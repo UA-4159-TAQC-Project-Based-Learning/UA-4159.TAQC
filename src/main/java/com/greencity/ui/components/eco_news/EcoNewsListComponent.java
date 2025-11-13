@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 public class EcoNewsListComponent extends BaseComponent {
 
-    @FindBy(css = ".gallery-view-li-active")
+    @FindBy(css = ".list-view-li-active")
     private List<WebElement> allListCards;
 
     public EcoNewsListComponent(WebDriver driver, WebElement rootElement){

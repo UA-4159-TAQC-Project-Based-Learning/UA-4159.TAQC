@@ -13,31 +13,27 @@ public class EcoNewsListCardComponent extends BaseComponent {
     private WebElement tag;
 
     @Getter
-    @FindBy(css = ".title-list")
+    @FindBy(css = ".eco-news_list-content-title")
     private WebElement title;
 
     @Getter
-    @FindBy(css = ".list-text")
+    @FindBy(css = ".eco-news_list-content-tex")
     private WebElement description;
 
     @Getter
-    @FindBy(css = ".user-data-text-date:not(.user)")
+    @FindBy(css = ".eco-news_data-text-date")
     private WebElement date;
 
-    @FindBy(css = ".user-data-text-date.user")
+    @FindBy(css = ".eco-news_person")
     private WebElement author;
 
-    @FindBy(xpath = "//p[contains(@class, 'user-data-like')][img[@alt='comments']]")
-    private WebElement commentsCounter;
+    @Getter
+    @FindBy(css = "button-news-card button")
+    private WebElement moreButton;
 
-    @FindBy(xpath = "//p[contains(@class, 'user-data-like')][img[@alt='likes']]")
-    private WebElement likesCounter;
-
-    @FindBy(css = ".list-image-content")
+    @FindBy(css = ".eco-news_list-img")
     private WebElement newsImage;
 
-    @FindBy(css = ".news-flags.favourite-button")
-    private WebElement addToFavorites;
 
 
 
@@ -71,27 +67,16 @@ public class EcoNewsListCardComponent extends BaseComponent {
         return tag.getText().trim();
     }
 
-    public int getCommentsCountValue() {
-        return Integer.parseInt(commentsCounter.getText().trim());
-    }
 
-    public boolean hasComments(){
-        if (getCommentsCountValue() == 0){
-            return false;
-        }
-        return true;
-    }
 
-    public int getLikesCountValue() {
-        return Integer.parseInt(likesCounter.getText().trim());
-    }
 
     public void openEcoNews() {
         title.click();
     }
 
-    public void saveToFavorites() {
-        addToFavorites.click();
+    public void clickMore(){
+        moreButton.click();
     }
+
 
 }
