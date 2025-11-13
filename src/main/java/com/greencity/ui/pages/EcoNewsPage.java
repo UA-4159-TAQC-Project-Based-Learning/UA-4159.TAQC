@@ -1,29 +1,37 @@
 package com.greencity.ui.pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class EcoNewsPage extends BasePage{
 
+    @Getter
     @FindBy(css = "h1.main-header")
     private WebElement mainHeader;
 
+    @Getter
     @FindBy(css = "span.search-img")
     private WebElement searchButton;
 
+    @Getter
     @FindBy(css = ".place-input")
     private WebElement searchField;
 
+    @Getter
     @FindBy(css = ".cross-position")
     private WebElement cancelSearchButton;
 
+    @Getter
     @FindBy(css = "span.bookmark-img")
     private WebElement bookmarkButton;
 
+    @Getter
     @FindBy(css = "div.container-img")
     private WebElement myEventsButton;
 
+    @Getter
     @FindBy(id = "create-button")
     private WebElement createNewsButton;
 
