@@ -9,7 +9,6 @@ public class EcoNewsPage extends BasePage{
     @FindBy(css = "h1.main-header")
     private WebElement mainHeader;
 
-    //recheck later clickable element
     @FindBy(css = "span.search-img")
     private WebElement searchButton;
 
@@ -19,11 +18,9 @@ public class EcoNewsPage extends BasePage{
     @FindBy(css = ".cross-position")
     private WebElement cancelSearchButton;
 
-    //recheck later clickable element
     @FindBy(css = "span.bookmark-img")
     private WebElement bookmarkButton;
 
-    //recheck later clickable element
     @FindBy(css = "div.container-img")
     private WebElement myEventsButton;
 
