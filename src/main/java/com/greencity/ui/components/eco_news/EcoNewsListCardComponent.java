@@ -1,23 +1,26 @@
-package com.greencity.ui.components;
+package com.greencity.ui.components.eco_news;
 
+import com.greencity.ui.components.BaseComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class EcoNewsListCardComponent extends BaseComponent{
+public class EcoNewsListCardComponent extends BaseComponent {
 
     @Getter
-
     @FindBy(css = ".filter-tag")
     private WebElement tag;
 
+    @Getter
     @FindBy(css = ".title-list")
     private WebElement title;
 
+    @Getter
     @FindBy(css = ".list-text")
     private WebElement description;
 
+    @Getter
     @FindBy(css = ".user-data-text-date:not(.user)")
     private WebElement date;
 
@@ -51,8 +54,13 @@ public class EcoNewsListCardComponent extends BaseComponent{
         return description.getText().trim();
     }
 
+
     public String getAuthorText() {
-        return author.getText().trim();
+        String name = author.getText().trim();
+        if (name.isEmpty()){
+            return "Anonymous";
+        }
+        return name;
     }
 
     public String getDateText() {
@@ -65,6 +73,13 @@ public class EcoNewsListCardComponent extends BaseComponent{
 
     public int getCommentsCountValue() {
         return Integer.parseInt(commentsCounter.getText().trim());
+    }
+
+    public boolean hasComments(){
+        if (getCommentsCountValue() == 0){
+            return false;
+        }
+        return true;
     }
 
     public int getLikesCountValue() {
