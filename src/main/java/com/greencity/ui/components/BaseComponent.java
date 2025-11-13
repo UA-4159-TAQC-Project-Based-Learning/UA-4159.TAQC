@@ -9,6 +9,7 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public abstract class BaseComponent extends Base {
 
+
     @Getter
     protected WebElement rootElement;
 
