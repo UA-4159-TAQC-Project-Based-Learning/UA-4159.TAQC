@@ -19,9 +19,9 @@ public class EcoNewsListComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
-    public List<EcoNewsListComponent> getCardComponents(){
+    public List<EcoNewsListCardComponent> getCardComponents(){
         return allListCards.stream()
-                .map(allListCards -> new EcoNewsListComponent(driver, allListCards))
+                .map(allListCards -> new EcoNewsListCardComponent(driver, allListCards))
                 .collect(Collectors.toList());
     }
 

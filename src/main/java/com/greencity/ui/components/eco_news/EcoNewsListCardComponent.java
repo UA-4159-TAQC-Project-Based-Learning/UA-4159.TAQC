@@ -28,11 +28,14 @@ public class EcoNewsListCardComponent extends BaseComponent {
     private WebElement author;
 
     @Getter
-    @FindBy(css = "button-news-card button")
+    @FindBy(css = ".button-news-card button")
     private WebElement moreButton;
 
     @FindBy(css = ".eco-news_list-img")
     private WebElement newsImage;
+
+    @FindBy(css = ".news-flags")
+    private WebElement addToFavoritesButton;
 
 
 
@@ -68,7 +71,9 @@ public class EcoNewsListCardComponent extends BaseComponent {
     }
 
 
-
+    public void setAddToFavoritesButton(){
+        addToFavoritesButton.click();
+    }
 
     public void openEcoNews() {
         title.click();
