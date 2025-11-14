@@ -17,7 +17,7 @@ public class EcoNewsListCardComponent extends BaseComponent {
     private WebElement title;
 
     @Getter
-    @FindBy(css = ".eco-news_list-content-tex")
+    @FindBy(css = ".eco-news_list-content-text")
     private WebElement description;
 
     @Getter
