@@ -2,7 +2,6 @@ package com.greencity.ui.components.eco_news;
 
 import com.greencity.ui.components.BaseComponent;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,7 @@ public class EconewsTableCardComponent extends BaseComponent {
     private WebElement imageElement;
 
     @Getter
-    @FindBy(xpath = "//div[@class='list-gallery-content']//div[@class='filter-tag']")
+    @FindBy(xpath = ".//div[@class='list-gallery-content']//div[@class='filter-tag']")
     private WebElement headerLinkElement;
 
     @Getter
@@ -30,15 +29,15 @@ public class EconewsTableCardComponent extends BaseComponent {
     private WebElement textElement;
 
     @Getter
-    @FindBy(xpath = "//div[@class='user-data']")
+    @FindBy(xpath = ".//div[@class='user-data']")
     private WebElement userDataInfoElement;
 
     @Getter
-    @FindBy(xpath = "//p[@class='user-data-like']/img[@alt='comments']/following-sibling::span[@class='numerosity']")
-    private WebElement comentsCounterElement;
+    @FindBy(xpath = ".//p[@class='user-data-like']/img[@alt='comments']/following-sibling::span[@class='numerosity']")
+    private WebElement commentsCounterElement;
 
     @Getter
-    @FindBy(xpath = "//p[@class='user-data-like']/img[@alt='likes']/following-sibling::span[@class='numerosity']")
+    @FindBy(xpath = ".//p[@class='user-data-like']/img[@alt='likes']/following-sibling::span[@class='numerosity']")
     private WebElement likesCounterElement;
 
 
