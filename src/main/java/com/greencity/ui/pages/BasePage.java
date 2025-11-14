@@ -11,10 +11,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.Objects;
-
 
 public abstract class BasePage extends Base {
     @Getter
@@ -33,11 +31,9 @@ public abstract class BasePage extends Base {
         footer = new FooterComponent(driver, FooterRoot);
     }
 
-
     private int getContentHeight() {
         return ((Number) Objects.requireNonNull(threadJs.executeScript("return document.body.scrollHeight;"))).intValue();
     }
-
 
     public void waitForPageToLoad(long timeoutInSeconds) {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds)).until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
@@ -47,6 +43,4 @@ public abstract class BasePage extends Base {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         return wait.until(ExpectedConditions.invisibilityOf(element));
     }
-
-
 }

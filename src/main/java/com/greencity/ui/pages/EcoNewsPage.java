@@ -11,18 +11,17 @@ public class EcoNewsPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//div[@aria-label='filter by items']")
+    @FindBy(css = "div.ul-eco-buttons")
     private WebElement filterContainer;
 
     public NewsFilterComponent getFilterComponent() {
         return new NewsFilterComponent(driver, filterContainer);
     }
 
-    @FindBy(xpath = "(//div[contains(@class, 'single-news')])[1]")
+    @FindBy(css = "div.title-list.word-wrap")
     private WebElement firstNewsCard;
 
     public String getFirstNewsTitle() {
         return firstNewsCard.getText().trim();
     }
-
 }

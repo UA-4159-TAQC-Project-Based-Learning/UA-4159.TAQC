@@ -13,9 +13,8 @@ public class HomePage extends BasePage {
     }
 
     public EcoNewsPage openEcoNewsPage() {
-        WebElement ecoNewsLink = driver.findElement(By.xpath("//a[@routerlink='/greenCity/news']"));
+        WebElement ecoNewsLink = driver.findElement(By.xpath("//a[contains(@href, '#/greenCity/news')]"));
         ecoNewsLink.click();
         return new EcoNewsPage(driver);
     }
-
 }

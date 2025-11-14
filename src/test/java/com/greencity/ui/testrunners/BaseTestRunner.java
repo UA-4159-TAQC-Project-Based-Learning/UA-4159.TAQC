@@ -28,15 +28,14 @@ public class BaseTestRunner {
     public void initDriver() {
         ChromeOptions options = new ChromeOptions();
 
-//        options.addArguments("--disable-notifications");//Disables notifications
-//        options.addArguments("--disable-popup-blocking");//Disables popup blocking
+        options.addArguments("--disable-notifications");//Disables notifications
+        options.addArguments("--disable-popup-blocking");//Disables popup blocking
 //        options.addArguments("--headless");// Runs Chrome in headless mode (without GUI)
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
     }
-
 
     @BeforeClass
     public void beforeClass() {
