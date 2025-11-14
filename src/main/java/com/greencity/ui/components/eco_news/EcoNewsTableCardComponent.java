@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class EconewsTableCardComponent extends BaseComponent {
+public class EcoNewsTableCardComponent extends BaseComponent {
 
     @Getter
-    @FindBy(css = ".news-flags.favourite-button")
+    @FindBy(xpath = ".//div[contains(@class, 'news-flags')]")
     private WebElement favoriteBtn;
 
     @Getter
@@ -40,8 +40,7 @@ public class EconewsTableCardComponent extends BaseComponent {
     @FindBy(xpath = ".//p[@class='user-data-like']/img[@alt='likes']/following-sibling::span[@class='numerosity']")
     private WebElement likesCounterElement;
 
-
-    public EconewsTableCardComponent(WebDriver driver, WebElement rootElement) {
+    public EcoNewsTableCardComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
