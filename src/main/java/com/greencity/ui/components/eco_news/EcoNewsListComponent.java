@@ -21,7 +21,7 @@ public class EcoNewsListComponent extends BaseComponent {
 
     public List<EcoNewsListCardComponent> getCardComponents(){
         return allListCards.stream()
-                .map(allListCards -> new EcoNewsListCardComponent(driver, allListCards))
+                .map(cardElement -> new EcoNewsListCardComponent(driver, cardElement))
                 .collect(Collectors.toList());
     }
 
