@@ -13,7 +13,7 @@ public class HeaderComponent extends BaseComponent {
     // TODO -> move enums to data layer ?? ^^
 
     public enum Language {
-        // TODO
+        // TODO: Add language enum values (e.g., EN, UA, etc.)
     }
 
     @Getter
