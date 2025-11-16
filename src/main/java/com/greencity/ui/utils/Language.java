@@ -1,5 +1,16 @@
 package com.greencity.ui.utils;
 
 public enum Language {
-    // TODO: Add language enum values (e.g., EN, UA, etc.)
+    EN("En"),
+    UK("Uk");
+
+    private final String label;
+
+    Language(String label) {
+        this.label = label;
+    }
+
+    public String label() {
+        return label;
+    }
 }

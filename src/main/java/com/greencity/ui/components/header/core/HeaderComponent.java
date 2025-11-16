@@ -1,6 +1,10 @@
 package com.greencity.ui.components.header.core;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.components.header.actions.HeaderControls;
+import com.greencity.ui.components.header.actions.search.SearchOverlay;
+import com.greencity.ui.components.header.navbar.NavBar;
+import com.greencity.ui.utils.NavItem;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,14 +34,49 @@ public class HeaderComponent extends BaseComponent {
     @FindBy(css = ".header_navigation-menu-left-col")
     private WebElement mobileMenuRoot;
 
-    // @Getter
-    // private final NavBar navBar;
+    @Getter
+    private final NavBar navBar;
 
-    // @Getter
-    // private final HeaderControlsWrapper controls;
+    @Getter
+    private final HeaderControls controls;
 
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+        navBar = new NavBar(driver, leftNavRoot);
+        controls = new HeaderControls(driver, rightNavRoot);
+    }
+
+    public void clickLogo() {
+        clickDynamicElement(logo);
+    }
+
+    public boolean isLoggedIn() {
+        return controls.hasUserMenu();
+    }
+
+    public String getUserFullName() {
+        if (!controls.hasUserMenu()) {
+            return "";
+        }
+        return controls.userMenu().getUserFirstAndLastNameAsText();
+    }
+
+    public void openNav(NavItem item) {
+        navBar.open(item);
+    }
+
+    public void clickSignIn() {
+        controls.clickSignIn();
+    }
+
+    public void clickSignUp() {
+        controls.clickSignUp();
+    }
+
+    public void signOutIfLoggedIn() {
+        if (controls.hasUserMenu()) {
+            controls.userMenu().signOut();
+        }
     }
 
 }
