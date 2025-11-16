@@ -9,13 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class HeaderComponent extends BaseComponent {
 
-    public enum NavItem { ECO_NEWS, EVENTS, PLACES, ABOUT_US, MY_SPACE_UBS_COURIER }
-    // TODO -> move enums to data layer ?? ^^
-
-    public enum Language {
-        // TODO: Add language enum values (e.g., EN, UA, etc.)
-    }
-
     @Getter
     @FindBy(xpath = ".//img[@src='assets/img/logo.svg']")
     private WebElement logo;
