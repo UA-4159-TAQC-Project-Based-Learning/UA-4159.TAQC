@@ -10,19 +10,19 @@ import java.util.List;
 
 public class FooterComponent extends BaseComponent {
     @Getter
-    @FindBy(xpath = ".//a[.//img[@src='assets/img/logo-l.svg']]")
+    @FindBy(xpath = ".//a[./img[@src='assets/img/logo-l.svg']]")
     private WebElement logo;
 
     @Getter
-    @FindBy(xpath = ".//nav//a")
+    @FindBy(xpath = ".//nav/ul/li/a")
     private List<WebElement> navigationItems;
 
     @Getter
-    @FindBy(xpath = ".//nav[@role='navigation']//ul[@class='footer_left-side']//a")
+    @FindBy(xpath = ".//nav[@role='navigation']/ul[@class='footer_left-side']/li/a")
     private List<WebElement> siteNavigationItems;
 
     @Getter
-    @FindBy(xpath = ".//nav//ul//li[@class='footer_social-wrp']//a")
+    @FindBy(xpath = ".//nav/ul/li[@class='footer_social-wrp']/a")
     private List<WebElement> socialNavigationItems;
 
     public FooterComponent(WebDriver driver, WebElement rootElement) {

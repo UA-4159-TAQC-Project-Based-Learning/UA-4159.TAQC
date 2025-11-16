@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
@@ -16,7 +17,6 @@ public class BaseTestRunner {
     protected WebDriver driver;
     protected static TestValueProvider testValueProvider;
     protected HomePage homePage;
-
     @BeforeSuite
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
