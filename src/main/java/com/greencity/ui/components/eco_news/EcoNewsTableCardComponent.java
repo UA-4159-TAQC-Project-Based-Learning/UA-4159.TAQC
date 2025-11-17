@@ -1,6 +1,7 @@
 package com.greencity.ui.components.eco_news;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.pages.EcoNewsDetailsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,12 +45,14 @@ public class EcoNewsTableCardComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
-    public void goToDetails() {
+    public EcoNewsDetailsPage goToDetails() {
         headerLinkElement.click();
+        return new EcoNewsDetailsPage(driver);
     }
 
-    public void addToFavorite() {
+    public EcoNewsTableCardComponent addToFavorite() {
         favoriteBtn.click();
+        return this;
     }
 
 }
