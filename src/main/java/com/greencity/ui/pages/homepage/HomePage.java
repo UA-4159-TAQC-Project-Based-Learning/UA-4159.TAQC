@@ -8,12 +8,14 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
 
+    private static final String ECO_NEWS_LINK_XPATH = "//a[contains(@href, '#/greenCity/news')]";
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public EcoNewsPage openEcoNewsPage() {
-        WebElement ecoNewsLink = driver.findElement(By.xpath("//a[contains(@href, '#/greenCity/news')]"));
+        WebElement ecoNewsLink = driver.findElement(By.xpath(ECO_NEWS_LINK_XPATH));
         ecoNewsLink.click();
         return new EcoNewsPage(driver);
     }

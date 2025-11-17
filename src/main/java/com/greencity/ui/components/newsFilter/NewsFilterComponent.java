@@ -1,35 +1,33 @@
 package com.greencity.ui.components.newsFilter;
 
 import com.greencity.ui.components.BaseComponent;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 
 public class NewsFilterComponent extends BaseComponent {
-
-@FindBy(xpath = ".//a[contains(@class,'global-tag')]")
-private List<WebElement> filterButtons;
+    @Getter
+    @FindBy(xpath = ".//a[contains(@class,'global-tag')]")
+    private List<WebElement> filterButtons;
 
     public NewsFilterComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
-    public List<WebElement> getFilterButtons() {
-        return filterButtons;
-    }
-
-    public void clickFilterByName(FilterName filterName) {
+    public NewsFilterComponent clickFilterByName(FilterName filterName) {
         for (WebElement button : filterButtons) {
             WebElement span = button.findElement(By.xpath(".//span"));
             if (span.getText().trim().equalsIgnoreCase(filterName.getValue())) {
                 button.click();
-                return;
+                return this;
             }
         }
-        throw new RuntimeException("No filter button found with name: " + filterName.getValue());
+        return this;
     }
 
     public boolean areAllFiltersVisible() {
@@ -46,11 +44,12 @@ private List<WebElement> filterButtons;
         return false;
     }
 
-    public void resetFilters() {
+    public NewsFilterComponent resetFilters() {
         for (WebElement button : filterButtons) {
             if (button.getAttribute("class").contains("global-tag-clicked")) {
                 button.click();
             }
         }
+        return this;
     }
 }
