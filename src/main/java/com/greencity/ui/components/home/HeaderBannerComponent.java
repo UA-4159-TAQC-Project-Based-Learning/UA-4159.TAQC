@@ -1,8 +1,10 @@
 package com.greencity.ui.components.home;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import com.greencity.ui.pages.profile.ProfilePage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,27 +14,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HeaderBannerComponent extends BaseComponent {
+    static final By LOGIN_MODAL_ROOT_LOCATOR =
+            By.xpath("//div[starts-with(@id,'cdk-overlay-')]");
     @Getter
     @FindBy(xpath = ".//h1")
     private WebElement headerBannerTitle;
-
+    @Getter
     @FindBy(xpath = ".//p")
     private WebElement bannerDescription;
-
+    @Getter
     @FindBy(xpath = ".//button[contains(text(),'Start forming a habit!')]")
     private WebElement startFormingHabitButton;
-
+    @Getter
     @FindBy(xpath = ".//img[@id='guy-image']")
     private WebElement bannerImage;
 
     public HeaderBannerComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-    }
-
-    //--------- headerBannerTitle---------
-
-    private WebElement getHeaderBanner() {
-        return headerBannerTitle;
     }
 
     public String getHeaderBannerTitleText() {
@@ -50,7 +48,6 @@ public class HeaderBannerComponent extends BaseComponent {
         return actualText.contains(expectedText);
     }
 
-    //--------- bannerDescription---------
     public String getBannerDescriptionText() {
         return bannerDescription.getText().trim();
     }
@@ -65,7 +62,6 @@ public class HeaderBannerComponent extends BaseComponent {
         return actualText.contains(expectedText);
     }
 
-    //--------- startFormingHabitButton---------
     public boolean isStartFormingHabitButtonDisplayed() {
         return startFormingHabitButton.isDisplayed();
     }
@@ -78,8 +74,8 @@ public class HeaderBannerComponent extends BaseComponent {
         return startFormingHabitButton.getText().trim();
     }
 
-    //--------- bannerImage ---------
     public boolean isBannerImageDisplayed() {
+        waitUntilElementVisible(bannerImage);
         return bannerImage.isDisplayed();
     }
 
@@ -87,7 +83,6 @@ public class HeaderBannerComponent extends BaseComponent {
         return bannerImage.getAttribute("src");
     }
 
-    //----------functional----------
     public boolean isBannerDisplayedCorrectly(String expectedTitle, String expectedDescriptionPart, String expectedButtonText) {
         return isHeaderBannerTitleDisplayed()
                 && getHeaderBannerTitleText().equals(expectedTitle)
@@ -100,8 +95,6 @@ public class HeaderBannerComponent extends BaseComponent {
         return isBannerImageDisplayed() && getBannerImageUrl().equals(expectedUrl);
     }
 
-    //----------business----------
-    //click on button when User is logged-in
     public ProfilePage clickStartButtonForLoggedInUser() {
         clickDynamicElement(startFormingHabitButton);
         new WebDriverWait(driver, Duration.ofSeconds(5))
@@ -109,11 +102,11 @@ public class HeaderBannerComponent extends BaseComponent {
         return new ProfilePage(driver);
     }
 
-    //click on button when User is as a Guest
-//    public LoginPopupComponent clickStartButtonForGuestUser() {
-//        clickDynamicElement(startFormingHabitButton);
-//        waitUntilElementVisible(loginPopup); // loginPopup (probably popup root)
-//        return new LoginPopupComponent(driver, loginPopup);
-//    }
+    public LoginModalComponent clickStartButtonForGuestUser() {
+        clickDynamicElement(startFormingHabitButton);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
+        return new LoginModalComponent(driver, loginModalRoot);
+    }
 
 }

@@ -18,23 +18,22 @@ public class EcoNewsSectionComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
-    //----------ecoNewsTitle----------
     public String getTitleText() {
         return ecoNewsTitle.getText().trim();
     }
 
-    //----------ReadAllLink----------
     public String getReadAllNewsLinkText() {
         return readAllNewsLink.getText().trim();
     }
+
     public String getReadAllNewsLinkHref() {
         return readAllNewsLink.getAttribute("href");
     }
 
-    //----------Business logic----------
     public EcoNewsPage clickReadAllNews() {
         waitUntilElementClickable(readAllNewsLink);
         clickDynamicElement(readAllNewsLink);
+        waitUntilPageLouder();
         return new EcoNewsPage(driver);
     }
 }

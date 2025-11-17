@@ -14,20 +14,20 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
+    @Getter
+    private final HeaderBannerComponent headerBanner;
     @FindBy(css = "header#header")
     private WebElement headerBannerRoot;
     @Getter
-    private final HeaderBannerComponent headerBanner;
-    //
     @FindBy(xpath = "//div[@class='stat-row']")
     private List<WebElement> statisticRowsRoot;
     private List<StatisticRowComponent> statisticRows;
-    //
+
     @FindBy(xpath = "//section[@id='events']")
     private WebElement ecoNewsSectionRoot;
     @Getter
     private EcoNewsSectionComponent ecoNewsSection;
-    //
+
     @FindBy(xpath = "//div[@id='subscribe']")
     private WebElement subscribeSectionRoot;
     @Getter
@@ -39,18 +39,11 @@ public class HomePage extends BasePage {
         this.headerBanner = new HeaderBannerComponent(driver, headerBannerRoot);
         this.ecoNewsSection = new EcoNewsSectionComponent(driver, ecoNewsSectionRoot);
         this.subscribeSection = new SubscribeSectionComponent(driver, subscribeSectionRoot);
-
-        //check that we are on Home page
-        if (!headerBanner.getHeaderBannerTitleText().equals("A new way to cultivate useful habits")) {
-            throw new IllegalStateException("HomePage not loaded correctly");
-        }
     }
 
     public List<StatisticRowComponent> getAllStatisticRows() {
         if (statisticRows == null) {
-            statisticRows = statisticRowsRoot.stream()
-                    .map(root -> new StatisticRowComponent(driver, root))
-                    .toList();
+            statisticRows = statisticRowsRoot.stream().map(root -> new StatisticRowComponent(driver, root)).toList();
         }
         return statisticRows;
     }

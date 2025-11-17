@@ -67,3 +67,6 @@ config.properties
 .allure/
 allure-report/
 allure-results
+
+# for test
+ExampleTest.java
