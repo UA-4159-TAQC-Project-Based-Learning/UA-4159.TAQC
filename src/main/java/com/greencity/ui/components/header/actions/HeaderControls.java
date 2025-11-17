@@ -2,6 +2,7 @@ package com.greencity.ui.components.header.actions;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.components.header.actions.search.SearchOverlay;
+import com.greencity.ui.components.header.navbar.MobileNavMenu;
 import com.greencity.ui.components.header.user.AuthPanel;
 import com.greencity.ui.components.header.user.UserMenu;
 import org.openqa.selenium.By;
@@ -51,12 +52,14 @@ public class HeaderControls extends BaseComponent {
         return new SearchOverlay(driver, overlayRoot);
     }
 
+    // TODO: change return type once SignInModal is ready
     public void clickSignIn() {
         if (hasAuthPanel()) {
             authPanel().clickSignIn();
         }
     }
 
+    // TODO: change return type once SignUpModal is ready
     public void clickSignUp() {
         if (hasAuthPanel()) {
             authPanel().clickSignUp();
@@ -67,9 +70,12 @@ public class HeaderControls extends BaseComponent {
         return !rootElement.findElements(By.cssSelector(burgerButtonCss)).isEmpty();
     }
 
-    public void clickBurgerIcon() {
+    public MobileNavMenu clickBurgerIcon() {
         if (hasBurgerIcon()) {
             rootElement.findElement(By.cssSelector(burgerButtonCss)).click();
+            return new MobileNavMenu(driver, rootElement);
+        } else {
+            throw new IllegalStateException("Cannot click Burger icon.");
         }
     }
 

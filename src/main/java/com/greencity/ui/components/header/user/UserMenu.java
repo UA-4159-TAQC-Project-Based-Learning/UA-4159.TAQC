@@ -1,6 +1,7 @@
 package com.greencity.ui.components.header.user;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.pages.homepage.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,9 +31,10 @@ public class UserMenu extends BaseComponent {
         clickDynamicElement(trigger);
     }
 
-    public void signOut() {
+    public HomePage signOut() {
         openProfileDropdown();
         WebElement signOut = rootElement.findElement(By.cssSelector(signOutCss));
         clickDynamicElement(signOut);
+        return new HomePage(driver);
     }
 }

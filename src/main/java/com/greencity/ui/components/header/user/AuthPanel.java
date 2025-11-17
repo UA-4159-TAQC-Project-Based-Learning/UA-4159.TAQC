@@ -14,11 +14,13 @@ public class AuthPanel extends BaseComponent {
         super(driver, rootElement);
     }
 
+    // TODO: change return type once SignInModal is ready
     public void clickSignIn() {
         WebElement signIn = rootElement.findElement(By.cssSelector(signInButtonCss));
         clickDynamicElement(signIn);
     }
 
+    // TODO: change return type once SignUpModal is ready
     public void clickSignUp() {
         WebElement signUp = rootElement.findElement(By.cssSelector(signUpButtonCss));
         clickDynamicElement(signUp);

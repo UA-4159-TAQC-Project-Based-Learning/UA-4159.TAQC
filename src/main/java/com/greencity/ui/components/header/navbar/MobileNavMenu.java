@@ -17,11 +17,13 @@ public class MobileNavMenu extends NavBar {
 
     // open() -> should be inherited from NavBar
 
+    // TODO: change return type to SignInModal once ready
     public void clickSignIn() {
         WebElement signIn = rootElement.findElement(By.cssSelector(signInCss));
         clickDynamicElement(signIn);
     }
 
+    // TODO: change return type to SignUpModal once ready
     public void clickSignUp() {
         WebElement signUp = rootElement.findElement(By.cssSelector(signUpCss));
         clickDynamicElement(signUp);

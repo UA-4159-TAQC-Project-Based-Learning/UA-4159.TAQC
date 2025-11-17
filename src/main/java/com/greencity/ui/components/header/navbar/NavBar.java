@@ -13,32 +13,8 @@ public class NavBar extends BaseComponent {
     }
 
     public void open(NavItem item) {
-        String href;
-
-        switch (item) {
-            case ECO_NEWS:
-                href = "#/greenCity/news";
-                break;
-            case EVENTS:
-                href = "#/greenCity/events";
-                break;
-            case PLACES:
-                href = "#/greenCity/places";
-                break;
-            case ABOUT_US:
-                href = "#/greenCity/about";
-                break;
-            case MY_SPACE:
-                href = "#/greenCity/profile";
-                break;
-            case UBS_COURIER:
-                href = "#/ubs";
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown navigation item: " + item);
-        }
-
-        WebElement link = rootElement.findElement(By.cssSelector("a[href='" + href + "']"));
+        WebElement link = rootElement.findElement(
+                By.cssSelector("a[href='" + item.href() + "']"));
         clickDynamicElement(link);
     }
 }
