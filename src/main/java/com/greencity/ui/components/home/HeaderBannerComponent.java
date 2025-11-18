@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import java.time.Duration;
 
@@ -97,14 +97,12 @@ public class HeaderBannerComponent extends BaseComponent {
 
     public ProfilePage clickStartButtonForLoggedInUser() {
         clickDynamicElement(startFormingHabitButton);
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.urlContains("/profile/"));
+        wait.until(ExpectedConditions.urlContains("/profile/"));
         return new ProfilePage(driver);
     }
 
     public LoginModalComponent clickStartButtonForGuestUser() {
         clickDynamicElement(startFormingHabitButton);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
         return new LoginModalComponent(driver, loginModalRoot);
     }

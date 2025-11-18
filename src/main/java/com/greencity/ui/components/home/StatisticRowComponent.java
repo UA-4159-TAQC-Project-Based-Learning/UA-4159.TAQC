@@ -4,13 +4,12 @@ import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import com.greencity.ui.pages.ubsPage.UbsPage;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import java.time.Duration;
 
@@ -117,14 +116,12 @@ public class StatisticRowComponent extends BaseComponent {
 
     public UbsPage clickStartHabitButtonForLoggedInUser() {
         startHabitButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.urlContains("/ubs"));
+        wait.until(ExpectedConditions.urlContains("/ubs"));
         return new UbsPage(driver);
     }
 
     public LoginModalComponent clickStartHabitButtonForGuestUser() {
         clickDynamicElement(startHabitButton);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
         return new LoginModalComponent(driver, loginModalRoot);
     }
