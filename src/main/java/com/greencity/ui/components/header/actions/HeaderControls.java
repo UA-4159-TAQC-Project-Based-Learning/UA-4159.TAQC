@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 public class HeaderControls extends BaseComponent {
 
-    private static String authPanelCss = "[class=\"sign-in\"], [class=\\\"sign-up\\\"]\"";
+    private static String authPanelCss = "[class='sign-in'], [class='sign-up']";
     private static String loggedInUserMenuCss = ".header_user-wrp";
     private static String languageSwitcherCss = ".header_lang-switcher-wrp";
     private static String burgerButtonCss = ".header_burger-btn";

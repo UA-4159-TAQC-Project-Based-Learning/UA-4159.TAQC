@@ -10,15 +10,15 @@ import org.openqa.selenium.support.FindBy;
 public class SearchOverlay extends BaseComponent {
 
     @Getter
-    @FindBy(css = "input[class*=\"search\"]")
+    @FindBy(css = "input[class*='search']")
     private WebElement searchInput;
 
     @Getter
-    @FindBy(css = "img[class*=\"close\"]")
+    @FindBy(css = "img[class*='close']")
     private WebElement closeButton;
 
     @Getter
-    private String loaderCss = "[role=\"progressbar\"]";
+    private String loaderCss = "[role='progressbar']";
 
     // TODO - Items Found
 

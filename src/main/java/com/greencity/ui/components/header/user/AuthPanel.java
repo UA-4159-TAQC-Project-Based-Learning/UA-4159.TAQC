@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 
 public class AuthPanel extends BaseComponent {
 
-    private String signInButtonCss = "[class*=\"sign-in\"]";
-    private String signUpButtonCss = "[class*=\"sign-up\"]";
+    private String signInButtonCss = "[class*='sign-in']";
+    private String signUpButtonCss = "[class*='sign-up']";
 
     public AuthPanel(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
