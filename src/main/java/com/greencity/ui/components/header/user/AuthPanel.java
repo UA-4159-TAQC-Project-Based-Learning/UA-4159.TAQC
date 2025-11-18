@@ -1,14 +1,20 @@
 package com.greencity.ui.components.header.user;
 
 import com.greencity.ui.components.BaseComponent;
-import org.openqa.selenium.By;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class AuthPanel extends BaseComponent {
 
-    private String signInButtonCss = "[class*='sign-in']";
-    private String signUpButtonCss = "[class*='sign-up']";
+    @Getter
+    @FindBy(css = ".header_sign-in-link")
+    private WebElement signInButton;
+
+    @Getter
+    @FindBy(css = ".header_sign-up-link")
+    private WebElement signUpButton;
 
     public AuthPanel(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -16,13 +22,11 @@ public class AuthPanel extends BaseComponent {
 
     // TODO: change return type once SignInModal is ready
     public void clickSignIn() {
-        WebElement signIn = rootElement.findElement(By.cssSelector(signInButtonCss));
-        clickDynamicElement(signIn);
+        clickDynamicElement(signInButton);
     }
 
     // TODO: change return type once SignUpModal is ready
     public void clickSignUp() {
-        WebElement signUp = rootElement.findElement(By.cssSelector(signUpButtonCss));
-        clickDynamicElement(signUp);
+        clickDynamicElement(signUpButton);
     }
 }

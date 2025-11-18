@@ -18,7 +18,8 @@ public class SearchOverlay extends BaseComponent {
     private WebElement closeButton;
 
     @Getter
-    private String loaderCss = "[role='progressbar']";
+    @FindBy(css = "[role='progressbar']")
+    private WebElement loader;
 
     // TODO - Items Found
 

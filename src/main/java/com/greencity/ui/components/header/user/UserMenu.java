@@ -3,42 +3,43 @@ package com.greencity.ui.components.header.user;
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.homepage.HomePage;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class UserMenu extends BaseComponent {
 
-//    private String userFirstAndLastNameCss = "[class*='user-name']";
-    private String signOutCss = "[aria-label*='sign-out']";
-    private String savedCss = "[class='bookmark-icon']";
-    private String notificationsCss = "[class='notification-icon']";
+    @Getter
+    @FindBy(css = ".user-name")
+    private WebElement userFirstAndLastName;
 
     @Getter
-    @FindBy(css = "[class*='user-name']")
-    private WebElement userFirstAndLastNameButton;
+    @FindBy(css = "[aria-label*='sign-out']")
+    private WebElement signOut;
+
+    @Getter
+    @FindBy(css = ".bookmark-icon")
+    private WebElement saved;
+
+    @Getter
+    @FindBy(css = ".notification-icon")
+    private WebElement notifications;
 
     public UserMenu(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
     public String getUserFirstAndLastNameAsText() {
-        return userFirstAndLastNameButton.getText().trim();
-    }
-
-    public WebElement getUserFirstAndLastNameAsWebElement() {
-        return rootElement.findElement(By.cssSelector(userFirstAndLastNameCss));
+        return userFirstAndLastName.getText().trim();
     }
 
     private void openProfileDropdown() {
-        WebElement trigger = getUserFirstAndLastNameAsWebElement();
+        WebElement trigger = getUserFirstAndLastName();
         clickDynamicElement(trigger);
     }
 
     public HomePage signOut() {
         openProfileDropdown();
-        WebElement signOut = rootElement.findElement(By.cssSelector(signOutCss));
         clickDynamicElement(signOut);
         return new HomePage(driver);
     }

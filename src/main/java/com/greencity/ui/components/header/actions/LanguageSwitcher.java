@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 public class LanguageSwitcher extends BaseElement {
 
     @Getter
-    @FindBy(css = "[aria-label=\"language switcher\"]")
+    @FindBy(css = "[aria-label='language switcher']")
     private WebElement languageToggle;
 
     public LanguageSwitcher(WebDriver driver, WebElement rootElement) {

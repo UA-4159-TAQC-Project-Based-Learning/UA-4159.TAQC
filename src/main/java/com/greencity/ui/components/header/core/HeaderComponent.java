@@ -57,14 +57,9 @@ public class HeaderComponent extends BaseComponent {
         return controls.hasAuthPanel();
     }
 
-    public boolean hasUserMenu() {
-        return controls.hasUserMenu();
-    }
-
     public boolean isLoggedIn() {
         return controls.hasUserMenu();
     }
-    // TODO: remove duplicate function ^^ ?
 
     /**
      *
@@ -111,7 +106,7 @@ public class HeaderComponent extends BaseComponent {
 
     public HomePage signOut() {
         if (controls.hasUserMenu()) {
-            controls.userMenu().signOut();
+            controls.userMenuComponent().signOut();
         }
         return new HomePage(driver);
     }
