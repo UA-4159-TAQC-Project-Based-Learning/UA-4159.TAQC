@@ -10,9 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
-import java.time.Duration;
-
 import static com.greencity.ui.components.home.HeaderBannerComponent.LOGIN_MODAL_ROOT_LOCATOR;
 
 public class StatisticRowComponent extends BaseComponent {

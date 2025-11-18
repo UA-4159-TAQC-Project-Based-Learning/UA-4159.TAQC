@@ -26,12 +26,12 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='events']")
     private WebElement ecoNewsSectionRoot;
     @Getter
-    private EcoNewsSectionComponent ecoNewsSection;
+    private final EcoNewsSectionComponent ecoNewsSection;
 
     @FindBy(xpath = "//div[@id='subscribe']")
     private WebElement subscribeSectionRoot;
     @Getter
-    private SubscribeSectionComponent subscribeSection;
+    private final SubscribeSectionComponent subscribeSection;
 
 
     public HomePage(WebDriver driver) {

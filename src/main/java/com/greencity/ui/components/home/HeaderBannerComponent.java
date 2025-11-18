@@ -10,9 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
-import java.time.Duration;
-
 public class HeaderBannerComponent extends BaseComponent {
     static final By LOGIN_MODAL_ROOT_LOCATOR =
             By.xpath("//div[starts-with(@id,'cdk-overlay-')]");
