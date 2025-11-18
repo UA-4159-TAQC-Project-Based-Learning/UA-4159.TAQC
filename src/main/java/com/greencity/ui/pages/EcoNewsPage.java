@@ -82,13 +82,13 @@ public class EcoNewsPage extends BasePage {
     }
 
     public EcoNewsTableCardComponent getOneTableCardByTitle(String title) {
-       List<EcoNewsTableCardComponent> listOfTableCards = this.getAllTableCards();
-       for (EcoNewsTableCardComponent item : listOfTableCards) {
-           if (title.equalsIgnoreCase(item.getTitle())) {
-               return item;
-           }
-       }
-       return null;
+        List<EcoNewsTableCardComponent> listOfTableCards = this.getAllTableCards();
+        for (EcoNewsTableCardComponent item : listOfTableCards) {
+            if (title.equalsIgnoreCase(item.getTitle())) {
+                return item;
+            }
+        }
+        return null;
     }
 
 }
