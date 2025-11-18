@@ -4,6 +4,7 @@ import com.greencity.ui.testrunners.BaseTestRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -11,12 +12,18 @@ import java.util.List;
 
 public class FooterTest extends BaseTestRunner {
 
-    private SoftAssert softAssert = new SoftAssert();
+    private SoftAssert softAssert;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        softAssert = new SoftAssert();
+    }
 
     @Test
     void testFooterLogoIsClickable() {
         WebElement logo = homePage.getFooter().getLogo();
         softAssert.assertTrue(logo.isEnabled(), "Footer logo should be clickable");
+        softAssert.assertAll();
     }
 
     @Test
@@ -28,6 +35,7 @@ public class FooterTest extends BaseTestRunner {
             softAssert.assertTrue(item.isDisplayed(), "Navigation item should be displayed: " + item.getText());
             softAssert.assertTrue(item.isEnabled(), "Footer logo should be clickable: " + item.getText());
         }
+        softAssert.assertAll();
     }
 
     @Test
@@ -41,6 +49,7 @@ public class FooterTest extends BaseTestRunner {
             softAssert.assertNotNull(href, "Social link should have an href");
             softAssert.assertFalse(item.findElements(By.xpath(".//img")).isEmpty(), "Social link should be image");
         }
+        softAssert.assertAll();
     }
 
     @Test
@@ -55,5 +64,6 @@ public class FooterTest extends BaseTestRunner {
             softAssert.assertFalse(href.isBlank(), "Site navigation link href should not be blank");
             softAssert.assertFalse(item.getText().isEmpty(), "Site navigation should be text");
         }
+        softAssert.assertAll();
     }
 }
