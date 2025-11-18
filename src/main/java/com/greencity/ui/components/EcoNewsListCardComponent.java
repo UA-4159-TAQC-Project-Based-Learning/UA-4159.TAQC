@@ -1,6 +1,6 @@
-package com.greencity.ui.components.eco_news;
+package com.greencity.ui.components;
 
-import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.pages.EcoNewsDetailsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,9 +38,7 @@ public class EcoNewsListCardComponent extends BaseComponent {
     private WebElement addToFavoritesButton;
 
 
-
-
-    public EcoNewsListCardComponent (WebDriver driver, WebElement rootElement){
+    public EcoNewsListCardComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
@@ -55,11 +53,7 @@ public class EcoNewsListCardComponent extends BaseComponent {
 
 
     public String getAuthorText() {
-        String name = author.getText().trim();
-        if (name.isEmpty()){
-            return "Anonymous";
-        }
-        return name;
+        return author.getText().trim();
     }
 
     public String getDateText() {
@@ -71,16 +65,19 @@ public class EcoNewsListCardComponent extends BaseComponent {
     }
 
 
-    public void setAddToFavoritesButton(){
+    public void clickAddToFavoritesButton() {
         addToFavoritesButton.click();
+
     }
 
-    public void openEcoNews() {
+    public EcoNewsDetailsPage clickOnCard() {
         title.click();
+        return new EcoNewsDetailsPage(driver);
     }
 
-    public void clickMore(){
+    public EcoNewsDetailsPage clickMore() {
         moreButton.click();
+        return new EcoNewsDetailsPage(driver);
     }
 
 
