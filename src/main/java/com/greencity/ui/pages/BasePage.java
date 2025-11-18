@@ -27,6 +27,7 @@ public abstract class BasePage extends Base {
     @FindBy(xpath = "//footer")
     private WebElement FooterRoot;
 
+
     public BasePage(WebDriver driver) {
         super(driver);
         header = new HeaderComponent(driver, headerRoot);
