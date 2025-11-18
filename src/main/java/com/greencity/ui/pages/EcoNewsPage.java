@@ -2,7 +2,6 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
