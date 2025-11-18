@@ -1,9 +1,14 @@
 package com.greencity.ui.pages;
 
+import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EcoNewsPage extends BasePage {
 
@@ -35,6 +40,9 @@ public class EcoNewsPage extends BasePage {
     @FindBy(id = "create-button")
     private WebElement createNewsButton;
 
+    @FindBy(xpath = "//ul[contains(@class, 'gallery-view-active')]/li")
+    private List<WebElement> tableCardsElements;
+
     public EcoNewsPage(WebDriver driver) {
         super(driver);
     }
@@ -63,6 +71,25 @@ public class EcoNewsPage extends BasePage {
     public EcoNewsPage closeSearch() {
         cancelSearchButton.click();
         return this;
+    }
+
+    public List<EcoNewsTableCardComponent> getAllTableCards() {
+        List<EcoNewsTableCardComponent> tableCards = new ArrayList<>();
+        for (WebElement element : tableCardsElements) {
+            EcoNewsTableCardComponent item = new EcoNewsTableCardComponent(driver, element);
+            tableCards.add(item);
+        }
+        return tableCards;
+    }
+
+    public EcoNewsTableCardComponent getOneTableCardByTitle(String title) {
+       List<EcoNewsTableCardComponent> listOfTableCards = this.getAllTableCards();
+       for (EcoNewsTableCardComponent item : listOfTableCards) {
+           if (title.equalsIgnoreCase(item.getTitle())) {
+               return item;
+           }
+       }
+       return null;
     }
 
 }

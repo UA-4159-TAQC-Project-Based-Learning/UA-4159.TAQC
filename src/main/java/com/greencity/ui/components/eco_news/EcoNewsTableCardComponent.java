@@ -55,4 +55,8 @@ public class EcoNewsTableCardComponent extends BaseComponent {
         return this;
     }
 
+    public String getTitle() {
+        return titleElement.getText().trim();
+    }
+
 }
