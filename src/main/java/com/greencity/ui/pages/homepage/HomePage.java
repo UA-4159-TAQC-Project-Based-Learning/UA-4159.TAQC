@@ -2,12 +2,14 @@ package com.greencity.ui.pages.homepage;
 
 import com.greencity.ui.pages.BasePage;
 import com.greencity.ui.pages.EcoNewsPage;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
 
+    @Getter
     private static final String ECO_NEWS_LINK_XPATH = "//a[contains(@href, '#/greenCity/news')]";
 
     public HomePage(WebDriver driver) {

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class NewsFilterComponent extends BaseComponent {
@@ -19,34 +20,45 @@ public class NewsFilterComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
-    public NewsFilterComponent clickFilterByName(FilterName filterName) {
-        for (WebElement button : filterButtons) {
-            WebElement span = button.findElement(By.xpath(".//span"));
-            if (span.getText().trim().equalsIgnoreCase(filterName.getValue())) {
-                button.click();
-                return this;
-            }
-        }
-        return this;
+    public boolean clickFilterByName(FilterName filterName) {
+        return findFilterButton(filterName)
+                .map(button -> {
+                    button.click();
+                    return true;
+                })
+                .orElse(false);
     }
 
     public boolean areAllFiltersVisible() {
-        return filterButtons.stream().allMatch(WebElement::isDisplayed);
+        return filterButtons != null
+                && !filterButtons.isEmpty()
+                && filterButtons.stream().allMatch(WebElement::isDisplayed);
+    }
+
+    private Optional<WebElement> findFilterButton(FilterName filterName) {
+        String expected = filterName.getValue().trim().toLowerCase();
+
+        return filterButtons.stream()
+                .filter(button -> {
+                    WebElement span = button.findElement(By.tagName("span"));
+                    return span.getText().trim().toLowerCase().equals(expected);
+                })
+                .findFirst();
     }
 
     public boolean isFilterActive(FilterName filterName) {
-        for (WebElement button : filterButtons) {
-            WebElement span = button.findElement(By.xpath(".//span"));
-            if (span.getText().trim().equalsIgnoreCase(filterName.getValue())) {
-                return button.getAttribute("class").contains("global-tag-clicked");
-            }
-        }
-        return false;
+        return findFilterButton(filterName)
+                .map(button -> {
+                    String classAttr = button.getAttribute("class");
+                    return classAttr != null && classAttr.contains("global-tag-clicked");
+                })
+                .orElse(false);
     }
 
     public NewsFilterComponent resetFilters() {
         for (WebElement button : filterButtons) {
-            if (button.getAttribute("class").contains("global-tag-clicked")) {
+            String classAttr = button.getAttribute("class");
+            if (classAttr != null && classAttr.contains("global-tag-clicked")) {
                 button.click();
             }
         }
