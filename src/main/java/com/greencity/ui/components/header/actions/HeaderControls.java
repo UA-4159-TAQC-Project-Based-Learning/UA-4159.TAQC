@@ -41,10 +41,6 @@ public class HeaderControls extends BaseComponent {
     @FindBy(css = "app-search-popup")
     private WebElement searchOverlayRoot;
 
-    @Getter
-    @FindBy(css = "app-auth-modal")
-    private WebElement authModalRoot;
-
     public HeaderControls(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
@@ -76,8 +72,7 @@ public class HeaderControls extends BaseComponent {
         if (!hasAuthPanel()) {throw new IllegalStateException("Auth panel is not available in header.");}
 
         authPanelComponent().clickSignIn();
-        waitUntilElementVisible(authModalRoot);
-        return new LoginModalComponent(driver, authModalRoot);
+        return new LoginModalComponent(driver);
     }
 
     // TODO: change return type once SignUpModal is ready

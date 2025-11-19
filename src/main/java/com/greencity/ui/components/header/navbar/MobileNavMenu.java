@@ -1,5 +1,6 @@
 package com.greencity.ui.components.header.navbar;
 
+import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,9 +23,11 @@ public class MobileNavMenu extends NavBar {
 
     // open() -> should be inherited from NavBar
 
-    // TODO: change return type to SignInModal once ready
-    public void clickSignIn() {
+    public LoginModalComponent clickSignIn() {
+        if (!hasSignIn()) {throw new IllegalStateException("Auth panel is not available in header.");}
+
         clickDynamicElement(signIn);
+        return new LoginModalComponent(driver);
     }
 
     // TODO: change return type to SignUpModal once ready

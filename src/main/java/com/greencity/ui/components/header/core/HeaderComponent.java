@@ -3,6 +3,7 @@ package com.greencity.ui.components.header.core;
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.components.header.actions.HeaderControls;
 import com.greencity.ui.components.header.navbar.NavBar;
+import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import com.greencity.ui.pages.BasePage;
 import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.pages.homepage.HomePage;
@@ -90,11 +91,11 @@ public class HeaderComponent extends BaseComponent {
         return selectedPage;
     }
 
-    // TODO: change return type once SignInModal component is ready
-    public void clickSignIn() {
-        if (!isLoggedIn()) {
-            controls.clickSignIn();
-        }
+    public LoginModalComponent clickSignIn() {
+        if (!hasAuthPanel()) {throw new IllegalStateException("Auth panel is not available in header.");}
+
+        controls.clickSignIn();
+        return new LoginModalComponent(driver);
     }
 
     // TODO: change return type once SignUpModal component is ready

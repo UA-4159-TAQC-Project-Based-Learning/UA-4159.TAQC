@@ -1,6 +1,7 @@
 package com.greencity.ui.components.header.user;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,9 @@ public class AuthPanel extends BaseComponent {
     }
 
     // TODO: change return type once SignInModal is ready
-    public void clickSignIn() {
+    public LoginModalComponent clickSignIn() {
         clickDynamicElement(signInButton);
+        return new LoginModalComponent(driver);
     }
 
     // TODO: change return type once SignUpModal is ready
