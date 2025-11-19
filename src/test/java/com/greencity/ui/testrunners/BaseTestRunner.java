@@ -7,14 +7,17 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
 
 
 public class BaseTestRunner {
-    protected WebDriver driver;
     protected static TestValueProvider testValueProvider;
+    protected WebDriver driver;
     protected HomePage homePage;
 
     @BeforeSuite
@@ -39,7 +42,7 @@ public class BaseTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        if (driver == null){
+        if (driver == null) {
             initDriver();
         }
         driver.get(testValueProvider.getBaseUIUrl());
@@ -52,6 +55,7 @@ public class BaseTestRunner {
             driver.close();
         }
     }
+
     @AfterSuite
     public void afterSuite() {
         if (driver != null) {
