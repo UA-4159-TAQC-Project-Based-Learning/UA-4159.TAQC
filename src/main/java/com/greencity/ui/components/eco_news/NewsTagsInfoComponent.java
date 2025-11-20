@@ -11,7 +11,7 @@ import java.util.List;
 public class NewsTagsInfoComponent extends BaseComponent {
 
     @Getter
-    @FindBy(xpath = "//div[@class='tags']/div")
+    @FindBy(xpath = ".//div[@class='tags']/div")
     private List<WebElement> allTagsElements;
 
     public NewsTagsInfoComponent(WebDriver driver, WebElement rootElement) {
