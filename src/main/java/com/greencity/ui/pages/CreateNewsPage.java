@@ -16,6 +16,10 @@ public class CreateNewsPage extends BasePage {
     @FindBy(css = ".source-block")
     private InputFormComponent sourceInput;
 
+    @Getter
+    @FindBy (css = ".textarea-wrapper")
+    private InputFormComponent contentEditor;
+
     public CreateNewsPage(WebDriver driver) {
         super(driver);
     }

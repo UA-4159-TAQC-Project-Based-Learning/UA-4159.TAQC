@@ -17,6 +17,9 @@ public class InputFormComponent extends BaseComponent {
     @FindBy(css = "input, textarea")
     private WebElement fieldElement;
 
+    @FindBy(css = ".textarea-wrapper quill-editor")
+    private ContentEditorComponent contentEditor;
+
     public InputFormComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
