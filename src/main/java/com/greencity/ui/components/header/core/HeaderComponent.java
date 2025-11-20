@@ -92,8 +92,6 @@ public class HeaderComponent extends BaseComponent {
     }
 
     public LoginModalComponent clickSignIn() {
-        if (!hasAuthPanel()) {throw new IllegalStateException("Auth panel is not available in header.");}
-
         controls.clickSignIn();
         return new LoginModalComponent(driver);
     }
