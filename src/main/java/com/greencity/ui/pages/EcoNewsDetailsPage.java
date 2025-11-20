@@ -29,4 +29,5 @@ public class EcoNewsDetailsPage extends BasePage {
         editNewsButton.click();
         return new EditEcoNewsPage(driver);
     }
+
 }
