@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +110,11 @@ public class EcoNewsDetailsPage extends BasePage {
     }
 
     public Integer getNumberOfLikes() {
-        return Integer.parseInt(numbersOfLikesElement.getText());
+        try {
+            return Integer.parseInt(numbersOfLikesElement.getText().trim());
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     public String getTitle() {
@@ -130,7 +135,11 @@ public class EcoNewsDetailsPage extends BasePage {
     }
 
     public Integer getNumberOfComments() {
-        return Integer.parseInt(totalCountCommentElement.getText());
+        try {
+            return Integer.parseInt(totalCountCommentElement.getText().trim());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     public EcoNewsDetailsPage clickCommentInputElementButton() {
@@ -142,6 +151,5 @@ public class EcoNewsDetailsPage extends BasePage {
         this.commentButtonElement.click();
         return this;
     }
-
 
 }
