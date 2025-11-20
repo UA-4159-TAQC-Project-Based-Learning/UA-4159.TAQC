@@ -2,11 +2,15 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.EcoNewsListCardComponent;
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
+import com.greencity.ui.components.newsFilter.NewsFilterComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,41 +18,50 @@ import java.util.stream.Collectors;
 public class EcoNewsPage extends BasePage {
 
     @Getter
+    public NewsFilterComponent newsFilterComponent;
+    protected EcoNewsListCardComponent ecoNewsListCardComponent;
+    @FindBy(css = "div.ul-eco-buttons")
+    private WebElement newsFilterContainer;
+    @FindBy(css = "div.list-gallery")
+    private WebElement randomNewsCard;
+    @Getter
     @FindBy(css = "h1.main-header")
     private WebElement mainHeader;
-
     @Getter
     @FindBy(css = "div.container-img:has(.search-img)")
     private WebElement searchButton;
-
     @Getter
     @FindBy(css = ".place-input")
     private WebElement searchField;
-
     @Getter
     @FindBy(css = ".cross-position")
     private WebElement cancelSearchButton;
-
     @Getter
     @FindBy(css = "div.container-img:has(.bookmark-img)")
     private WebElement bookmarkButton;
-
     @Getter
     @FindBy(css = "div.container-img:has(.my-events-img)")
     private WebElement myEventsButton;
-    protected EcoNewsListCardComponent ecoNewsListCardComponent;
-
     @Getter
     @FindBy(id = "create-button")
     private WebElement createNewsButton;
 
     @FindBy(xpath = "//ul[contains(@class, 'gallery-view-active')]/li")
     private List<WebElement> tableCardsElements;
+
+    @Getter
+    @FindBy(xpath = "//div[contains(text(), ' Edit news ')]")
+    private WebElement editNewsLink;
+
     @FindBy(css = ".eco-news_list-view-wrp")
     private List<WebElement> ecoNewsListRoots;
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
+
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(newsFilterContainer));
+
+        newsFilterComponent = new NewsFilterComponent(driver, newsFilterContainer);
     }
 
     public CreateNewsPage clickCreateNews() {
@@ -68,9 +81,7 @@ public class EcoNewsPage extends BasePage {
     }
 
     public List<EcoNewsListCardComponent> getAllCards() {
-        return ecoNewsListRoots.stream()
-                .map(root -> new EcoNewsListCardComponent(driver, root))
-                .collect(Collectors.toList());
+        return ecoNewsListRoots.stream().map(root -> new EcoNewsListCardComponent(driver, root)).collect(Collectors.toList());
     }
 
     public EcoNewsPage openMyEvents() {
@@ -79,10 +90,7 @@ public class EcoNewsPage extends BasePage {
     }
 
     public EcoNewsListCardComponent findCardByTitle(String title) {
-        return getAllCards().stream()
-                .filter(card -> card.getTitleText().equalsIgnoreCase(title))
-                .findFirst()
-                .orElse(null);
+        return getAllCards().stream().filter(card -> card.getTitleText().equalsIgnoreCase(title)).findFirst().orElse(null);
     }
 
     public EcoNewsPage closeSearch() {
@@ -108,4 +116,5 @@ public class EcoNewsPage extends BasePage {
         }
         return null;
     }
+
 }
