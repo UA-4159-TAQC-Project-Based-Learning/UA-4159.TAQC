@@ -1,6 +1,7 @@
 package com.greencity.ui.pages;
 
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
+import com.greencity.ui.components.eco_news.NewsTagsInfoComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,8 +24,11 @@ public class EcoNewsDetailsPage extends BasePage {
     private WebElement backButton;
 
     @Getter
-    @FindBy(xpath = "//div[@class='tags']/div")
-    private List<WebElement> allTagsElements;
+    @FindBy(css = "div.tags")
+    private WebElement tagsRoot;
+
+    @Getter
+    private NewsTagsInfoComponent newsTagsInfoComponent;
 
     @Getter
     @FindBy(css = "div.news-title")
@@ -82,9 +86,10 @@ public class EcoNewsDetailsPage extends BasePage {
     @FindBy(css = "app-add-comment .primary-global-button")
     private WebElement commentButtonElement;
 
-
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
+
+        newsTagsInfoComponent = new NewsTagsInfoComponent(driver, tagsRoot);
     }
 
     public EditEcoNewsPage openEditNewsPage() {
