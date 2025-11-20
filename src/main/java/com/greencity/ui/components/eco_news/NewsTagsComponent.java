@@ -15,6 +15,14 @@ public class NewsTagsComponent extends BaseComponent {
     @FindBy(css = "a.global-tag")
     private List<WebElement> tagButtons;
 
+    @Getter
+    @FindBy(css = ".tags-block h3")
+    private List<WebElement> tagsSectionTitle;
+
+    @Getter
+    @FindBy(css = ".tags-block p")
+    private List<WebElement> tagsValidationMessage;
+
     public NewsTagsComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }

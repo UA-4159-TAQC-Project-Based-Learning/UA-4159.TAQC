@@ -31,7 +31,7 @@ public class AddImageComponent extends BaseComponent {
 
     @Getter
     @FindBy(css = ".image-block .warning")
-    private WebElement warningMessage;
+    private WebElement validationMessage;
 
     public AddImageComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -54,12 +54,12 @@ public class AddImageComponent extends BaseComponent {
         submitButton.click();
     }
 
-    public String getWarningMessage() {
-        return warningMessage.getText();
+    public String getValidationMessage() {
+        return validationMessage.getText();
     }
 
     public boolean isWarningTextHighlighted() {
-        return warningMessage.getAttribute("class").contains("warning-color");
+        return validationMessage.getAttribute("class").contains("warning-color");
     }
 
     public boolean isDropzoneHighlighted() {
