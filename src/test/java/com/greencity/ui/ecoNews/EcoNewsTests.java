@@ -1,9 +1,10 @@
-package com.greencity.ui.testrunners;
+package com.greencity.ui.ecoNews;
 
 import com.greencity.ui.components.newsFilter.FilterName;
 import com.greencity.ui.components.newsFilter.NewsFilterComponent;
 import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.pages.homepage.HomePage;
+import com.greencity.ui.testrunners.BaseTestRunner;
 import lombok.Getter;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -22,8 +23,10 @@ public class EcoNewsTests extends BaseTestRunner {
 
     @Test
     public void testFilterButtonsClickable() {
-        EcoNewsPage ecoNewsPage = new HomePage(driver).openEcoNewsPage();
-        NewsFilterComponent filter = ecoNewsPage.getFilterComponent();
+        HomePage homePage = new HomePage(driver);
+        homePage.getEcoNewsLink().click();
+        EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
+        NewsFilterComponent filter = ecoNewsPage.getNewsFilterComponent();
 
         for (FilterName filterName : FilterName.values()) {
             filter.clickFilterByName(filterName);
@@ -34,15 +37,23 @@ public class EcoNewsTests extends BaseTestRunner {
 
     @Test
     public void testAllFilterButtonsVisible() {
-        EcoNewsPage ecoNewsPage = homePage.openEcoNewsPage();
-        NewsFilterComponent filter = ecoNewsPage.getFilterComponent();
+        HomePage homePage = new HomePage(driver);
+
+        homePage.getEcoNewsLink().click();
+        EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
+
+        NewsFilterComponent filter = ecoNewsPage.getNewsFilterComponent();
         Assert.assertTrue(filter.areAllFiltersVisible(), "Not all filter buttons are visible");
     }
 
     @Test
     public void testFilterButtonTexts() {
-        EcoNewsPage ecoNewsPage = homePage.openEcoNewsPage();
-        NewsFilterComponent filter = ecoNewsPage.getFilterComponent();
+        HomePage homePage = new HomePage(driver);
+
+        homePage.getEcoNewsLink().click();
+
+        EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
+        NewsFilterComponent filter = ecoNewsPage.getNewsFilterComponent();
 
         for (FilterName filterName : FilterName.values()) {
             boolean found = filter.getFilterButtons().stream().anyMatch(span -> span.getText().trim().equalsIgnoreCase(filterName.getValue()));
