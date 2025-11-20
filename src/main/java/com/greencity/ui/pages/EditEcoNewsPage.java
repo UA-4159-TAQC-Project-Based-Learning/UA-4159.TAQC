@@ -5,7 +5,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class EditEcoNewsPage extends BasePage {
 
@@ -16,7 +15,6 @@ public class EditEcoNewsPage extends BasePage {
 
     public EditEcoNewsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
 
         editNewsButtonsComponent = new EditNewsButtonsComponent(driver, editNewsButtonsContainer);
     }

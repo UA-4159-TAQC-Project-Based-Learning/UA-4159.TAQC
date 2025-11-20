@@ -8,7 +8,6 @@ public class PreviewEcoNewsPage extends BasePage {
 
     public PreviewEcoNewsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public boolean isOpened() {
