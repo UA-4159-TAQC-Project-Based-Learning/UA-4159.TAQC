@@ -1,25 +1,24 @@
 package com.greencity.ui.components;
 
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 @Getter
 public class InputFormComponent extends BaseComponent {
 
-    private final WebElement labelElement;
+    @FindBy(css = ".title-wrapper h3")
+    private WebElement labelElement;
 
-    private final WebElement fieldInfoElement;
+    @FindBy(css = ".field-info")
+    private WebElement fieldInfoElement;
 
-    private final WebElement fieldElement;
+    @FindBy(css = "input, textarea")
+    private WebElement fieldElement;
 
     public InputFormComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        this.labelElement = rootElement.findElement(By.cssSelector(".title-wrapper h3"));
-        this.fieldInfoElement = rootElement.findElement(By.cssSelector(".field-info"));
-        this.fieldElement = rootElement.findElement(By.cssSelector("input, textarea"));
-
     }
 
     public InputFormComponent clear() {
