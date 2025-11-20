@@ -7,4 +7,5 @@ public class EcoNewsDetailsPage extends BasePage {
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
     }
+
 }
