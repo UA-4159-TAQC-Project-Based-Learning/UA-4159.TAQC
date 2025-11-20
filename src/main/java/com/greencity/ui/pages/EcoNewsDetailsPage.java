@@ -1,5 +1,6 @@
 package com.greencity.ui.pages;
 
+import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EcoNewsDetailsPage extends BasePage {
@@ -44,6 +46,43 @@ public class EcoNewsDetailsPage extends BasePage {
     @FindBy(css = "span.numerosity_likes")
     private WebElement numbersOfLikesElement;
 
+    @Getter
+    @FindBy(css = "img.news-image-img")
+    private WebElement imageElement;
+
+    @Getter
+    @FindBy(css = "div.news-text")
+    private WebElement newsTextElement;
+
+    @Getter
+    @FindBy(xpath = "//a/img[@alt='twitter']")
+    private WebElement twitterLinkElement;
+
+    @Getter
+    @FindBy(xpath = "//a/img[@alt='linkedin']")
+    private WebElement linkedinLinkElement;
+
+    @Getter
+    @FindBy(xpath = "//a/img[@alt='facebook']")
+    private WebElement facebookLinkElement;
+
+    @Getter
+    @FindBy(css = "div.list-gallery")
+    private List<WebElement> recommendedNewsElements;
+
+    @Getter
+    @FindBy(id = "total-count")
+    private WebElement totalCountCommentElement;
+
+    @Getter
+    @FindBy(css = "div.comment-textarea")
+    private WebElement commentInputElement;
+
+    @Getter
+    @FindBy(css = "app-add-comment .primary-global-button")
+    private WebElement commentButtonElement;
+
+
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
     }
@@ -60,7 +99,7 @@ public class EcoNewsDetailsPage extends BasePage {
         return new EcoNewsPage(driver);
     }
 
-    public String getAuthorName(){
+    public String getAuthorName() {
         return authorInfoElement.getText();
     }
 
@@ -68,12 +107,35 @@ public class EcoNewsDetailsPage extends BasePage {
         return Integer.parseInt(numbersOfLikesElement.getText());
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return titleElement.getText();
     }
 
-    public String getDateInfo(){
+    public String getDateInfo() {
         return dateInfoElement.getText();
+    }
+
+    public List<EcoNewsTableCardComponent> getRecommendedNewsTableCardComponents() {
+        List<EcoNewsTableCardComponent> result = new ArrayList<>();
+        for (WebElement element : recommendedNewsElements) {
+            EcoNewsTableCardComponent card = new EcoNewsTableCardComponent(driver, element);
+            result.add(card);
+        }
+        return result;
+    }
+
+    public Integer getNumberOfComments() {
+        return Integer.parseInt(totalCountCommentElement.getText());
+    }
+
+    public EcoNewsDetailsPage clickCommentInputElementButton() {
+        this.commentInputElement.click();
+        return this;
+    }
+
+    public EcoNewsDetailsPage clickCommentButtonElement() {
+        this.commentButtonElement.click();
+        return this;
     }
 
 
