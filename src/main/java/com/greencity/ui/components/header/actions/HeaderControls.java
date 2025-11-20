@@ -46,11 +46,11 @@ public class HeaderControls extends BaseComponent {
     }
 
     public boolean hasAuthPanel() {
-        try { return  signInButton.isDisplayed() && signUpButton.isDisplayed(); } catch (Exception ignored) { return false; }
+        return signInButton.isDisplayed() && signUpButton.isDisplayed();
     }
 
     public boolean hasUserMenu() {
-        try { return loggedInUserButton.isDisplayed(); } catch (Exception ignored) { return false; }
+        return loggedInUserButton.isDisplayed();
     }
 
     public AuthPanel authPanelComponent() { return new AuthPanel(driver, rootElement); }
@@ -69,8 +69,6 @@ public class HeaderControls extends BaseComponent {
     }
 
     public LoginModalComponent clickSignIn() {
-        if (!hasAuthPanel()) {throw new IllegalStateException("Auth panel is not available in header.");}
-
         authPanelComponent().clickSignIn();
         return new LoginModalComponent(driver);
     }
@@ -83,15 +81,11 @@ public class HeaderControls extends BaseComponent {
     }
 
     public boolean hasBurgerIcon() {
-        try { return burgerButton.isDisplayed(); } catch (Exception ignored) { return false; }
+        return burgerButton.isDisplayed();
     }
 
     public MobileNavMenu clickBurgerIcon() {
-        if (hasBurgerIcon()) {
-            clickDynamicElement(burgerButton);
-            return new MobileNavMenu(driver, burgerButton);
-        } else {
-            throw new IllegalStateException("Cannot click Burger icon.");
-        }
+        clickDynamicElement(burgerButton);
+        return new MobileNavMenu(driver, burgerButton);
     }
 }

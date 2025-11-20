@@ -28,11 +28,7 @@ public class SearchOverlay extends BaseComponent {
     }
 
     public boolean isOpen(){
-        try {
-            return searchInput.isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
+        return searchInput.isDisplayed();
     }
 
     public void type(String text) {

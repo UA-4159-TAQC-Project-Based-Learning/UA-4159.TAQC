@@ -24,8 +24,6 @@ public class MobileNavMenu extends NavBar {
     // open() -> should be inherited from NavBar
 
     public LoginModalComponent clickSignIn() {
-        if (!hasSignIn()) {throw new IllegalStateException("Auth panel is not available in header.");}
-
         clickDynamicElement(signIn);
         return new LoginModalComponent(driver);
     }
@@ -36,10 +34,10 @@ public class MobileNavMenu extends NavBar {
     }
 
     public boolean hasSignIn() {
-        try { return signIn.isDisplayed(); } catch (Exception ignored) { return false; }
+        return signIn.isDisplayed();
     }
 
     public boolean hasSignUp() {
-        try { return signUp.isDisplayed(); } catch (Exception ignored) { return false; }
+        return signUp.isDisplayed();
     }
 }
