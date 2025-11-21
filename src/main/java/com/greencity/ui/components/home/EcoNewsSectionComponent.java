@@ -1,7 +1,7 @@
 package com.greencity.ui.components.home;
 
 import com.greencity.ui.components.BaseComponent;
-import com.greencity.ui.pages.ecoNewsPage.EcoNewsPage;
+import com.greencity.ui.pages.EcoNewsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
