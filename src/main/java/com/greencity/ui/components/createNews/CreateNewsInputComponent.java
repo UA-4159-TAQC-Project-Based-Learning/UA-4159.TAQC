@@ -1,5 +1,6 @@
-package com.greencity.ui.components;
+package com.greencity.ui.components.createNews;
 
+import com.greencity.ui.components.BaseComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

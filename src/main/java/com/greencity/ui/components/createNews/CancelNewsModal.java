@@ -2,38 +2,38 @@ package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.CreateNewsPage;
-import com.greencity.ui.pages.ecoNewsPage.EcoNewsPage;
+import com.greencity.ui.pages.EcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class CancelNewsModal extends BaseComponent {
 
     @Getter
-    @FindBy(xpath = ".//div.warning-title")
-    WebElement cancelNewsModalTitle;
+    @FindBy(xpath = ".//div[contains(@class, 'warning-title')]")
+    private WebElement cancelNewsModalTitle;
 
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
-    WebElement continueEditingModalButton;
+    private WebElement continueEditingModalButton;
 
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'primary-global-button')]")
-    WebElement yesCancelModalButton;
+    private WebElement yesCancelModalButton;
 
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'close')]")
-    WebElement crossIconNewsModal;
+    private WebElement crossIconNewsModal;
 
-        public CancelNewsModal(WebDriver driver, WebElement rootElement) {
+    public CancelNewsModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
     public void waitForModalVisible() {
-            wait.until(ExpectedConditions.visibilityOf(rootElement));
+        wait.until(ExpectedConditions.visibilityOf(rootElement));
     }
 
     public CreateNewsPage clickContinueEditingButton() {

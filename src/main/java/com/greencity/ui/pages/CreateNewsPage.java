@@ -1,11 +1,8 @@
 package com.greencity.ui.pages;
 
-import com.greencity.ui.components.CreateNewsInputComponent;
+
 import com.greencity.ui.components.InputFormComponent;
-import com.greencity.ui.components.createNews.AddImageComponent;
-import com.greencity.ui.components.createNews.CancelNewsModal;
-import com.greencity.ui.components.createNews.CreateNewsButtonsComponent;
-import com.greencity.ui.components.createNews.NewsTagsComponent;
+import com.greencity.ui.components.createNews.*;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
