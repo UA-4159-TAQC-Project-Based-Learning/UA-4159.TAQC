@@ -16,23 +16,23 @@ public class HomePage extends BasePage {
 
     @Getter
     private final HeaderBannerComponent headerBanner;
+    @Getter
+    private final EcoNewsSectionComponent ecoNewsSection;
+    @Getter
+    private final SubscribeSectionComponent subscribeSection;
     @FindBy(css = "header#header")
     private WebElement headerBannerRoot;
     @Getter
     @FindBy(xpath = "//div[@class='stat-row']")
     private List<WebElement> statisticRowsRoot;
     private List<StatisticRowComponent> statisticRows;
-
     @FindBy(xpath = "//section[@id='events']")
     private WebElement ecoNewsSectionRoot;
-    @Getter
-    private final EcoNewsSectionComponent ecoNewsSection;
-
     @FindBy(xpath = "//div[@id='subscribe']")
     private WebElement subscribeSectionRoot;
     @Getter
-    private final SubscribeSectionComponent subscribeSection;
-
+    @FindBy(xpath = "//a[contains(@href, '#/greenCity/news')]")
+    private WebElement ecoNewsLink;
 
     public HomePage(WebDriver driver) {
         super(driver);

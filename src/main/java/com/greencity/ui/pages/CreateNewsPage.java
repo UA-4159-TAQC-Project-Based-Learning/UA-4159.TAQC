@@ -1,6 +1,7 @@
 package com.greencity.ui.pages;
 
 import com.greencity.ui.components.CreateNewsInputComponent;
+import com.greencity.ui.components.InputFormComponent;
 import com.greencity.ui.components.createNews.AddImageComponent;
 import com.greencity.ui.components.createNews.CancelNewsModal;
 import com.greencity.ui.components.createNews.CreateNewsButtonsComponent;
@@ -21,10 +22,17 @@ public class CreateNewsPage extends BasePage {
     private final NewsTagsComponent newsTagsComponent;
     @Getter
     private final CreateNewsButtonsComponent createNewsButtonsComponent;
-
     @FindBy(css = "div.popup-dialog-container")
     WebElement CancelNewsModalRoot;
-
+    @Getter
+    @FindBy(css = ".title-block")
+    private InputFormComponent titleInput;
+    @Getter
+    @FindBy(css = ".source-block")
+    private InputFormComponent sourceInput;
+    @Getter
+    @FindBy(css = ".textarea-wrapper")
+    private InputFormComponent contentEditor;
     @Getter
     @FindBy(css = "h2.title-header")
     private WebElement pageTitle;
