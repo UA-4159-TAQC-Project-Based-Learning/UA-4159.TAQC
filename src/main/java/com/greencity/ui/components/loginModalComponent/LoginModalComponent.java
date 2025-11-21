@@ -57,8 +57,7 @@ public class LoginModalComponent extends BaseComponent {
      * and uses it as the component root.
      */
     public LoginModalComponent(WebDriver driver) {
-        this(driver, new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(MODAL_ROOT_LOCATOR)));
+        this(driver, new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(MODAL_ROOT_LOCATOR)));
     }
 
     public boolean isOpen() {
