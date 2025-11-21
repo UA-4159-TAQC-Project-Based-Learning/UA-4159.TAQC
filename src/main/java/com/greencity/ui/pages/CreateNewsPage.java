@@ -1,28 +1,65 @@
 package com.greencity.ui.pages;
 
+
 import com.greencity.ui.components.InputFormComponent;
+import com.greencity.ui.components.createNews.*;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CreateNewsPage extends BasePage {
 
     @Getter
+    private final CreateNewsInputComponent createNewsInputComponent;
+    @Getter
+    private final AddImageComponent addImageComponent;
+    @Getter
+    private final NewsTagsComponent newsTagsComponent;
+    @Getter
+    private final CreateNewsButtonsComponent createNewsButtonsComponent;
+    @FindBy(css = "div.popup-dialog-container")
+    WebElement CancelNewsModalRoot;
+    @Getter
     @FindBy(css = ".title-block")
     private InputFormComponent titleInput;
-
     @Getter
     @FindBy(css = ".source-block")
     private InputFormComponent sourceInput;
-
     @Getter
-    @FindBy (css = ".textarea-wrapper")
+    @FindBy(css = ".textarea-wrapper")
     private InputFormComponent contentEditor;
+    @Getter
+    @FindBy(css = "h2.title-header")
+    private WebElement pageTitle;
+    @Getter
+    @FindBy(css = "p.title-description")
+    private WebElement pageTitleDescription;
+    @Getter
+    @FindBy(css = "div.form-container")
+    private WebElement inputsComponentRoot;
+    @Getter
+    @FindBy(css = "div.image-block")
+    private WebElement addImageComponentRoot;
+    @Getter
+    @FindBy(css = "div.tags-block")
+    private WebElement newsTagsComponentRoot;
+    @Getter
+    @FindBy(css = "div.submit-buttons")
+    private WebElement submitButtonsRoot;
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
+        this.createNewsInputComponent = new CreateNewsInputComponent(driver, inputsComponentRoot);
+        this.addImageComponent = new AddImageComponent(driver, addImageComponentRoot);
+        this.newsTagsComponent = new NewsTagsComponent(driver, newsTagsComponentRoot);
+        this.createNewsButtonsComponent = new CreateNewsButtonsComponent(driver, submitButtonsRoot);
     }
 
+    public CancelNewsModal getCancelNewsModal() {
+        wait.until(ExpectedConditions.visibilityOf(CancelNewsModalRoot));
+        return new CancelNewsModal(driver, CancelNewsModalRoot);
+    }
 
 }

@@ -4,6 +4,7 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,12 +20,14 @@ public class BaseTestRunner {
     protected static TestValueProvider testValueProvider;
     protected WebDriver driver;
     protected HomePage homePage;
+    protected JavascriptExecutor threadJs;
 
     @BeforeSuite
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
         testValueProvider = new TestValueProvider();
         initDriver();
+        threadJs = (JavascriptExecutor) driver;
     }
 
     @Step("init ChromeDriver")
