@@ -2,7 +2,7 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.Base;
 import com.greencity.ui.components.footer.FooterComponent;
-import com.greencity.ui.components.header.HeaderComponent;
+import com.greencity.ui.components.header.core.HeaderComponent;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
