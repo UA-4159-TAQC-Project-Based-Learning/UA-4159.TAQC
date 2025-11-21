@@ -18,9 +18,9 @@ import org.openqa.selenium.WebDriver;
  *
  * Later, in @BeforeEach (or any other relevant place) -> restore localStorage
  * ls = new LocalStorage(driver);
- * ls.setItem("accessToken", savedSession.accessToken());
- * ls.setItem("refreshToken", savedSession.refreshToken());
- * ls.setItem("userId", savedSession.userId());
+ * ls.setLSItemLS("accessToken", savedSession.accessToken());
+ * ls.setLSItemLS("refreshToken", savedSession.refreshToken());
+ * ls.setLSItemLS("userId", savedSession.userId());
  *
  */
 public class LocalStorage extends Base {
