@@ -1,6 +1,6 @@
-package com.greencity.ui.utils;
+package com.greencity.utils;
 
-import com.greencity.ui.Base;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -18,19 +18,23 @@ import org.openqa.selenium.WebDriver;
  *
  * Later, in @BeforeEach (or any other relevant place) -> restore localStorage
  * ls = new LocalStorage(driver);
- * ls.setLSItemLS("accessToken", savedSession.accessToken());
- * ls.setLSItemLS("refreshToken", savedSession.refreshToken());
- * ls.setLSItemLS("userId", savedSession.userId());
+ * ls.setItem("accessToken", savedSession.accessToken());
+ * ls.setItem("refreshToken", savedSession.refreshToken());
+ * ls.setItem("userId", savedSession.userId());
  *
  */
-public class LocalStorage extends Base {
+public class LocalStorage {
 
     private static final String ACCESS_TOKEN_KEY  = "accessToken";
     private static final String REFRESH_TOKEN_KEY = "refreshToken";
     private static final String USER_ID_KEY       = "userId";
+    private static final String NAME_KEY          = "name";
+    private static final String LANGUAGE_KEY      = "language";
+
+    private final JavascriptExecutor js;
 
     public LocalStorage(WebDriver driver) {
-        super(driver);
+        this.js = (JavascriptExecutor) driver;
     }
 
     /**
@@ -38,33 +42,37 @@ public class LocalStorage extends Base {
      * @param key -> localStorage key (e.g. "accessToken")
      * @return -> value as String
      */
-    public String getItemFromLS(String key) {
-        return (String) threadJs.executeScript(
+    public String getItem(String key) {
+        return (String) js.executeScript(
                 "return window.localStorage.getItem(arguments[0]);",
                 key
         );
     }
 
-    public void setLSItemLS(String key, String value) {
-        threadJs.executeScript(
+    public void setItem(String key, String value) {
+        js.executeScript(
                 "window.localStorage.setItem(arguments[0], arguments[1]);",
                 key, value
         );
     }
 
-    public void clearLS() {
-        threadJs.executeScript("window.localStorage.clear();");
+    public void clear() {
+        js.executeScript("window.localStorage.clear();");
     }
 
     public String getAccessToken() {
-        return getItemFromLS(ACCESS_TOKEN_KEY);
+        return getItem(ACCESS_TOKEN_KEY);
     }
 
     public String getRefreshToken() {
-        return getItemFromLS(REFRESH_TOKEN_KEY);
+        return getItem(REFRESH_TOKEN_KEY);
     }
 
     public String getUserId() {
-        return getItemFromLS(USER_ID_KEY);
+        return getItem(USER_ID_KEY);
     }
+
+    public String getName() {return  getItem(NAME_KEY);}
+
+    public String getLanguage() {return getItem(LANGUAGE_KEY);}
 }
