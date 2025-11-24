@@ -9,13 +9,11 @@
         <classes>
             <class name="com.greencity.ui.testrunners.BaseTestRunner"/>
             <class name="com.greencity.ui.testrunners.TestRunnerWithUser"/>
-            <class name="com.greencity.ui.CancelEditingTest"/>
-            <class name="com.greencity.ui.AuthorCanEditNewsTest"/>
-            <class name="com.greencity.ui.CheckingTagSelectionTest"/>
-            <class name="com.greencity.ui.EcoNewsSectionDisplayedUnregisteredUserTest"/>
-            <class name="com.greencity.ui.EditButtonVisibilityTest"/>
-            <class name="com.greencity.ui.NavigateEcoNewsPageAndLayoutTest"/>
-            <class name="com.greencity.ui.SourceFieldValidationTest"/>
+            <class name="com.greencity.ui.BaseTest"/>
+            <class name="com.greencity.ui.BaseTestWhithUser"/>
+            <class name="com.greencity.ui.FooterTest"/>
+            <class name="com.greencity.ui.ecoNews.EcoNewsTests"/>
+            <class name="com.greencity.ui.ecoNews.EditEcoNewsPageTest"/>
         </classes>
     </test>
 </suite>

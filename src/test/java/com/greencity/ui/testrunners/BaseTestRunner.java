@@ -26,8 +26,6 @@ public class BaseTestRunner {
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
         testValueProvider = new TestValueProvider();
-        initDriver();
-        threadJs = (JavascriptExecutor) driver;
     }
 
     @Step("init ChromeDriver")
@@ -41,6 +39,7 @@ public class BaseTestRunner {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
+        threadJs = (JavascriptExecutor) driver;
     }
 
     @BeforeClass
