@@ -39,7 +39,7 @@ public class InputFormComponent extends BaseComponent {
         return fieldElement.getAttribute("value");
     }
 
-    public InputFormComponent setValue(String text) {
+    public InputFormComponent typeText(String text) {
         fieldElement.click();
         fieldElement.clear();
         fieldElement.sendKeys(text);
