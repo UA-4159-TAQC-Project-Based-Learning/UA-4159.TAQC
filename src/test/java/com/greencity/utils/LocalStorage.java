@@ -72,7 +72,7 @@ public class LocalStorage {
         return getItem(USER_ID_KEY);
     }
 
-    public String getName() {return  getItem(NAME_KEY);}
+    public String getName() {return getItem(NAME_KEY);}
 
     public String getLanguage() {return getItem(LANGUAGE_KEY);}
 }
