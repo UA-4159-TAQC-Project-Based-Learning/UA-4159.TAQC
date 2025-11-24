@@ -38,7 +38,7 @@ public class LocalStorage {
     }
 
     /**
-     *
+     * Retrieves a value from localStorage by key.
      * @param key -> localStorage key (e.g. "accessToken")
      * @return -> value as String
      */
