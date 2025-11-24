@@ -8,10 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -51,15 +48,9 @@ public class BaseTestRunner {
         homePage = new HomePage(driver);
     }
 
-    @AfterClass()
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
-        if (driver != null) {
-            driver.close();
-        }
-    }
-
-    @AfterSuite
-    public void afterSuite() {
+        System.out.println("driver = " + driver);
         if (driver != null) {
             driver.quit();
         }
