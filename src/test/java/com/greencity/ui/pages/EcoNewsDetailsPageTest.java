@@ -2,11 +2,8 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.SortedMap;
 
 public class EcoNewsDetailsPageTest extends BaseTestRunner {
 
@@ -24,5 +21,4 @@ public class EcoNewsDetailsPageTest extends BaseTestRunner {
         softAssert.assertEquals(detailsPage.getNewsTextElement().getText(), "Black cats live twice as long as Orange cats");
         softAssert.assertAll();
     }
-
 }

@@ -26,6 +26,4 @@ public class EcoNewsTableCardComponentTest extends BaseTestRunner {
         EcoNewsTableCardComponent oneTable = ecoNewsPage.getOneTableCardByTitle("My Tea Cups News1");
         Assert.assertNotNull(oneTable);
     }
-
-
 }
