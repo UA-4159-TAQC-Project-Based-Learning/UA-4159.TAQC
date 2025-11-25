@@ -66,4 +66,20 @@ public class TestValueProvider {
     public String getJDBCGreenCityURL() {
         return properties != null ? properties.getProperty("JDBCGreenCityURL") : System.getenv("JDBC_GREENCITY_URL");
     }
+
+    public String getLsUserAccessToken() {
+        return properties != null ? properties.getProperty("ls.accessToken") : System.getenv("LS_ACCESS_TOKEN");
+    }
+
+    public String getLsUserRefreshToken() {
+        return properties != null ? properties.getProperty("ls.refreshToken") : System.getenv("LS_REFRESH_TOKEN");
+    }
+
+    public String getLsUserId() {
+        return properties != null ? properties.getProperty("ls.userId") : System.getenv("LS_USER_ID");
+    }
+
+    public String getLsUserName() {
+        return properties != null ? properties.getProperty("ls.name") : System.getenv("LS_NAME");
+    }
 }

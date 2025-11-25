@@ -4,13 +4,11 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -19,12 +17,12 @@ public class BaseTestRunner {
     protected static TestValueProvider testValueProvider;
     protected WebDriver driver;
     protected HomePage homePage;
+    protected JavascriptExecutor threadJs;
 
     @BeforeSuite
     public void beforeSuite() {
         WebDriverManager.chromedriver().setup();
         testValueProvider = new TestValueProvider();
-        initDriver();
     }
 
     @Step("init ChromeDriver")
@@ -38,6 +36,7 @@ public class BaseTestRunner {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
+        threadJs = (JavascriptExecutor) driver;
     }
 
     @BeforeClass
@@ -49,15 +48,9 @@ public class BaseTestRunner {
         homePage = new HomePage(driver);
     }
 
-    @AfterClass()
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
-        if (driver != null) {
-            driver.close();
-        }
-    }
-
-    @AfterSuite
-    public void afterSuite() {
+        System.out.println("driver = " + driver);
         if (driver != null) {
             driver.quit();
         }

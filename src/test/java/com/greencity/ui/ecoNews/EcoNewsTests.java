@@ -13,8 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 public class EcoNewsTests extends BaseTestRunner {
 
-    @Getter
-    private SoftAssert softAssert;
+    protected SoftAssert softAssert;
 
     @BeforeMethod
     public void beforeMethod() {

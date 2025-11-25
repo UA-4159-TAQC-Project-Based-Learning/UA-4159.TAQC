@@ -20,7 +20,6 @@ public class NewsFilterComponent extends BaseComponent {
 
     public NewsFilterComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        PageFactory.initElements(driver, this);
     }
 
     public boolean clickFilterByName(FilterName filterName) {
