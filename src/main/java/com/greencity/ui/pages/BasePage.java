@@ -11,7 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.greencity.utils.TestValueProvider;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -26,13 +25,11 @@ public abstract class BasePage extends Base {
     @FindBy(xpath = "//footer")
     private WebElement FooterRoot;
 
-    public TestValueProvider testValueProvider;
 
     public BasePage(WebDriver driver) {
         super(driver);
         header = new HeaderComponent(driver, headerRoot);
         footer = new FooterComponent(driver, FooterRoot);
-        testValueProvider = new TestValueProvider();
     }
 
     private int getContentHeight() {
