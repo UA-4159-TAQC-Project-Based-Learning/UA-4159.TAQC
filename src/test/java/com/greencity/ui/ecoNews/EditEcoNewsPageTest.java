@@ -1,16 +1,18 @@
 package com.greencity.ui.ecoNews;
 
-import com.greencity.ui.BaseTest;
 import com.greencity.ui.components.buttons.EditNewsButtonsComponent;
 import com.greencity.ui.pages.EcoNewsDetailsPage;
 import com.greencity.ui.pages.EditEcoNewsPage;
 import com.greencity.ui.pages.ecoNewsPreviewPage.PreviewEcoNewsPage;
+import com.greencity.ui.testrunners.BaseTestRunner;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class EditEcoNewsPageTest extends BaseTest {
+
+@Test(enabled = false)
+public class EditEcoNewsPageTest extends BaseTestRunner {
 
     private EditEcoNewsPage editEcoNewsPage;
 

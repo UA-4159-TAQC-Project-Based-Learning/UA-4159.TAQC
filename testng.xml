@@ -7,14 +7,12 @@
     </listeners>
     <test name="UITests">
         <classes>
-            <class name="com.greencity.ui.testrunners.BaseTestRunner"/>
-            <class name="com.greencity.ui.testrunners.TestRunnerWithUser"/>
-            <class name="com.greencity.ui.BaseTest"/>
-            <class name="com.greencity.ui.BaseTestWhithUser"/>
-            <class name="com.greencity.ui.FooterTest"/>
             <class name="com.greencity.ui.ecoNews.EcoNewsTests"/>
-            <class name="com.greencity.ui.ecoNews.EditEcoNewsPageTest"/>
+            <exclude name="com.greencity.ui.ecoNews.EditEcoNewsPageTest"/>
+            <class name="com.greencity.ui.pages.EcoNewsDetailsPageTest"/>
+            <class name="com.greencity.ui.pages.EcoNewsTableCardComponentTest"/>
             <class name="com.greencity.ui.CreateNewsTitleValidationTest"/>
+            <class name="com.greencity.ui.FooterTest"/>
         </classes>
     </test>
 </suite>

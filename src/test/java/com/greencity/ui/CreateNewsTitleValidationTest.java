@@ -12,8 +12,6 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
     @BeforeClass
     public void setUp() {
 
-        initDriver();
-
         String createNewsUrl = testValueProvider.getBaseUIUrl() + "/news/create-news";
         driver.get(createNewsUrl);
 
@@ -21,13 +19,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         createNewsPage.waitForPageToLoad(10);
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
-    }
+
 
     @Test(description = "Title input invalid when empty and Publish disabled")
     public void testTitleEmptyAndPublishDisabled() {
