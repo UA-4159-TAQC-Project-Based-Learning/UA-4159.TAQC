@@ -74,11 +74,15 @@ public class InputFormComponent extends BaseComponent {
         return searchingClass != null && searchingClass.contains(className);
     }
 
-    public boolean isValid() {
+    public boolean isValidField() {
         return hasClass(fieldElement, "ng-valid");
     }
 
-    public boolean isInvalid() {
+    public boolean hasWarningFieldInfo() {
+        return hasClass(fieldInfoElement, "warning");
+    }
+
+    public boolean isInvalidField() {
         return hasClass(fieldElement, "ng-invalid");
     }
 

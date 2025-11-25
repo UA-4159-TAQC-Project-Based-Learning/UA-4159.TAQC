@@ -14,6 +14,7 @@
             <class name="com.greencity.ui.FooterTest"/>
             <class name="com.greencity.ui.ecoNews.EcoNewsTests"/>
             <class name="com.greencity.ui.ecoNews.EditEcoNewsPageTest"/>
+            <class name="com.greencity.ui.CreateNewsTitleValidationTest"/>
         </classes>
     </test>
 </suite>
