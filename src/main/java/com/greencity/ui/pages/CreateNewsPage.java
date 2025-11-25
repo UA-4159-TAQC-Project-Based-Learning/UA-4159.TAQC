@@ -12,7 +12,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class CreateNewsPage extends BasePage {
 
     @Getter
-    private final CreateNewsInputComponent createNewsInputComponent;
+    private final InputFormComponent titleInput;
+    @Getter
+    private final InputFormComponent sourceInput;
+    @Getter
+    private final InputFormComponent contentEditor;
     @Getter
     private final AddImageComponent addImageComponent;
     @Getter
@@ -23,13 +27,13 @@ public class CreateNewsPage extends BasePage {
     WebElement CancelNewsModalRoot;
     @Getter
     @FindBy(css = ".title-block")
-    private InputFormComponent titleInput;
+    private WebElement titleInputRoot;
     @Getter
     @FindBy(css = ".source-block")
-    private InputFormComponent sourceInput;
+    private WebElement sourceInputRoot;
     @Getter
     @FindBy(css = ".textarea-wrapper")
-    private InputFormComponent contentEditor;
+    private WebElement contentEditorRoot;
     @Getter
     @FindBy(css = "h2.title-header")
     private WebElement pageTitle;
@@ -51,7 +55,9 @@ public class CreateNewsPage extends BasePage {
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
-        this.createNewsInputComponent = new CreateNewsInputComponent(driver, inputsComponentRoot);
+        this.titleInput = new InputFormComponent(driver, titleInputRoot);
+        this.sourceInput = new InputFormComponent(driver, sourceInputRoot);
+        this.contentEditor = new InputFormComponent(driver, contentEditorRoot);
         this.addImageComponent = new AddImageComponent(driver, addImageComponentRoot);
         this.newsTagsComponent = new NewsTagsComponent(driver, newsTagsComponentRoot);
         this.createNewsButtonsComponent = new CreateNewsButtonsComponent(driver, submitButtonsRoot);

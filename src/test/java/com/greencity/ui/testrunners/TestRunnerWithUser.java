@@ -18,6 +18,7 @@ public class TestRunnerWithUser extends BaseTestRunner {
             throw new RuntimeException(e);
         }
         driver.navigate().refresh();
+
     }
 
     private void setLSItem(String key, String value) {
