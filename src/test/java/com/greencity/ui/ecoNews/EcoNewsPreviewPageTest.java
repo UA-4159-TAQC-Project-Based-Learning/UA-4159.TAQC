@@ -38,7 +38,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
         EcoNewsPage newsPage = new EcoNewsPage(driver);
         newsPage.clickCreateNews();
-        editNewsPage.waitForPageToLoad(10000);
+        newsPage.waitForPageToLoad(10000);
 
         String title = "test title 1234567890";
         String content = "test content 1234567890";
@@ -49,7 +49,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
         qlEditor.click();
         qlEditor.sendKeys(content);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
-        editNewsPage.waitForPageToLoad(10000);
+        createNewsPage.waitForPageToLoad(10000);
 
         CreateNewsPreviewPage previewPage = new CreateNewsPreviewPage(driver);
 
