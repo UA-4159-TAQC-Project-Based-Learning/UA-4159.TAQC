@@ -19,35 +19,55 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     @Test(description = "User can publish news with 1 tag")
     public void testCreateNewsWithOneTag() {
-/*
+
         SoftAssert softAssert = new SoftAssert();
 
         EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
-                .getNewsTagsComponent()
                 .selectTag("News")
                 .getTitleInput()
                 .typeText("Test")
                 .getContentEditor()
                 .typeText("Test content with 20 chars")
+                .getCreateNewsButtonsComponent()
                 .clickPublish();
 
-        softAssert.assertTrue(ecoNewsDetailsPage.isOpened(),
-                "Eco News details page did not open after publishing");
-
-        softAssert.assertTrue(ecoNewsDetailsPage.getTags().contains("News"),
+        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("News"),
                 "Expected tag 'News' was not found on published news");
 
         softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), "Test",
                 "Title does not match");
 
         softAssert.assertAll();
-
- */
     }
 
     @Test(description = "User can publish news with 3 tags")
     public void testCreateNewsWithThreeTags() {
+        SoftAssert softAssert = new SoftAssert();
 
+        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+                .selectTag("News")
+                .selectTag("Events")
+                .selectTag("Education")
+                .getTitleInput()
+                .typeText("Test")
+                .getContentEditor()
+                .typeText("Test content with 20 chars")
+                .getCreateNewsButtonsComponent()
+                .clickPublish();
+
+        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("News"),
+                "Expected tag 'News' was not found on published news");
+
+        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("Events"),
+                "Expected tag 'Events' was not found on published news");
+
+        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("Education"),
+                "Expected tag 'Education' was not found on published news");
+
+        softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), "Test",
+                "Title does not match");
+
+        softAssert.assertAll();
     }
 
     @Test(description = "Selecting more than three tags is not possible")
@@ -57,6 +77,20 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     @Test(description = "Creating news with zero tags selected is not possible")
     public void testCreateNewsWithZeroTags() {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        boolean publishEnabled = createNewsPage
+                .getTitleInput()
+                .typeText("Test")
+                .getContentEditor()
+                .typeText("Test content with 20 chars")
+                .getCreateNewsButtonsComponent()
+                .isPublishEnabled();
+        softAssert.assertFalse(publishEnabled,
+                "Expected Publish button to be disabled when title is empty");
+
+        softAssert.assertAll();
 
     }
 
