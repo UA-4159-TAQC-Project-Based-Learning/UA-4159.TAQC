@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.List;
+
 public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;
@@ -22,17 +24,35 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
         SoftAssert softAssert = new SoftAssert();
 
-        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+        createNewsPage
                 .selectTag("News")
                 .getTitleInput()
                 .typeText("Test")
                 .getContentEditor()
-                .typeText("Test content with 20 chars")
-                .getCreateNewsButtonsComponent()
-                .clickPublish();
+                .typeText("Test content with 20 chars");
 
-        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("News"),
+        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+                .getCreateNewsButtonsComponent()
+                .clickPublish()
+                .getOneTableCardByTitle("Test")
+                .goToDetails();
+
+
+        softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("News"),
                 "Expected tag 'News' was not found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Events"),
+                "Unexpected tag 'Events' was found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Education"),
+                "Unexpected tag 'Education' was found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Initiatives"),
+                "Unexpected tag 'Initiatives' was found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Ads"),
+                "Unexpected tag 'Ads' was found on published news");
+
 
         softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), "Test",
                 "Title does not match");
@@ -44,25 +64,36 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
     public void testCreateNewsWithThreeTags() {
         SoftAssert softAssert = new SoftAssert();
 
-        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+        createNewsPage
                 .selectTag("News")
                 .selectTag("Events")
                 .selectTag("Education")
                 .getTitleInput()
                 .typeText("Test")
                 .getContentEditor()
-                .typeText("Test content with 20 chars")
-                .getCreateNewsButtonsComponent()
-                .clickPublish();
+                .typeText("Test content with 20 chars");
 
-        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("News"),
+        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+                .getCreateNewsButtonsComponent()
+                .clickPublish()
+                .getOneTableCardByTitle("Test")
+                .goToDetails();
+
+        softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("News"),
                 "Expected tag 'News' was not found on published news");
 
-        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("Events"),
+        softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Events"),
                 "Expected tag 'Events' was not found on published news");
 
-        softAssert.assertTrue(ecoNewsDetailsPage.getTagsRoot().hasTag("Education"),
+        softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Education"),
                 "Expected tag 'Education' was not found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Initiatives"),
+                "Unexpected tag 'Initiatives' was found on published news");
+
+        softAssert.assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("Ads"),
+                "Unexpected tag 'Ads' was found on published news");
+
 
         softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), "Test",
                 "Title does not match");
@@ -72,6 +103,30 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     @Test(description = "Selecting more than three tags is not possible")
     public void testCreateNewsWithMoreThanThreeTags() {
+        SoftAssert softAssert = new SoftAssert();
+
+        createNewsPage
+                .selectTag("News")
+                .selectTag("Events")
+                .selectTag("Education")
+                .selectTag("Initiatives")
+                .selectTag("Ads");
+
+
+        List<String> selectedTags = createNewsPage
+                .getNewsTagsComponent()
+                .getSelectedTags();
+
+        softAssert.assertEquals(selectedTags.size(), 3,
+                "User should not be able to select more than 3 tags");
+
+        softAssert.assertFalse(selectedTags.contains("Initiatives"),
+                "Tag 'Initiatives' should NOT be selectable");
+
+        softAssert.assertFalse(selectedTags.contains("Ads"),
+                "Tag 'Ads' should NOT be selectable");
+
+        softAssert.assertAll();
 
     }
 
@@ -80,15 +135,18 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
         SoftAssert softAssert = new SoftAssert();
 
-        boolean publishEnabled = createNewsPage
+        createNewsPage
                 .getTitleInput()
                 .typeText("Test")
                 .getContentEditor()
-                .typeText("Test content with 20 chars")
+                .typeText("Test content with 20 chars");
+
+        boolean publishEnabled = createNewsPage
                 .getCreateNewsButtonsComponent()
                 .isPublishEnabled();
+
         softAssert.assertFalse(publishEnabled,
-                "Expected Publish button to be disabled when title is empty");
+                "Expected Publish button to be disabled when tags are not selected");
 
         softAssert.assertAll();
 
