@@ -1,4 +1,4 @@
-package com.greencity.ui.components.eco_news;
+package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import lombok.Getter;
