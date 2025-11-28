@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 @Getter
 public class InputFormComponent extends AbstractInputComponent {
@@ -13,6 +15,7 @@ public class InputFormComponent extends AbstractInputComponent {
 
     public InputFormComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
 
     public InputFormComponent clear() {

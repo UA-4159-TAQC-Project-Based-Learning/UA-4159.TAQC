@@ -2,8 +2,13 @@ package com.greencity.ui;
 
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+
+import java.time.Duration;
 
 public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
@@ -17,6 +22,10 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
         createNewsPage = new CreateNewsPage(driver);
         createNewsPage.waitForPageToLoad(10);
+        
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated
+                        (By.cssSelector("textarea[formcontrolname='title']")));
     }
 
 
@@ -92,7 +101,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
         boolean mainText = createNewsPage.getContentEditor()
                 .getInputAreaText().trim().isEmpty();
-        softAssert.assertTrue(mainText);
+        softAssert.assertTrue(mainText, "Main text should be empty when only title is entered");
 
         boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
                 .isPublishEnabled();
@@ -119,7 +128,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
                 .isPublishEnabled();
         softAssert.assertTrue(actualPublishEnabled,
-                "Publish button should be enable after entering valid main text, selecting news tag and add valid title");
+                "Publish button should be enabled after entering valid main text, selecting news tag and add valid title");
 
         softAssert.assertAll();
     }

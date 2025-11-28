@@ -3,7 +3,7 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.ContentEditorComponent;
 import com.greencity.ui.components.InputFormComponent;
-import com.greencity.ui.components.eco_news.NewsTagsComponent;
+import com.greencity.ui.components.createNews.NewsTagsComponent;
 import com.greencity.ui.components.createNews.*;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
