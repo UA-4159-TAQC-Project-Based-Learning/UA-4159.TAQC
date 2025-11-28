@@ -4,13 +4,17 @@ import com.greencity.ui.components.home.EcoNewsSectionComponent;
 import com.greencity.ui.components.home.HeaderBannerComponent;
 import com.greencity.ui.components.home.StatisticRowComponent;
 import com.greencity.ui.components.home.SubscribeSectionComponent;
+import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import com.greencity.ui.pages.BasePage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+
+import static com.greencity.ui.components.home.HeaderBannerComponent.LOGIN_MODAL_ROOT_LOCATOR;
 
 public class HomePage extends BasePage {
 
@@ -33,6 +37,16 @@ public class HomePage extends BasePage {
     @Getter
     @FindBy(xpath = "//a[contains(@href, '#/greenCity/news')]")
     private WebElement ecoNewsLink;
+//    @FindBy(xpath = "//span[text()='Sign up ']")
+//    private WebElement signUpButton;
+//    @FindBy(xpath = "//img[@alt='sing in button']")
+//    private WebElement signInButton;
+
+//    public LoginModalComponent openLoginModal() {
+//        signInButton.click();
+//        WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
+//        return new LoginModalComponent(driver, loginModalRoot);
+//    }
 
     public HomePage(WebDriver driver) {
         super(driver);
