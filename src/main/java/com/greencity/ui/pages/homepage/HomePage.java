@@ -37,16 +37,16 @@ public class HomePage extends BasePage {
     @Getter
     @FindBy(xpath = "//a[contains(@href, '#/greenCity/news')]")
     private WebElement ecoNewsLink;
-    @FindBy(xpath = "//span[text()='Sign up ']")
-    private WebElement signUpButton;
-    @FindBy(xpath = "//img[@alt='sing in button']")
-    private WebElement signInButton;
+//    @FindBy(xpath = "//span[text()='Sign up ']")
+//    private WebElement signUpButton;
+//    @FindBy(xpath = "//img[@alt='sing in button']")
+//    private WebElement signInButton;
 
-    public LoginModalComponent openLoginModal() {
-        signInButton.click();
-        WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
-        return new LoginModalComponent(driver, loginModalRoot);
-    }
+//    public LoginModalComponent openLoginModal() {
+//        signInButton.click();
+//        WebElement loginModalRoot = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_MODAL_ROOT_LOCATOR));
+//        return new LoginModalComponent(driver, loginModalRoot);
+//    }
 
     public HomePage(WebDriver driver) {
         super(driver);

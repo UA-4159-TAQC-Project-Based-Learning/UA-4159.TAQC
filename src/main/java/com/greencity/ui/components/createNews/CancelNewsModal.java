@@ -20,19 +20,22 @@ public class CancelNewsModal extends BaseComponent {
     private WebElement continueNewsEditingModalButton;
 
     @Getter
-    @FindBy(xpath = "//button[text() = ' Yes, cancel ']")
+    @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
     private WebElement yesCancelChangesModalButton;
 
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'close')]")
     private WebElement crossIconForCloseChangesModal;
 
+
     public CancelNewsModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
+
     public void waitForModalVisible() {
-        wait.until(ExpectedConditions.visibilityOf(rootElement));
+
+//        wait.until(ExpectedConditions.visibilityOf(rootElement));
     }
 
     public CreateNewsPage clickContinueEditingButton() {
