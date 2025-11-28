@@ -63,4 +63,11 @@ public class ContentEditorComponent extends BaseComponent {
     public ContentEditorComponent(WebDriver driver, WebElement rootElement){
         super(driver, rootElement);
     }
+
+    public ContentEditorComponent typeText(String text) {
+        textInputArea.click();
+        textInputArea.clear();
+        textInputArea.sendKeys(text);
+        return this;
+    }
 }
