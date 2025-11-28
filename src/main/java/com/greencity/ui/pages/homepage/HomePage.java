@@ -38,6 +38,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[contains(@href, '#/greenCity/news')]")
     private WebElement ecoNewsLink;
     @FindBy(xpath = "//span[text()='Sign up ']")
+    private WebElement signUpButton;
+    @FindBy(xpath = "//img[@alt='sing in button']")
     private WebElement signInButton;
 
     public LoginModalComponent openLoginModal() {

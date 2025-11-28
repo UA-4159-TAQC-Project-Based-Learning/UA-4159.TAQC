@@ -16,7 +16,7 @@ import java.util.List;
 public class EcoNewsDetailsPage extends BasePage {
 
     @Getter
-    private static final String AUTHOR_NEWS_URL = "https://www.greencity.cx.ua/#/greenCity/news/158";
+    public static final String AUTHOR_NEWS_URL = "https://www.greencity.cx.ua/#/greenCity/news/168";
     @FindBy(css = "div.edit-news")
     private WebElement editNewsButton;
 
@@ -151,5 +151,4 @@ public class EcoNewsDetailsPage extends BasePage {
         this.commentButtonElement.click();
         return this;
     }
-
 }

@@ -2,31 +2,30 @@ package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.CreateNewsPage;
-import com.greencity.ui.pages.EcoNewsPage;
+import com.greencity.ui.pages.EditEcoNewsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
 public class CancelNewsModal extends BaseComponent {
 
     @Getter
     @FindBy(xpath = ".//div[contains(@class, 'warning-title')]")
-    private WebElement cancelNewsModalTitle;
+    private WebElement cancelNewsChangesModalTitle;
 
     @Getter
-    @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
-    private WebElement continueEditingModalButton;
+    @FindBy(xpath = ".//button[text() = ' Continue editing ']")
+    private WebElement continueNewsEditingModalButton;
 
     @Getter
-    @FindBy(xpath = ".//button[contains(@class, 'primary-global-button')]")
-    private WebElement yesCancelModalButton;
+    @FindBy(xpath = "//button[text() = ' Yes, cancel ']")
+    private WebElement yesCancelChangesModalButton;
 
     @Getter
     @FindBy(xpath = ".//button[contains(@class, 'close')]")
-    private WebElement crossIconNewsModal;
+    private WebElement crossIconForCloseChangesModal;
 
     public CancelNewsModal(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -38,20 +37,19 @@ public class CancelNewsModal extends BaseComponent {
 
     public CreateNewsPage clickContinueEditingButton() {
         waitForModalVisible();
-        clickDynamicElement(continueEditingModalButton);
+        clickDynamicElement(continueNewsEditingModalButton);
         return new CreateNewsPage(driver);
     }
 
-    public EcoNewsPage clickYesCancelButton() {
+    public EditEcoNewsPage clickYesCancelButton() {
         waitForModalVisible();
-        yesCancelModalButton.click();
-        return new EcoNewsPage(driver);
+        yesCancelChangesModalButton.click();
+        return new EditEcoNewsPage(driver);
     }
 
     public CreateNewsPage clickCloseIcon() {
         waitForModalVisible();
-        crossIconNewsModal.click();
+        crossIconForCloseChangesModal.click();
         return new CreateNewsPage(driver);
     }
-
 }
