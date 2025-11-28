@@ -6,13 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Getter
-public class ContentEditorComponent extends BaseComponent {
-
-    @FindBy(css = ".title-wrapper h3")
-    private WebElement labelElement;
-
-    @FindBy(css = ".field-info")
-    private WebElement fieldInfoElement;
+public class ContentEditorComponent extends AbstractInputComponent {
 
     @FindBy (css = ".ql-editor p")
     private WebElement textInputArea;
@@ -62,19 +56,17 @@ public class ContentEditorComponent extends BaseComponent {
     @FindBy (css = "button.ql-direction[value='rtl']")
     private WebElement rightToLeftButton;
 
+    @FindBy (css = "quill-counter")
+    private WebElement notEnoughCharacterMessage;
+
+
+
 
 
     public ContentEditorComponent(WebDriver driver, WebElement rootElement){
         super(driver, rootElement);
     }
 
-    public String getLabelText() {
-        return labelElement.getText().trim();
-    }
-
-    public String getFieldInfoText() {
-        return fieldInfoElement.getText().trim();
-    }
 
     public ContentEditorComponent clear() {
         textInputArea.clear();
@@ -86,7 +78,7 @@ public class ContentEditorComponent extends BaseComponent {
         return this;
     }
 
-    public String getMainTextValue() {
+    public String getValue() {
         return textInputArea.getAttribute("value");
     }
 
@@ -98,6 +90,10 @@ public class ContentEditorComponent extends BaseComponent {
 
     public String getInputAreaText() {
         return textInputArea.getText().trim();
+    }
+
+    public boolean isEnoughCharacterMainText() {
+        return hasClass(notEnoughCharacterMessage, "warning");
     }
 
 }

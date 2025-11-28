@@ -6,13 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Getter
-public class InputFormComponent extends BaseComponent {
-
-    @FindBy(css = ".title-wrapper h3")
-    private WebElement labelElement;
-
-    @FindBy(css = ".field-info")
-    private WebElement fieldInfoElement;
+public class InputFormComponent extends AbstractInputComponent {
 
     @FindBy(css = "input, textarea")
     private WebElement fieldElement;
@@ -37,7 +31,6 @@ public class InputFormComponent extends BaseComponent {
     }
 
     public InputFormComponent typeText(String text) {
-        fieldElement.click();
         fieldElement.clear();
         fieldElement.sendKeys(text);
         return this;
@@ -45,14 +38,6 @@ public class InputFormComponent extends BaseComponent {
 
     public String getPlaceholderText() {
         return fieldElement.getAttribute("placeholder");
-    }
-
-    public String getLabelText() {
-        return labelElement.getText().trim();
-    }
-
-    public String getFieldInfoText() {
-        return fieldInfoElement.getText().trim();
     }
 
     public boolean isTextArea() {
@@ -63,20 +48,8 @@ public class InputFormComponent extends BaseComponent {
         return fieldElement.getTagName().equalsIgnoreCase("input");
     }
 
-    public boolean hasClass(WebElement element, String className) {
-        if (element == null) {
-            return false;
-        }
-        String searchingClass = element.getAttribute("class");
-        return searchingClass != null && searchingClass.contains(className);
-    }
-
     public boolean isValidField() {
         return hasClass(fieldElement, "ng-valid");
-    }
-
-    public boolean hasWarningFieldInfo() {
-        return hasClass(fieldInfoElement, "warning");
     }
 
     public boolean isInvalidField() {
