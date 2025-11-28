@@ -21,7 +21,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
 
 
-    @Test(description = "Title input invalid when empty and Publish disabled")
+    @Test(priority = 1, description = "Title input invalid when empty and Publish disabled")
     public void testTitleEmptyAndPublishDisabled() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -48,7 +48,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         softAssert.assertAll();
     }
 
-    @Test(description = "Title input should not exceed 170 characters")
+    @Test(priority = 2, description = "Title input should not exceed 170 characters")
     //in testcase requirement max length = 170 char functional on site implemented max length = 171
     public void testTitleMaxLength() {
         SoftAssert softAssert = new SoftAssert();
@@ -71,7 +71,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         softAssert.assertAll();
     }
 
-    @Test(description = "Valid title should have correct counter value")
+    @Test(priority = 3, description = "Valid title should have correct counter value")
     public void testTitleValidValue(){
         SoftAssert softAssert = new SoftAssert();
 
@@ -90,13 +90,41 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         softAssert.assertFalse(warningTag,
                 "Expected no warning in fieldInfo when title length " + validTitle.length() + "/170 ");
 
+        boolean mainText = createNewsPage.getContentEditor()
+                .getInputAreaText().trim().isEmpty();
+        softAssert.assertTrue(mainText);
+
         boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
                 .isPublishEnabled();
         softAssert.assertFalse(actualPublishEnabled,
                 "Publish button should be not enable before entering main text and selecting news tag");
 
+
         softAssert.assertAll();
     }
+
+    @Test(priority = 4, description = "Add valid title, tag and main text should publish button be enabled")
+    public void testPublishButtonValid(){
+        SoftAssert softAssert = new SoftAssert();
+
+        String validTitle = "Test News";
+        createNewsPage.getTitleInput()
+                .clickOnField()
+                .typeText(validTitle);
+        String validMainText = "B".repeat(21);
+        createNewsPage.getContentEditor()
+                        .clickOnMainText().typeText(validMainText);
+        createNewsPage.getNewsTagsComponent().selectTag("News");
+
+        boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
+                .isPublishEnabled();
+        softAssert.assertTrue(actualPublishEnabled,
+                "Publish button should be enable after entering valid main text, selecting news tag and add valid title");
+
+        softAssert.assertAll();
+    }
+
+
 
 }
 
