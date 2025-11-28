@@ -9,7 +9,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
 
         String createNewsUrl = testValueProvider.getBaseUIUrl() + "/news/create-news";
