@@ -42,6 +42,9 @@ public class TestValueProvider {
     public String getUserPassword() {
         return properties != null ? properties.getProperty("user.password") : System.getenv("USER_PASSWORD");
     }
+    public Integer getUserNewsId() {
+        return properties != null ? Integer.parseInt(properties.getProperty("user.news.id")) : Integer.parseInt(System.getenv("USER_NEWS_ID"));
+    }
 
     public String getAdminEmail() {
         return properties != null ? properties.getProperty("admin.email") : System.getenv("ADMIN_EMAIL");

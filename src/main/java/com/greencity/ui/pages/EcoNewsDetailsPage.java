@@ -6,17 +6,13 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EcoNewsDetailsPage extends BasePage {
 
-    @Getter
-    private static final String AUTHOR_NEWS_URL = "https://www.greencity.cx.ua/#/greenCity/news/158";
+
     @FindBy(css = "div.edit-news")
     private WebElement editNewsButton;
 
@@ -29,7 +25,7 @@ public class EcoNewsDetailsPage extends BasePage {
     private WebElement tagsRoot;
 
     @Getter
-    private NewsTagsInfoComponent newsTagsInfoComponent;
+    private final NewsTagsInfoComponent newsTagsInfoComponent;
 
     @Getter
     @FindBy(css = "div.news-title")
@@ -93,13 +89,6 @@ public class EcoNewsDetailsPage extends BasePage {
         newsTagsInfoComponent = new NewsTagsInfoComponent(driver, tagsRoot);
     }
 
-    public EditEcoNewsPage openEditNewsPage() {
-        driver.get(AUTHOR_NEWS_URL);
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(editNewsButton));
-        editNewsButton.click();
-        return new EditEcoNewsPage(driver);
-    }
-
     public EcoNewsPage clickBackButton() {
         this.backButton.click();
         return new EcoNewsPage(driver);
@@ -123,6 +112,11 @@ public class EcoNewsDetailsPage extends BasePage {
 
     public String getDateInfo() {
         return dateInfoElement.getText();
+    }
+
+    public EditEcoNewsPage clickEditNewsButton() {
+        this.editNewsButton.click();
+        return new EditEcoNewsPage(driver);
     }
 
     public List<EcoNewsTableCardComponent> getRecommendedNewsTableCardComponents() {
@@ -151,5 +145,4 @@ public class EcoNewsDetailsPage extends BasePage {
         this.commentButtonElement.click();
         return this;
     }
-
 }

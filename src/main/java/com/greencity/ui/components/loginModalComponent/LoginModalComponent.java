@@ -1,6 +1,7 @@
 package com.greencity.ui.components.loginModalComponent;
 
 import com.greencity.ui.components.BaseComponent;
+import com.greencity.ui.pages.profile.ProfilePage;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -68,20 +69,23 @@ public class LoginModalComponent extends BaseComponent {
         clickDynamicElement(closeButton);
     }
 
-    public void typeEmail(String email) {
+    public LoginModalComponent typeEmail(String email) {
         waitUntilElementVisible(emailInput);
         emailInput.clear();
         emailInput.sendKeys(email);
+        return this;
     }
 
-    public void typePassword(String password) {
+    public LoginModalComponent typePassword(String password) {
         waitUntilElementVisible(passwordInput);
         passwordInput.clear();
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void submit() {
+    public ProfilePage submit() {
         clickDynamicElement(signInButton);
+        return new ProfilePage(driver);
     }
 
     // TODO - change return type once Profile page is ready
