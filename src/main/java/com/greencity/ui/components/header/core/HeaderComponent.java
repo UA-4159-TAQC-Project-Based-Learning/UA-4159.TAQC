@@ -70,6 +70,10 @@ public class HeaderComponent extends BaseComponent {
      * TODO: once all POMs are created, this function should return pages for each NavItem specified in NavItem enum.
      */
     public BasePage openNavItem(NavItem item) {
+        if (item == NavItem.LOGO) {
+            return clickLogo();
+        }
+
         navBar.open(item);
 
         BasePage selectedPage = switch (item) {
@@ -89,6 +93,14 @@ public class HeaderComponent extends BaseComponent {
         };
 
         return selectedPage;
+    }
+
+    public void clickNavItemWithoutNavigation(NavItem item) {
+        if (item == NavItem.LOGO) {
+            clickDynamicElement(logo);
+            return;
+        }
+        navBar.open(item);
     }
 
     public LoginModalComponent clickSignIn() {

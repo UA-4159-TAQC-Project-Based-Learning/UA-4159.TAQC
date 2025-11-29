@@ -7,11 +7,16 @@ import com.greencity.ui.components.header.user.AuthPanel;
 import com.greencity.ui.components.header.user.UserMenu;
 import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HeaderControls extends BaseComponent {
+
+    // Needed for hasUserMenu() when DOM can be re-created
+    @Getter
+    private static final String USER_MENU_CSS = "#header_user-wrp";
 
     @Getter
     @FindBy(css = ".ubs-header-sing-in-img-greencity")
@@ -22,7 +27,7 @@ public class HeaderControls extends BaseComponent {
     private WebElement signUpButton;
 
     @Getter
-    @FindBy(css = "#header_user-wrp")
+    @FindBy(css = USER_MENU_CSS)
     private WebElement loggedInUserButton;
 
     @Getter
@@ -50,7 +55,8 @@ public class HeaderControls extends BaseComponent {
     }
 
     public boolean hasUserMenu() {
-        return loggedInUserButton.isDisplayed();
+        // Intentionally not using @FindBy - header DOM may change, so the element should be re-located each time
+        return !driver.findElements(By.cssSelector(USER_MENU_CSS)).isEmpty();
     }
 
     public AuthPanel authPanelComponent() { return new AuthPanel(driver, rootElement); }
