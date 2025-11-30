@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 
 public class AddImageComponent extends BaseComponent {
@@ -32,6 +34,9 @@ public class AddImageComponent extends BaseComponent {
     @Getter
     @FindBy(css = ".image-block .warning")
     private WebElement validationMessage;
+
+    @FindBy(css = ".image-preview img")
+    private WebElement uploadedImagePreview;
 
     public AddImageComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
@@ -68,6 +73,12 @@ public class AddImageComponent extends BaseComponent {
 
     public boolean hasUploadError() {
         return isWarningTextHighlighted() && isDropzoneHighlighted();
+    }
+
+    public boolean isImagePreviewDisplayed() {
+        return uploadedImagePreview.isDisplayed() &&
+                    uploadedImagePreview.getAttribute("src") != null &&
+                    !uploadedImagePreview.getAttribute("src").isEmpty();
     }
 
 }
