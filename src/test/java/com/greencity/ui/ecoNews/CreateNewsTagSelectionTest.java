@@ -15,6 +15,9 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     @BeforeMethod
     public void openCreateNewsPage() {
+        String createNewsUrl = testValueProvider.getBaseUIUrl() + "/news/create-news";
+        driver.get(createNewsUrl);
+
         createNewsPage = new CreateNewsPage(driver);
         createNewsPage.waitForPageToLoad(10);
     }
@@ -27,7 +30,9 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
         createNewsPage
                 .selectTag("News")
                 .getTitleInput()
-                .typeText("Test")
+                .typeText("Test");
+
+        createNewsPage
                 .getContentEditor()
                 .typeText("Test content with 20 chars");
 
