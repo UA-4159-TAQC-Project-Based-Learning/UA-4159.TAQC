@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
 public class CreateNewsPage extends BasePage {
 
     @Getter
@@ -68,4 +70,27 @@ public class CreateNewsPage extends BasePage {
         return new CancelNewsModal(driver, CancelNewsModalRoot);
     }
 
+    public void setFillMandatoryFields(String title, List<String> tags, String contentText) {
+       if (title == null || title.isEmpty() || title.length() > 170) {
+           throw new IllegalArgumentException("Title must be from 1 and up to 170 characters");
+       }
+       titleInput.typeText(title);
+
+       if (contentText == null || contentText.length() < 20) {
+           throw new IllegalArgumentException("Content text must be min - 20 characters");
+       }
+       contentEditor.typeText(contentText);
+
+       if (tags == null || tags.isEmpty() || tags.size() > 3) {
+           throw new IllegalArgumentException("Select at least one and no more than three tags");
+       }
+       List<String> selectedTags = newsTagsComponent.getSelectedTags();
+       for (String tag : selectedTags) {
+           newsTagsComponent.unselectTag(tag);
+       }
+
+       for (String tag : tags) {
+           newsTagsComponent.selectTag(tag);
+       }
+    }
 }

@@ -45,4 +45,6 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         waitUntilPageLouder();
         return new EcoNewsPage(driver);
     }
+
+
 }

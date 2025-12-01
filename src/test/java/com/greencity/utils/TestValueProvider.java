@@ -1,7 +1,11 @@
 package com.greencity.utils;
 
+import com.greencity.data.MandatoryFieldsNewsData;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class TestValueProvider {
@@ -32,7 +36,16 @@ public class TestValueProvider {
 
 
     public String getUserEmail() {
-        return properties != null ? properties.getProperty("user.email") : System.getenv("USER_EMAIL");
+        //return properties != null ? properties.getProperty("user.email") : System.getenv("USER_EMAIL");
+        String env = System.getenv("USER_EMAIL");
+        if (env != null) return env;
+
+        String property = properties.getProperty("user.email");
+        if (property != null && property.startsWith("${") && property.endsWith("}")) {
+            String envVar = property.substring(2, property.length() - 1);
+            return System.getenv(envVar);
+        }
+        return property;
     }
 
     public String getUserName() {
@@ -40,8 +53,18 @@ public class TestValueProvider {
     }
 
     public String getUserPassword() {
-        return properties != null ? properties.getProperty("user.password") : System.getenv("USER_PASSWORD");
+        //return properties != null ? properties.getProperty("user.password") : System.getenv("USER_PASSWORD");
+        String env = System.getenv("USER_PASSWORD");
+        if (env != null) return env;
+
+        String property = properties.getProperty("user.password");
+        if (property != null && property.startsWith("${") && property.endsWith("}")) {
+            String envVar = property.substring(2, property.length() - 1);
+            return System.getenv(envVar);
+        }
+        return property;
     }
+
     public Integer getUserNewsId() {
         return properties != null ? Integer.parseInt(properties.getProperty("user.news.id")) : Integer.parseInt(System.getenv("USER_NEWS_ID"));
     }
@@ -85,4 +108,30 @@ public class TestValueProvider {
     public String getLsUserName() {
         return properties != null ? properties.getProperty("ls.name") : System.getenv("LS_NAME");
     }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
+
+    public String getUserEmailFromEnv() {
+        String env = System.getenv("USER_EMAIL");
+        if (env != null) {
+            return env;
+        }
+        throw new IllegalArgumentException("Environment variable USER_EMAIL is not set");
+    }
+
+
+    public MandatoryFieldsNewsData getValidMandatoryFieldsNewsData() {
+        String title = getProperty("news.title.valid");
+        String tagsString = getProperty("news.tags.valid");
+        String contentText = getProperty("news.contentText.valid");
+
+        List<String> tags = Arrays.stream(tagsString.split(","))
+                .map(String::trim)
+                .toList();
+        return new MandatoryFieldsNewsData(title, tags, contentText);
+
+    }
+
 }

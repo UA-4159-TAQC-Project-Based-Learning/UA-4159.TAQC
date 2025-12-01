@@ -86,5 +86,9 @@ public class InputFormComponent extends BaseComponent {
         return hasClass(fieldElement, "ng-invalid");
     }
 
+    public boolean isWarningsForField() {
+        return hasClass(fieldElement, "field-warning");
+    }
+
 
 }
