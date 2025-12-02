@@ -13,7 +13,7 @@ public class AbstractInputComponent  extends BaseComponent {
     protected WebElement fieldInfoElement;
 
 
-    public AbstractInputComponent(WebDriver driver, WebElement rootElement){
+    public AbstractInputComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
