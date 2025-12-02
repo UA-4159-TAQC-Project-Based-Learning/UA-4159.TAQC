@@ -1,9 +1,10 @@
 package com.greencity.ui.components;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+@Getter
 public class AbstractInputComponent  extends BaseComponent {
 
     @FindBy(css = ".title-wrapper h3")
