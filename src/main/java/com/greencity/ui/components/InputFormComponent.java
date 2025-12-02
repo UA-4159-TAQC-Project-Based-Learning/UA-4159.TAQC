@@ -33,6 +33,7 @@ public class InputFormComponent extends AbstractInputComponent {
     }
 
     public InputFormComponent typeText(String text) {
+        fieldElement.click();
         fieldElement.clear();
         fieldElement.sendKeys(text);
         return this;
