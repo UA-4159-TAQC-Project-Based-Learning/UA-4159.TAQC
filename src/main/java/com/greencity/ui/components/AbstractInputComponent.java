@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AbstractInputComponent  extends BaseComponent {
+public abstract class AbstractInputComponent  extends BaseComponent {
 
     @FindBy(css = ".title-wrapper h3")
     protected WebElement labelElement;
