@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 
 
 
-//@Test(enabled = false)
 public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
