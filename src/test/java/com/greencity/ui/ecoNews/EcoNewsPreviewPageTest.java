@@ -21,12 +21,11 @@ import static org.testng.Assert.assertTrue;
 //@Test(enabled = false)
 public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
-    private EditEcoNewsPage editEcoNewsPage;
+
     private SoftAssert softAssert;
 
     @BeforeMethod
     public void beforeMethod() {
-        loginUser();
         softAssert = new SoftAssert();
     }
 
@@ -45,7 +44,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
         createNewsPage.getTitleInput().typeText(title);
-        WebElement qlEditor =createNewsPage.getQlEditor();
+        WebElement qlEditor = createNewsPage.getQlEditor();
         qlEditor.click();
         qlEditor.sendKeys(content);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
@@ -62,8 +61,8 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
         softAssert.assertTrue(previewPage.getTextContent().isDisplayed(), "Content is not displayed.");
         softAssert.assertEquals(previewPage.getTextContent().getText(), content,  "Content is wrong.");
 
-        LocalDate currentDate = LocalDate.now(); // or any date
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        LocalDate currentDate = LocalDate.now(); // Get current date for validation
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
         String formatted = currentDate.format(formatter);
 
         softAssert.assertTrue(previewPage.getDate().isDisplayed(), "Date is not displayed.");

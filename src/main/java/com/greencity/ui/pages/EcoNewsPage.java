@@ -56,6 +56,10 @@ public class EcoNewsPage extends BasePage {
     @FindBy(css = ".eco-news_list-view-wrp")
     private List<WebElement> ecoNewsListRoots;
 
+    @Getter
+    @FindBy(css = "div.title-list.word-wrap")
+    private WebElement randomNewsTitle;
+
     public EcoNewsPage(WebDriver driver) {
         super(driver);
 
@@ -117,4 +121,11 @@ public class EcoNewsPage extends BasePage {
         return null;
     }
 
+    public boolean EcoNewsPageIsOpened() {
+        try {
+            return randomNewsTitle.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

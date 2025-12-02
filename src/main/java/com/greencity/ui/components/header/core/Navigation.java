@@ -14,23 +14,23 @@ public class Navigation extends BaseComponent {
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'Events') or contains(normalize-space(.), 'Події')]")
-    private WebElement EventsLink;
+    private WebElement eventsLink;
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'Places') or contains(normalize-space(.), 'Карта')]")
-    private WebElement PlacesLink;
+    private WebElement placesLink;
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'About Us') or contains(normalize-space(.), 'Про нас')]")
-    private WebElement AboutUsLink;
+    private WebElement aboutUsLink;
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'My Spaces') or contains(normalize-space(.), 'Мій кабінет')]")
-    private WebElement MySpacesLink;
+    private WebElement mySpacesLink;
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'UBS Courier') or contains(normalize-space(.), 'UBS кур'єр')]")
-    private WebElement UbsCourierLink;
+    private WebElement ubsCourierLink;
 
 
     public Navigation(WebDriver driver, WebElement rootElement) {
