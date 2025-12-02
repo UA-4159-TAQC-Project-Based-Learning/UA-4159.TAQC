@@ -49,7 +49,7 @@ public class HeaderComponent extends BaseComponent {
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
         navBar = new NavBar(driver, leftNavRoot);
-        navigation =  new Navigation(driver, leftNavRoot);
+        navigation = new Navigation(driver, leftNavRoot);
         controls = new HeaderControls(driver, rightNavRoot);
     }
 
