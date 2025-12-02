@@ -40,7 +40,7 @@ public class CreateNewsPreviewPage extends BasePage {
 
     @Getter
     @FindBy (css = ".news-content .news-text-container .news-text")
-    private WebElement Text;
+    private WebElement TextContent;
 
     public CreateNewsPreviewPage(WebDriver driver) {
         super(driver);
