@@ -26,7 +26,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
     }
 
     @Test
-    public void previewOpensSuccessfully() throws InterruptedException {
+    public void previewOpensSuccessfully() {
         EditEcoNewsPage editNewsPage = new EditEcoNewsPage(driver);
         editNewsPage.getHeader().getNavigation().getEcoNewsLink().click();
         editNewsPage.waitForPageToLoad(10000);
