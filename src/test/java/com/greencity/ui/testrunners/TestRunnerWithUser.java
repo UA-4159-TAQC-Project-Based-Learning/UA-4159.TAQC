@@ -11,8 +11,8 @@ public class TestRunnerWithUser extends BaseTestRunner {
     @BeforeClass
     public void loginUser() {
 
-//        loginUserWithModal();
-        loginUserWithToken();
+        loginUserWithModal();
+//        loginUserWithToken();
 
     }
 

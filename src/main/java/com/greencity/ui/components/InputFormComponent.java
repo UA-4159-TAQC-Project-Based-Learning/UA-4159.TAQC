@@ -15,7 +15,6 @@ public class InputFormComponent extends AbstractInputComponent {
 
     public InputFormComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
 
     public InputFormComponent clear() {
