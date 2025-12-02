@@ -2,17 +2,20 @@ package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import lombok.Getter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NewsTagsComponent extends BaseComponent {
 
     @Getter
     @FindBy(css = "a.global-tag")
+    //@FindBy(css = "button.tag-button")
     private List<WebElement> tagButtons;
 
     @Getter
@@ -30,7 +33,9 @@ public class NewsTagsComponent extends BaseComponent {
     public void selectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)) {
-                tag.click();
+                waitUntilElementClickable(tag);
+                clickDynamicElement(tag);
+                //tag.click();
                 return;
             }
         }
@@ -39,8 +44,10 @@ public class NewsTagsComponent extends BaseComponent {
     public void unselectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)
-                    && tag.getAttribute("class").contains("global-tag-clicked")) {
-                tag.click();
+                    && Objects.requireNonNull(tag.getAttribute("class")).contains("global-tag-clicked")) {
+                waitUntilElementClickable(tag);
+                clickDynamicElement(tag);
+                //tag.click();
                 return;
             }
         }
@@ -67,7 +74,7 @@ public class NewsTagsComponent extends BaseComponent {
     public List<String> getSelectedTags() {
         List<String> selected = new ArrayList<>();
         for (WebElement tag : tagButtons) {
-            if (tag.getAttribute("class").contains("global-tag-clicked")) {
+            if (Objects.requireNonNull(tag.getAttribute("class")).contains("global-tag-clicked")) {
                 selected.add(tag.getText());
             }
         }
