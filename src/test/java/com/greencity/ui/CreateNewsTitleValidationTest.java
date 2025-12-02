@@ -106,7 +106,7 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
                 .isPublishEnabled();
         softAssert.assertFalse(actualPublishEnabled,
-                "Publish button should be not enable before entering main text and selecting news tag");
+                "Publish button should not be enabled before entering main text and selecting news tag");
 
 
         softAssert.assertAll();
