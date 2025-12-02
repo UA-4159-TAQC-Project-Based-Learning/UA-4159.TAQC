@@ -25,14 +25,6 @@ public abstract class AbstractInputComponent  extends BaseComponent {
         return fieldInfoElement.getText().trim();
     }
 
-    public boolean hasClass(WebElement element, String className) {
-        if (element == null) {
-            return false;
-        }
-        String searchingClass = element.getAttribute("class");
-        return searchingClass != null && searchingClass.contains(className);
-    }
-
     public boolean hasWarningFieldInfo() {
         return hasClass(fieldInfoElement, "warning");
     }
