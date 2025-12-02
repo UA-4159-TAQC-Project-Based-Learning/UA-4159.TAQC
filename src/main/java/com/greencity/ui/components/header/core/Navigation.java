@@ -10,7 +10,7 @@ public class Navigation extends BaseComponent {
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'Eco news') or contains(normalize-space(.), 'Еко новини')]")
-    private WebElement EcoNewsLink;
+    private WebElement ecoNewsLink;
 
     @Getter
     @FindBy(xpath = ".//a[contains(normalize-space(.), 'Events') or contains(normalize-space(.), 'Події')]")
