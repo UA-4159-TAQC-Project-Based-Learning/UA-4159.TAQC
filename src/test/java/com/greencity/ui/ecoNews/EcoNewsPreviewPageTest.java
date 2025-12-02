@@ -13,7 +13,6 @@ import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.testng.Assert.assertTrue;
 
 
 //@Test(enabled = false)
