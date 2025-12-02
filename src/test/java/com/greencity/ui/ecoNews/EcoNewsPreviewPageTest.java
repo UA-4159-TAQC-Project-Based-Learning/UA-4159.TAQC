@@ -1,6 +1,5 @@
 package com.greencity.ui.ecoNews;
 
-import com.greencity.ui.components.buttons.EditNewsButtonsComponent;
 import com.greencity.ui.pages.*;
 import com.greencity.ui.pages.ecoNewsPreviewPage.PreviewEcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
