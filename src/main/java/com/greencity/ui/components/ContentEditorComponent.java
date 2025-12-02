@@ -63,7 +63,7 @@ public class ContentEditorComponent extends AbstractInputComponent {
 
 
 
-    public ContentEditorComponent(WebDriver driver, WebElement rootElement){
+    public ContentEditorComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 

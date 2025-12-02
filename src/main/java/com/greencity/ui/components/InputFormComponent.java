@@ -15,7 +15,6 @@ public class InputFormComponent extends AbstractInputComponent {
 
     public InputFormComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
-        PageFactory.initElements(new DefaultElementLocatorFactory(rootElement), this);
     }
 
     public InputFormComponent clear() {
@@ -34,6 +33,7 @@ public class InputFormComponent extends AbstractInputComponent {
     }
 
     public InputFormComponent typeText(String text) {
+        fieldElement.click();
         fieldElement.clear();
         fieldElement.sendKeys(text);
         return this;

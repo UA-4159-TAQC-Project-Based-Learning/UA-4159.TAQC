@@ -43,9 +43,13 @@ public class HeaderComponent extends BaseComponent {
     @Getter
     private final HeaderControls controls;
 
+    @Getter
+    private final Navigation navigation;
+
     public HeaderComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
         navBar = new NavBar(driver, leftNavRoot);
+        navigation = new Navigation(driver, leftNavRoot);
         controls = new HeaderControls(driver, rightNavRoot);
     }
 

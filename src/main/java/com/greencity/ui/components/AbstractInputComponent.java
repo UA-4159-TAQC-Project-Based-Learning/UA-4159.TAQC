@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 @Getter
-public class AbstractInputComponent  extends BaseComponent {
+public abstract class AbstractInputComponent  extends BaseComponent {
 
     @FindBy(css = ".title-wrapper h3")
     protected WebElement labelElement;
@@ -14,7 +14,7 @@ public class AbstractInputComponent  extends BaseComponent {
     protected WebElement fieldInfoElement;
 
 
-    public AbstractInputComponent(WebDriver driver, WebElement rootElement){
+    public AbstractInputComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
 
@@ -24,14 +24,6 @@ public class AbstractInputComponent  extends BaseComponent {
 
     public String getFieldInfoText() {
         return fieldInfoElement.getText().trim();
-    }
-
-    public boolean hasClass(WebElement element, String className) {
-        if (element == null) {
-            return false;
-        }
-        String searchingClass = element.getAttribute("class");
-        return searchingClass != null && searchingClass.contains(className);
     }
 
     public boolean hasWarningFieldInfo() {

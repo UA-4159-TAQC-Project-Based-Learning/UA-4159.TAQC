@@ -52,6 +52,9 @@ public class CreateNewsPage extends BasePage {
     @FindBy(css = "div.tags-block")
     private WebElement newsTagsComponentRoot;
     @Getter
+    @FindBy(css = "div.ql-editor")
+    private WebElement qlEditor;
+    @Getter
     @FindBy(css = "div.submit-buttons")
     private WebElement submitButtonsRoot;
     @Getter
