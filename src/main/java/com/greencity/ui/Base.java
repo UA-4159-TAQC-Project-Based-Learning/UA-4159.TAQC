@@ -122,4 +122,12 @@ public abstract class Base {
     public void waitUntilPageLouder() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
     }
+
+    public static boolean hasClass(WebElement element, String className) {
+        if (element == null) {
+            return false;
+        }
+        String searchingClass = element.getAttribute("class");
+        return searchingClass != null && searchingClass.contains(className);
+    }
 }

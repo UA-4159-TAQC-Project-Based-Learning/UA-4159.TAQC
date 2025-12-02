@@ -1,10 +1,12 @@
 package com.greencity.ui.components;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ContentEditorComponent extends BaseComponent {
+@Getter
+public class ContentEditorComponent extends AbstractInputComponent {
 
     @FindBy (css = ".ql-editor p")
     private WebElement textInputArea;
@@ -42,10 +44,10 @@ public class ContentEditorComponent extends BaseComponent {
     @FindBy (css = "button.ql-script[value='sub']")
     private WebElement subscriptButton;
 
-      @FindBy (css = "button.ql-script[value='super']")
+    @FindBy (css = "button.ql-script[value='super']")
     private WebElement superscriptButton;
 
-      @FindBy (css = "button.ql-indent[value='-1']")
+    @FindBy (css = "button.ql-indent[value='-1']")
     private WebElement decreaseIndentButton;
 
     @FindBy (css = "button.ql-indent[value='+1']")
@@ -54,13 +56,44 @@ public class ContentEditorComponent extends BaseComponent {
     @FindBy (css = "button.ql-direction[value='rtl']")
     private WebElement rightToLeftButton;
 
+    @FindBy (css = "quill-counter")
+    private WebElement notEnoughCharacterMessage;
 
 
-    //in progress
 
 
 
-    public ContentEditorComponent(WebDriver driver, WebElement rootElement){
+    public ContentEditorComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
+
+
+    public ContentEditorComponent clear() {
+        textInputArea.clear();
+        return this;
+    }
+
+    public ContentEditorComponent clickOnMainText() {
+        textInputArea.click();
+        return this;
+    }
+
+    public String getValue() {
+        return textInputArea.getAttribute("value");
+    }
+
+    public ContentEditorComponent typeText(String text) {
+        textInputArea.click();
+        textInputArea.sendKeys(text);
+        return this;
+    }
+
+    public String getInputAreaText() {
+        return textInputArea.getText().trim();
+    }
+
+    public boolean isEnoughCharacterMainText() {
+        return hasClass(notEnoughCharacterMessage, "warning");
+    }
+
 }
