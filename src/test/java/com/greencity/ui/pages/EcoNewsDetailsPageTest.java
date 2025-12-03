@@ -2,23 +2,48 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class EcoNewsDetailsPageTest extends BaseTestRunner {
 
     @Test
+    @Epic("Eco News")
+    @Feature("News Details")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that Eco News details page displays correct elements")
     public void testEcoNewsDetailsPageElementsPresent() {
+
         SoftAssert softAssert = new SoftAssert();
+
+        Allure.step("Open Eco News page");
         homePage.getEcoNewsLink().click();
 
+        Allure.step("Scroll to the middle of the page");
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
         ecoNewsPage.scrollToMiddlePage();
-        EcoNewsTableCardComponent oneTable = ecoNewsPage.getOneTableCardByTitle("Black cats live longer");
-        EcoNewsDetailsPage detailsPage = oneTable.goToDetails();
-        softAssert.assertEquals(detailsPage.getTitle(), "Black cats live longer");
-        softAssert.assertEquals(detailsPage.getAuthorName(), "by Bob");
-        softAssert.assertEquals(detailsPage.getNewsTextElement().getText(), "Black cats live twice as long as Orange cats");
+
+        Allure.step("Find news card by title: New Eco-Event Announced for Weekend");
+        EcoNewsTableCardComponent tableCard =
+                ecoNewsPage.getOneTableCardByTitle("New Eco-Event Announced for Weekend");
+
+        Allure.step("Open the news details page");
+        EcoNewsDetailsPage detailsPage = tableCard.goToDetails();
+
+        Allure.step("Validate title");
+        softAssert.assertEquals(detailsPage.getTitle(),
+                "New Eco-Event Announced for Weekend");
+
+        Allure.step("Validate author");
+        softAssert.assertEquals(detailsPage.getAuthorName(),
+                "by Maryna Lobatiuk");
+
+        Allure.step("Validate news text");
+        softAssert.assertEquals(detailsPage.getNewsTextElement().getText(),
+                "A community garden opened this week, inviting residents to grow organic vegetables and learn about sustainable land use.");
+
+        Allure.step("Assert all collected checks");
         softAssert.assertAll();
     }
 }
