@@ -46,11 +46,4 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         return new EcoNewsPage(driver);
     }
 
-    public boolean isCancelButtonVisible() {
-        return cancelButton.isDisplayed();
-    }
-
-    public boolean isCancelButtonEnabled() {
-        return cancelButton.isEnabled();
-    }
 }

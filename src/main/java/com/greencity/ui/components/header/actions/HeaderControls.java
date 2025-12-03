@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class HeaderControls extends BaseComponent {
 
     // Needed for hasUserMenu() when DOM can be re-created
@@ -56,7 +58,8 @@ public class HeaderControls extends BaseComponent {
 
     public boolean hasUserMenu() {
         // Intentionally not using @FindBy - header DOM may change, so the element should be re-located each time
-        return !driver.findElements(By.cssSelector(USER_MENU_CSS)).isEmpty();
+        List<WebElement> elements = driver.findElements(By.cssSelector(USER_MENU_CSS));
+        return !elements.isEmpty() && elements.get(0).isDisplayed();
     }
 
     public AuthPanel authPanelComponent() { return new AuthPanel(driver, rootElement); }

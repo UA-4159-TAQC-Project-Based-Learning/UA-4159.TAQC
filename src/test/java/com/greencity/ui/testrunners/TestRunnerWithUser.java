@@ -40,6 +40,7 @@ public class TestRunnerWithUser extends BaseTestRunner {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
+        // Suggest using this instead of Thread.sleep() - some tests need to recreate the Header POM after UI refresh.
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(d -> {
                     WebElement freshHeaderRoot = d.findElement(By.xpath(BasePage.getHEADER_ROOT_LOCATOR_XPATH()));

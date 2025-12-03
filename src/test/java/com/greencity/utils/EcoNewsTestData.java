@@ -10,7 +10,7 @@ public class EcoNewsTestData {
         return new Object[][]{
                 { "title example", "content example" },
                 { "valid title", "valid content example" },
-                { "", ""} // empty input
+                { "", ""}
         };
     }
 
@@ -20,7 +20,7 @@ public class EcoNewsTestData {
         String uniqueContent = "Content body for " + uniqueTitle;
 
         return new Object[][]{
-                { uniqueTitle, uniqueContent },
+                { uniqueTitle, uniqueContent }
         };
     }
 
@@ -28,7 +28,7 @@ public class EcoNewsTestData {
     public static Object[][] navItemsForCancelTest() {
         return new Object[][]{
                 {NavItem.ECO_NEWS},
-                {NavItem.LOGO},
+                {NavItem.LOGO}
         };
     }
 

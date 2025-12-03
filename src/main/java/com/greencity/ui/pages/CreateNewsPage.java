@@ -90,8 +90,4 @@ public class CreateNewsPage extends BasePage {
         return new TextEditorComponent(driver);
     }
 
-    @Getter
-    @FindBy(css = "div.cdk-overlay-backdrop")
-    private WebElement modalBackdrop_cancelTestUsage;
-
 }

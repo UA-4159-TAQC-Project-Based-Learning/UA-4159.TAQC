@@ -19,8 +19,11 @@ import java.time.Duration;
 
 public class CancelNewsTest extends TestRunnerWithUser {
 
-    private SoftAssert softAssert = new SoftAssert();
+    private SoftAssert softAssert;
     private CreateNewsPage createNewsPage;
+
+    // Used for use test only - headerNav_emptyForm_shouldNavigateWithoutPopup()
+    public static final String CREATE_NEWS_URL = "/create-news";
 
     @BeforeMethod
     public void beforeMethod() {
@@ -71,12 +74,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
 
         softAssert.assertTrue(
-                cancelNewsModal.getContinueNewsEditingModalButton_v2_cancelTestUsage().isDisplayed(),
+                cancelNewsModal.getContinueNewsEditingModalButtonAlternative().isDisplayed(),
                 "'Continue editing' button should be visible in the popup when cancelling with data entered."
         );
 
         softAssert.assertTrue(
-                cancelNewsModal.getYesCancelChangesModalButton_v2_cancelTestUsage().isDisplayed(),
+                cancelNewsModal.getYesCancelChangesModalButtonAlternative().isDisplayed(),
                 "'Yes, cancel' button should be visible in the popup when cancelling with data entered."
         );
     }
@@ -92,7 +95,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .openCancelModal()
                 .waitUntilOpened();
 
-        cancelNewsModal.getYesCancelChangesModalButton_v2_cancelTestUsage().click();
+        cancelNewsModal.getYesCancelChangesModalButtonAlternative().click();
 
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
         ecoNewsPage.waitUntilPageLouder();
@@ -140,7 +143,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .openCancelModal()
                 .waitUntilOpened();
 
-        cancelNewsModal.getContinueNewsEditingModalButton_v2_cancelTestUsage().click();
+        cancelNewsModal.getContinueNewsEditingModalButtonAlternative().click();
         cancelNewsModal.waitForModalClosed();
 
         softAssert.assertTrue(
@@ -172,7 +175,6 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .waitUntilOpened();
 
         cancelNewsModal.closeByClickingOutsidePopUp();
-        cancelNewsModal.waitForModalClosed();
 
         softAssert.assertTrue(
                 createNewsPage.getPageTitle().isDisplayed(),
@@ -202,7 +204,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .openCancelModal()
                 .waitUntilOpened();
 
-        cancelNewsModal.getCrossIconForCloseChangesModal_v2_cancelTestUsage().click();
+        cancelNewsModal.getCrossIconForCloseChangesModalAlternative().click();
         cancelNewsModal.waitForModalClosed();
 
         softAssert.assertTrue(
@@ -228,9 +230,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void headerNav_withData_shouldShowConfirmationPopup(NavItem item) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        createNewsPage
                 .enterTitleAndContent("Title entered", "Content entered")
-                .openCancelModal()
+                .getHeader()
+                .clickNavItemWithoutNavigation(item);
+
+        CancelNewsModal cancelNewsModal = new CancelNewsModal(driver)
                 .waitUntilOpened();
 
         softAssert.assertTrue(
@@ -239,17 +244,15 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
 
         softAssert.assertTrue(
-                cancelNewsModal.getContinueNewsEditingModalButton_v2_cancelTestUsage().isDisplayed(),
+                cancelNewsModal.getContinueNewsEditingModalButtonAlternative().isDisplayed(),
                 "'Continue editing' button should be visible in the popup when cancelling with data entered."
         );
 
         softAssert.assertTrue(
-                cancelNewsModal.getYesCancelChangesModalButton_v2_cancelTestUsage().isDisplayed(),
+                cancelNewsModal.getYesCancelChangesModalButtonAlternative().isDisplayed(),
                 "'Yes, cancel' button should be visible in the popup when cancelling with data entered."
         );
     }
-
-    public static final String CREATE_NEWS_URL = "/create-news";
 
     // U4T-41
     @Test(
@@ -279,11 +282,13 @@ public class CancelNewsTest extends TestRunnerWithUser {
                         "Clicking ECO_NEWS with empty form should navigate to Eco News list page. Actual URL: " + currentUrl
                 );
             }
-            case LOGO -> softAssert.assertEquals(
-                    currentUrl,
-                    testValueProvider.getBaseUIUrl(),
-                    "Clicking logo with empty form should navigate to Home page."
-            );
+            case LOGO -> {
+                softAssert.assertEquals(
+                        currentUrl,
+                        testValueProvider.getBaseUIUrl(),
+                        "Clicking logo with empty form should navigate to Home page."
+                );
+            }
         }
     }
 
