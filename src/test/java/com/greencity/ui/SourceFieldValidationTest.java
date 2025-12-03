@@ -122,7 +122,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 newsData.getTags(),
                 newsData.getContentText()
         );
-        
+
         System.out.println("Tags from provider: " + newsData.getTags());
         System.out.println("Selected tags in component: " + createNewsPage.getNewsTagsComponent().getSelectedTags());
 
