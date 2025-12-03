@@ -20,6 +20,7 @@ public class TestRunnerWithUser extends BaseTestRunner {
     public void loginUser() {
 
         loginUserWithModal();
+//        loginUserWithToken();
 
     }
 

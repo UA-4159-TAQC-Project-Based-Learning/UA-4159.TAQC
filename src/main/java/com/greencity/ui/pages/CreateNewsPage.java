@@ -1,7 +1,9 @@
 package com.greencity.ui.pages;
 
 
+import com.greencity.ui.components.ContentEditorComponent;
 import com.greencity.ui.components.InputFormComponent;
+import com.greencity.ui.components.createNews.NewsTagsComponent;
 import com.greencity.ui.components.createNews.*;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,7 @@ public class CreateNewsPage extends BasePage {
     @Getter
     private final InputFormComponent sourceInput;
     @Getter
-    private final InputFormComponent contentEditor;
+    private final ContentEditorComponent contentEditor;
     @Getter
     private final AddImageComponent addImageComponent;
     @Getter
@@ -49,6 +51,9 @@ public class CreateNewsPage extends BasePage {
     @FindBy(css = "div.tags-block")
     private WebElement newsTagsComponentRoot;
     @Getter
+    @FindBy(css = "div.ql-editor")
+    private WebElement qlEditor;
+    @Getter
     @FindBy(css = "div.submit-buttons")
     private WebElement submitButtonsRoot;
 
@@ -56,7 +61,7 @@ public class CreateNewsPage extends BasePage {
         super(driver);
         this.titleInput = new InputFormComponent(driver, titleInputRoot);
         this.sourceInput = new InputFormComponent(driver, sourceInputRoot);
-        this.contentEditor = new InputFormComponent(driver, contentEditorRoot);
+        this.contentEditor = new ContentEditorComponent(driver, contentEditorRoot);
         this.addImageComponent = new AddImageComponent(driver, addImageComponentRoot);
         this.newsTagsComponent = new NewsTagsComponent(driver, newsTagsComponentRoot);
         this.createNewsButtonsComponent = new CreateNewsButtonsComponent(driver, submitButtonsRoot);
