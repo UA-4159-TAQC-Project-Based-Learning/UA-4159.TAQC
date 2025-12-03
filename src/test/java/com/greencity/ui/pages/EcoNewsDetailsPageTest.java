@@ -3,16 +3,17 @@ package com.greencity.ui.pages;
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import io.qameta.allure.*;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+@Epic("Eco News")
+@Feature("News Details")
 public class EcoNewsDetailsPageTest extends BaseTestRunner {
 
     @Test
-    @Epic("Eco News")
-    @Feature("News Details")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Verify that Eco News details page displays correct elements")
+    @Description("Open Eco News, scroll, find a news card, and validate title, author, and text")
     public void testEcoNewsDetailsPageElementsPresent() {
 
         SoftAssert softAssert = new SoftAssert();
