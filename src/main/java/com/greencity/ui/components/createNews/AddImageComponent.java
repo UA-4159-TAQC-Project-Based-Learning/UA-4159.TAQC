@@ -71,7 +71,7 @@ public class AddImageComponent extends BaseComponent {
         return validationMessage.getAttribute("class").contains("warning-color");
     }
 
-    @Step("Check if imageContainer is highlighted")
+    @Step("Check if ImageContainer is highlighted")
     public boolean isDropzoneHighlighted() {
         return imageContainer.getAttribute("class").contains("warning-background");
     }
