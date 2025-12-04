@@ -62,9 +62,6 @@ public class EcoNewsPage extends BasePage {
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
-
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(newsFilterContainer));
-
         newsFilterComponent = new NewsFilterComponent(driver, newsFilterContainer);
     }
 

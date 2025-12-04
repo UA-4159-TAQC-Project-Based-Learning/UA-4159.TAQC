@@ -73,4 +73,9 @@ public class CreateNewsPage extends BasePage {
         return new CancelNewsModal(driver, CancelNewsModalRoot);
     }
 
+    public CreateNewsPage selectTag(String tagName) {
+        newsTagsComponent.selectTag(tagName);
+        return this;
+    }
+
 }
