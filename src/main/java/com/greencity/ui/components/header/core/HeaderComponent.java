@@ -95,6 +95,11 @@ public class HeaderComponent extends BaseComponent {
         return selectedPage;
     }
 
+    public EcoNewsPage clickEcoNewsNavItem() {
+        navBar.open(NavItem.ECO_NEWS);
+        return new EcoNewsPage(driver);
+    }
+
     public LoginModalComponent clickSignIn() {
         controls.clickSignIn();
         return new LoginModalComponent(driver);
