@@ -93,7 +93,7 @@ public class EcoNewsPage extends BasePage {
         return ecoNewsListRoots.stream().map(root -> new EcoNewsListCardComponent(driver, root)).collect(Collectors.toList());
     }
 
-    @Step("Open 'My Events' section")
+    @Step("Open 'My News' section")
     public EcoNewsPage openMyEvents() {
         myEventsButton.click();
         return this;
