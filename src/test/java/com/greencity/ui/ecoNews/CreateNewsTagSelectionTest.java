@@ -4,6 +4,7 @@ import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsDetailsPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -22,6 +23,7 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
         createNewsPage = homePage.getHeader().clickEcoNewsNavItem().clickCreateNews();
     }
 
+    @Issue("U4T-13")
     @Test(description = "User can publish news with 1 tag")
     public void testCreateNewsWithOneTag() {
 

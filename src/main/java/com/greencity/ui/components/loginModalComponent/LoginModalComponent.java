@@ -2,6 +2,7 @@ package com.greencity.ui.components.loginModalComponent;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.profile.ProfilePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -69,6 +70,7 @@ public class LoginModalComponent extends BaseComponent {
         clickDynamicElement(closeButton);
     }
 
+    @Step("Type email: {email}")
     public LoginModalComponent typeEmail(String email) {
         waitUntilElementVisible(emailInput);
         emailInput.clear();
@@ -76,6 +78,7 @@ public class LoginModalComponent extends BaseComponent {
         return this;
     }
 
+    @Step("Type password: {password}")
     public LoginModalComponent typePassword(String password) {
         waitUntilElementVisible(passwordInput);
         passwordInput.clear();
@@ -83,12 +86,14 @@ public class LoginModalComponent extends BaseComponent {
         return this;
     }
 
+    @Step("Submit login form")
     public ProfilePage submit() {
         clickDynamicElement(signInButton);
         return new ProfilePage(driver);
     }
 
     // TODO - change return type once Profile page is ready
+    @Step("Login with email: {email} and password: {password}")
     public void login(String email, String password) {
         typeEmail(email);
         typePassword(password);

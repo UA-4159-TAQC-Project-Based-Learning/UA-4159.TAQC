@@ -3,6 +3,7 @@ package com.greencity.ui.components.createNews;
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.CreateNewsPreviewPage;
 import com.greencity.ui.pages.EcoNewsPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,6 +38,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         return publishButton.isEnabled();
     }
 
+    @Step("Click 'Publish' button")
     public EcoNewsPage clickPublish() {
         if (!isPublishEnabled()) {
             throw new IllegalArgumentException("Publish button is disabled. Check if all required fields are filled out");
