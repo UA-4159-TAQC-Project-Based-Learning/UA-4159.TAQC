@@ -1,6 +1,7 @@
 package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,23 +38,29 @@ public class AddImageComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Upload image from: '{filePath}'")
     public AddImageComponent uploadImage(String filePath) {
         uploadImageField.sendKeys(filePath);
         return this;
     }
 
+    @Step("Click Browse image link")
     public AddImageComponent clickBrowse() {
         browseLink.click();
         return this;
     }
+
+    @Step("Click Cancel image upload")
     public void clickCancel() {
         cancelButton.click();
     }
 
+    @Step("Confirm image upload (Submit)")
     public void clickSubmit() {
         submitButton.click();
     }
 
+    @Step("Get image validation message")
     public String getValidationMessage() {
         return validationMessage.getText();
     }
