@@ -60,7 +60,7 @@ public class NewsTagsComponent extends BaseComponent {
         return false;
     }
 
-    @Step("Get List of all tags")
+    @Step("Get list of all tags")
     public List<String> getAllTags() {
         List<String> tags = new ArrayList<>();
         for (WebElement tag : tagButtons) {
