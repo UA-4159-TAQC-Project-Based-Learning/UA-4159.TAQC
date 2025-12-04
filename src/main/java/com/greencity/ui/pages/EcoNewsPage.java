@@ -88,7 +88,7 @@ public class EcoNewsPage extends BasePage {
         return this;
     }
 
-    @Step("Get all list view news cards")
+    @Step("Get list of all list view news cards")
     public List<EcoNewsListCardComponent> getAllCards() {
         return ecoNewsListRoots.stream().map(root -> new EcoNewsListCardComponent(driver, root)).collect(Collectors.toList());
     }
