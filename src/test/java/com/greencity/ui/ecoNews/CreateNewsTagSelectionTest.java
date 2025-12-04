@@ -26,11 +26,11 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
     public void testCreateNewsWithOneTag() {
 
         SoftAssert softAssert = new SoftAssert();
-
+        String uniqueTitle = "Test One Tag " + System.currentTimeMillis();
         createNewsPage
                 .selectTag("News")
                 .getTitleInput()
-                .typeText("Test");
+                .typeText(uniqueTitle);
 
         createNewsPage
                 .getContentEditor()
@@ -39,19 +39,10 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
         EcoNewsPage ecoNewsPage = createNewsPage
                 .getCreateNewsButtonsComponent()
                 .clickPublish();
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+
         EcoNewsDetailsPage ecoNewsDetailsPage = ecoNewsPage
-                .getOneTableCardByTitle("Test")
+                .getOneTableCardByTitle(uniqueTitle)
                 .goToDetails();
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
         softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("News"),
                 "Expected tag 'News' was not found on published news");
@@ -69,7 +60,7 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
                 "Unexpected tag 'Ads' was found on published news");
 
 
-        softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), "Test",
+        softAssert.assertEquals(ecoNewsDetailsPage.getTitle(), uniqueTitle,
                 "Title does not match");
 
         softAssert.assertAll();
