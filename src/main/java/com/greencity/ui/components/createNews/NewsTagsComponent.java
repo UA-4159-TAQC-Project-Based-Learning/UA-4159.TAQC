@@ -1,6 +1,7 @@
 package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,7 @@ public class NewsTagsComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Select tag '{tagName}'")
     public void selectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)) {
@@ -41,6 +43,7 @@ public class NewsTagsComponent extends BaseComponent {
         }
     }
 
+    @Step("Unselect tag '{tagName}'")
     public void unselectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)
@@ -54,6 +57,7 @@ public class NewsTagsComponent extends BaseComponent {
     }
 
 
+    @Step("Check if tag '{tagName}' is selected")
     public boolean isTagSelected(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)) {
@@ -63,6 +67,7 @@ public class NewsTagsComponent extends BaseComponent {
         return false;
     }
 
+    @Step("Get list of all tags")
     public List<String> getAllTags() {
         List<String> tags = new ArrayList<>();
         for (WebElement tag : tagButtons) {
@@ -71,6 +76,7 @@ public class NewsTagsComponent extends BaseComponent {
         return tags;
     }
 
+    @Step("Get all selected tags")
     public List<String> getSelectedTags() {
         List<String> selected = new ArrayList<>();
         for (WebElement tag : tagButtons) {

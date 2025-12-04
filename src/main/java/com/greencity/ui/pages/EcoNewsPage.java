@@ -3,6 +3,7 @@ package com.greencity.ui.pages;
 import com.greencity.ui.components.EcoNewsListCardComponent;
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.components.newsFilter.NewsFilterComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,46 +63,51 @@ public class EcoNewsPage extends BasePage {
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
-
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(newsFilterContainer));
-
         newsFilterComponent = new NewsFilterComponent(driver, newsFilterContainer);
     }
 
+    @Step("Click 'Create News' button")
     public CreateNewsPage clickCreateNews() {
         createNewsButton.click();
         return new CreateNewsPage(driver);
     }
 
+    @Step("Search for news: '{searchText}'")
     public EcoNewsPage searchForNews(String searchText) {
         searchButton.click();
         searchField.sendKeys(searchText);
         return this;
     }
 
+    @Step("Open bookmarks section")
     public EcoNewsPage openBookmarks() {
         bookmarkButton.click();
         return this;
     }
 
+    @Step("Get list of all list view news cards")
     public List<EcoNewsListCardComponent> getAllCards() {
         return ecoNewsListRoots.stream().map(root -> new EcoNewsListCardComponent(driver, root)).collect(Collectors.toList());
     }
 
+    @Step("Open 'My News' section")
     public EcoNewsPage openMyEvents() {
         myEventsButton.click();
         return this;
     }
 
+    @Step("Find news card by title: '{title}'")
     public EcoNewsListCardComponent findCardByTitle(String title) {
         return getAllCards().stream().filter(card -> card.getTitleText().equalsIgnoreCase(title)).findFirst().orElse(null);
     }
 
+    @Step("Close search")
     public EcoNewsPage closeSearch() {
         cancelSearchButton.click();
         return this;
     }
 
+    @Step("Get all table view news cards")
     public List<EcoNewsTableCardComponent> getAllTableCards() {
         List<EcoNewsTableCardComponent> tableCards = new ArrayList<>();
         for (WebElement element : tableCardsElements) {
@@ -111,6 +117,7 @@ public class EcoNewsPage extends BasePage {
         return tableCards;
     }
 
+    @Step("Get table card by title: '{title}'")
     public EcoNewsTableCardComponent getOneTableCardByTitle(String title) {
         List<EcoNewsTableCardComponent> listOfTableCards = this.getAllTableCards();
         for (EcoNewsTableCardComponent item : listOfTableCards) {
@@ -121,7 +128,9 @@ public class EcoNewsPage extends BasePage {
         return null;
     }
 
-    public boolean EcoNewsPageIsOpened() {
+
+    @Step("Check if Eco News Page is opened")
+    public boolean ecoNewsPageIsOpened() {
         try {
             return randomNewsTitle.isDisplayed();
         } catch (Exception e) {

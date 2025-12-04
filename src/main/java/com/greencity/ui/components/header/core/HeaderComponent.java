@@ -8,6 +8,7 @@ import com.greencity.ui.pages.BasePage;
 import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.ui.utils.NavItem;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -95,6 +96,13 @@ public class HeaderComponent extends BaseComponent {
         return selectedPage;
     }
 
+    @Step("Click 'Eco News' nav item in header")
+    public EcoNewsPage clickEcoNewsNavItem() {
+        navBar.open(NavItem.ECO_NEWS);
+        return new EcoNewsPage(driver);
+    }
+
+    @Step("Click 'Sign In' button in header")
     public LoginModalComponent clickSignIn() {
         controls.clickSignIn();
         return new LoginModalComponent(driver);

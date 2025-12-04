@@ -2,6 +2,7 @@ package com.greencity.ui.components.eco_news;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.EcoNewsDetailsPage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,6 +46,7 @@ public class EcoNewsTableCardComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Go to eco news details page from table card")
     public EcoNewsDetailsPage goToDetails() {
         headerLinkElement.click();
         return new EcoNewsDetailsPage(driver);
