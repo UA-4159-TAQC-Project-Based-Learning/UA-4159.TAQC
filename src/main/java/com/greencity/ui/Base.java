@@ -111,6 +111,7 @@ public abstract class Base {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    @Step("Refresh the page")
     public void refreshPage() {
         driver.navigate().refresh();
     }
@@ -119,6 +120,7 @@ public abstract class Base {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
+    @Step("Wait until page is loaded")
     public void waitUntilPageLouder() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
     }

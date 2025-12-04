@@ -5,6 +5,7 @@ import com.greencity.ui.components.ContentEditorComponent;
 import com.greencity.ui.components.InputFormComponent;
 import com.greencity.ui.components.createNews.NewsTagsComponent;
 import com.greencity.ui.components.createNews.*;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -88,6 +89,12 @@ public class CreateNewsPage extends BasePage {
     // Created a separate TextEditorComponent because the editor is not a regular input field
     public TextEditorComponent getTextEditor() {
         return new TextEditorComponent(driver);
+    }
+
+    @Step("Select tag: {tagName}")
+    public CreateNewsPage selectTag(String tagName) {
+        newsTagsComponent.selectTag(tagName);
+        return this;
     }
 
 }

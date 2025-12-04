@@ -1,5 +1,6 @@
 package com.greencity.ui.components;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,6 +61,7 @@ public class ContentEditorComponent extends AbstractInputComponent {
     private WebElement notEnoughCharacterMessage;
 
 
+    //in progress
 
 
 
@@ -82,6 +84,7 @@ public class ContentEditorComponent extends AbstractInputComponent {
         return textInputArea.getAttribute("value");
     }
 
+    @Step("Typing text '{text}' into content editor")
     public ContentEditorComponent typeText(String text) {
         textInputArea.click();
         textInputArea.sendKeys(text);
