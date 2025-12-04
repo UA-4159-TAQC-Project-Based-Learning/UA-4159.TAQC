@@ -6,6 +6,7 @@ import com.greencity.ui.components.header.navbar.MobileNavMenu;
 import com.greencity.ui.components.header.user.AuthPanel;
 import com.greencity.ui.components.header.user.UserMenu;
 import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,10 +46,12 @@ public class HeaderControls extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Check if auth panel (for logged-out user) is visible in the header")
     public boolean hasAuthPanel() {
         return signInButton.isDisplayed() && signUpButton.isDisplayed();
     }
 
+    @Step("Check if user menu (for logged-in user) is visible in the header")
     public boolean hasUserMenu() {
         return loggedInUserButton.isDisplayed();
     }
@@ -63,27 +66,32 @@ public class HeaderControls extends BaseComponent {
         return new LanguageSwitcher(driver, languageSwitcher);
     }
 
+    @Step("Open search overlay")
     public SearchOverlay openSearch() {
         clickDynamicElement(searchIcon);
         return new SearchOverlay(driver, searchOverlayRoot);
     }
 
+    @Step("Click 'Sign In' button in the header")
     public LoginModalComponent clickSignIn() {
         authPanelComponent().clickSignIn();
         return new LoginModalComponent(driver);
     }
 
     // TODO: change return type once SignUpModal is ready
+    @Step("Click 'Sign Up' button in the header")
     public void clickSignUp() {
         if (hasAuthPanel()) {
             authPanelComponent().clickSignUp();
         }
     }
 
+    @Step("Check if burger icon is visible in the header")
     public boolean hasBurgerIcon() {
         return burgerButton.isDisplayed();
     }
 
+    @Step("Click burger icon to open mobile navigation")
     public MobileNavMenu clickBurgerIcon() {
         clickDynamicElement(burgerButton);
         return new MobileNavMenu(driver, burgerButton);
