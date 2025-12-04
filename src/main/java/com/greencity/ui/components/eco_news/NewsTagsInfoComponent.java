@@ -1,6 +1,7 @@
 package com.greencity.ui.components.eco_news;
 
 import com.greencity.ui.components.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ public class NewsTagsInfoComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Check if tag '{tagName}' is present")
     public boolean hasTag(String tagName) {
         for (WebElement tag : allTagsElements) {
             if (tag.getText().trim().equals(tagName))
