@@ -66,7 +66,7 @@ public class AddImageComponent extends BaseComponent {
     }
 
 
-    @Step("Check if validationMessage text is highlighted")
+    @Step("Check if ValidationMessage is highlighted")
     public boolean isWarningTextHighlighted() {
         return validationMessage.getAttribute("class").contains("warning-color");
     }
