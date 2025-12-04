@@ -25,9 +25,6 @@ public class EcoNewsDetailsPage extends BasePage {
     private WebElement tagsRoot;
 
     @Getter
-    private final NewsTagsInfoComponent newsTagsInfoComponent;
-
-    @Getter
     @FindBy(css = "div.news-title")
     private WebElement titleElement;
 
@@ -86,7 +83,11 @@ public class EcoNewsDetailsPage extends BasePage {
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
 
-        newsTagsInfoComponent = new NewsTagsInfoComponent(driver, tagsRoot);
+//        newsTagsInfoComponent = new NewsTagsInfoComponent(driver, tagsRoot);
+    }
+
+    public NewsTagsInfoComponent getNewsTagsInfoComponent() {
+        return new NewsTagsInfoComponent(driver, tagsRoot);
     }
 
     public EcoNewsPage clickBackButton() {

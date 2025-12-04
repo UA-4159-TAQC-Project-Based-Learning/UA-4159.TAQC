@@ -11,7 +11,7 @@ import java.util.List;
 public class NewsTagsInfoComponent extends BaseComponent {
 
     @Getter
-    @FindBy(xpath = ".//div[@class='tags']/div")
+    @FindBy(xpath = ".//div[contains(@class,'tags-item')]")
     private List<WebElement> allTagsElements;
 
     public NewsTagsInfoComponent(WebDriver driver, WebElement rootElement) {
@@ -20,7 +20,7 @@ public class NewsTagsInfoComponent extends BaseComponent {
 
     public boolean hasTag(String tagName) {
         for (WebElement tag : allTagsElements) {
-            if (tag.getText().equals(tagName))
+            if (tag.getText().trim().equals(tagName))
                 return true;
         }
         return false;

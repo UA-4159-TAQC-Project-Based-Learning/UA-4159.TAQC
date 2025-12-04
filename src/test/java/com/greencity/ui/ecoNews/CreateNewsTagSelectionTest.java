@@ -10,17 +10,16 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;
 
     @BeforeMethod
     public void openCreateNewsPage() {
-        String createNewsUrl = testValueProvider.getBaseUIUrl() + "/news/create-news";
-        driver.get(createNewsUrl);
-
-        createNewsPage = new CreateNewsPage(driver);
-        createNewsPage.waitForPageToLoad(10);
+        homePage.refreshPage();
+        createNewsPage = homePage.getHeader().clickEcoNewsNavItem().clickCreateNews();
     }
 
     @Test(description = "User can publish news with 1 tag")
@@ -40,11 +39,19 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
         EcoNewsPage ecoNewsPage = createNewsPage
                 .getCreateNewsButtonsComponent()
                 .clickPublish();
-
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         EcoNewsDetailsPage ecoNewsDetailsPage = ecoNewsPage
                 .getOneTableCardByTitle("Test")
                 .goToDetails();
-
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         softAssert.assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag("News"),
                 "Expected tag 'News' was not found on published news");
