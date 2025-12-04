@@ -50,7 +50,7 @@ public class EcoNewsTableCardComponentTest extends BaseTestRunner {
 
         softAssert.assertNotNull(oneTable, "Card with title '" + newsTitle + "' was not found on the page");
 
-        Allure.step("Assert all soft assertion");
+        Allure.step("Assert all soft assertions");
         softAssert.assertAll();
     }
 }
