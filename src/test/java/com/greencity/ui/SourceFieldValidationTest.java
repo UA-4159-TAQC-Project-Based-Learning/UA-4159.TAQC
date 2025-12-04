@@ -10,6 +10,7 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
 import com.greencity.ui.utils.NavItem;
 import com.greencity.utils.TestValueProvider;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -63,6 +64,9 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
 
         softAssert.assertTrue(createNewsPage.getSourceInput().isWarningsForField(),
                 "Source input should be invalid for incorrect URL format");
+
+        String borderColor = createNewsPage.getSourceInput().getBorderColorWhenWarning();
+        softAssert.assertEquals(borderColor, "rgb(255, 0, 0)", "Source border field should be red when invalid URL");
         softAssert.assertAll();
     }
 
@@ -91,7 +95,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
     }
 
     @Test(dataProvider = "invalidUrlsForSubmit",
-            description = "Publish button is disable when invalid Source URL"
+            description = "Publish button is disabled when invalid Source URL"
     )
     public void publishButtonDisabledForInvalidSource(String invalidUrl) {
         MandatoryFieldsNewsData newsData = testValueProvider.getValidMandatoryFieldsNewsData();
@@ -107,8 +111,8 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
     @DataProvider
     public static Object[][] validSources() {
         return new Object[][]{
-                {"http://test1.com"}
-                //{"https://test2.com"}
+                {"http://test1.com"},
+                {"https://test2.com"}
         };
     }
 
@@ -122,10 +126,6 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 newsData.getTags(),
                 newsData.getContentText()
         );
-
-        System.out.println("Tags from provider: " + newsData.getTags());
-        System.out.println("Selected tags in component: " + createNewsPage.getNewsTagsComponent().getSelectedTags());
-
         createNewsPage.getSourceInput().typeText(validUrl);
         EcoNewsPage ecoNewsPage = createNewsPage
                 .getCreateNewsButtonsComponent()
@@ -134,7 +134,26 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
         EcoNewsTableCardComponent publishedNewsCard = ecoNewsPage.getOneTableCardByTitle(newsData.getTitle());
 
         softAssert.assertEquals(publishedNewsCard != null, true, "News should be present after publishing");
-        Assert.assertNotNull(publishedNewsCard);
+        softAssert.assertEquals(publishedNewsCard.getTitle(), newsData.getTitle(),
+                "News title should match the one entered");
+        softAssert.assertAll();
+    }
+    @Test(description = "Check that news can be published with empty Source field")
+    public void isSuccessfulNewsPublishingWithEmptySource() {
+        MandatoryFieldsNewsData newsData = testValueProvider.getValidMandatoryFieldsNewsData();
+
+        createNewsPage.fillMandatoryFields(
+                newsData.getTitle(),
+                newsData.getTags(),
+                newsData.getContentText()
+        );
+        createNewsPage.getSourceInput().clear();
+        EcoNewsPage ecoNewsPage = createNewsPage
+                .getCreateNewsButtonsComponent()
+                .clickPublish();
+        EcoNewsTableCardComponent publishedNewsCard = ecoNewsPage.getOneTableCardByTitle(newsData.getTitle());
+
+        softAssert.assertEquals(publishedNewsCard != null, true, "News should be present after publishing");
         softAssert.assertEquals(publishedNewsCard.getTitle(), newsData.getTitle(),
                 "News title should match the one entered");
         softAssert.assertAll();
