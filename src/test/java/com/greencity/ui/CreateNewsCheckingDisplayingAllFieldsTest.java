@@ -61,6 +61,18 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
                         .isDisplayed(),
                 "Tags should be displayed");
 
+        createNewsPage.getNewsTagsComponent()
+                .selectTag("News");
+        softAssert.assertTrue(createNewsPage.getNewsTagsComponent()
+                .isTagSelected("News"),
+                "Tag 'News' should be selected");
+
+        createNewsPage.getNewsTagsComponent()
+                .unselectTag("News");
+        softAssert.assertFalse(createNewsPage.getNewsTagsComponent()
+                .isTagSelected("News"),
+                "Tag 'News' should be unselected");
+
         softAssert.assertAll();
     }
 
@@ -107,7 +119,36 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
         softAssert.assertEquals(testValueProvider.getLsUserName().trim(),
                 createNewsPage.getAuthorOfNews().
                         getText().trim(),
-                "Author should be equals to Username");
+                "Author should be equal to Username");
+
+        softAssert.assertFalse(Boolean.parseBoolean(createNewsPage.getAuthorOfNews()
+                .getAttribute("contenteditable")), "Author field should not be editable");
+
+        softAssert.assertAll();
+    }
+
+    @Test (priority = 6, description = "Date of news should be filled")
+    public void testDateIsDisplayed(){
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertTrue(createNewsPage.getActualDate().isDisplayed(),
+                "Date should be displayed");
+
+        softAssert.assertFalse(createNewsPage.getActualDate()
+                .getText().trim().isEmpty(), "Date should not be empty");
+
+        softAssert.assertFalse(Boolean.parseBoolean(createNewsPage.getActualDate()
+                .getAttribute("contenteditable")), "Date field should not be editable");
+
+        boolean isValidFormat =
+                createNewsPage.getActualDate()
+                        .getText()
+                        .trim()
+                        .matches("^([A-Z][a-z]{2}|[A-Z][a-z]+) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+
+        softAssert.assertTrue(isValidFormat,
+                "Date format should match 'MMMM d, yyyy'");
+
 
         softAssert.assertAll();
     }
@@ -135,18 +176,37 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
                         .isDisplayed(),
                 "Source input field should be displayed");
 
+        softAssert.assertTrue(createNewsPage.getSourceInput()
+                .getFieldInfoElement()
+                .getText().trim()
+                .contains("http(s)://"));
+
         softAssert.assertAll();
     }
 
 
-    @Test (priority = 8, description = "Submit Button block should be displayed")
-    public void testSubmitButtonDisplayed(){
+    @Test (priority = 8, description = "'Cancel', 'Preview' and 'Submit' buttons should be displayed")
+    public void testCancelPreviewSubmitButtonsDisplayed(){
         SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
+                        .getRootElement()
+                        .isDisplayed(),
+                "Buttons 'Cancel', 'Preview', 'Submit' block should be displayed");
+
+        softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
+                        .getCancelButton()
+                        .isDisplayed(),
+                "Button 'Cancel' should be displayed");
+
+        softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
+                        .getPreviewButton()
+                        .isDisplayed(),
+                "Button 'Preview' should be displayed");
 
         softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
                         .getPublishButton()
                         .isDisplayed(),
-                "Button Submit should be displayed");
+                "Button 'Submit' should be displayed");
 
         softAssert.assertAll();
     }
