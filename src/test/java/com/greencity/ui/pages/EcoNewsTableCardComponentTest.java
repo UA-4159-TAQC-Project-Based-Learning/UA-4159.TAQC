@@ -17,18 +17,15 @@ public class EcoNewsTableCardComponentTest extends BaseTestRunner {
     @Severity(SeverityLevel.NORMAL)
     @Description("Open EcoNews page, scroll to middle, and verify that at least one news card exists")
     public void testEcoNewsTableCardFindAll() {
-        Allure.step("Click on Eco News link from home page");
-        homePage.getEcoNewsLink().click();
+        homePage.getHeader().clickEcoNewsNavItem();
 
-        Allure.step("Initialize EcoNewsPage and scroll to middle of the page");
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
         ecoNewsPage.scrollToMiddlePage();
 
-        Allure.step("Get all table cards on EcoNews page");
+
         List<EcoNewsTableCardComponent> tableList = ecoNewsPage.getAllTableCards();
 
-        Allure.step("Verify that at least one table card is present");
-        Assert.assertTrue(!tableList.isEmpty(), "No Eco News table cards were found on the page");
+        Assert.assertFalse(tableList.isEmpty(), "No Eco News table cards were found on the page");
     }
 
     @Test(description = "Verify that a specific Eco News table card can be found by title")
@@ -37,20 +34,16 @@ public class EcoNewsTableCardComponentTest extends BaseTestRunner {
     public void testEcoNewsTableCardFindOne() {
         SoftAssert softAssert = new SoftAssert();
 
-        Allure.step("Click on Eco News link from home page");
-        homePage.getEcoNewsLink().click();
+        homePage.getHeader().clickEcoNewsNavItem();
 
-        Allure.step("Initialize EcoNewsPage and scroll to middle of the page");
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
         ecoNewsPage.scrollToMiddlePage();
 
         String newsTitle = "My Tea Cups News1";
-        Allure.step("Search for Eco News card with title: " + newsTitle);
         EcoNewsTableCardComponent oneTable = ecoNewsPage.getOneTableCardByTitle(newsTitle);
 
         softAssert.assertNotNull(oneTable, "Card with title '" + newsTitle + "' was not found on the page");
 
-        Allure.step("Assert all soft assertions");
         softAssert.assertAll();
     }
 }

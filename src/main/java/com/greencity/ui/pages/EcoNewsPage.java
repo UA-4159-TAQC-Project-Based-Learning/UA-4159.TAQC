@@ -106,8 +106,7 @@ public class EcoNewsPage extends BasePage {
         cancelSearchButton.click();
         return this;
     }
-
-    @Step("Get all table view news cards")
+    @Step("Get all table cards on Eco News page")
     public List<EcoNewsTableCardComponent> getAllTableCards() {
         List<EcoNewsTableCardComponent> tableCards = new ArrayList<>();
         for (WebElement element : tableCardsElements) {
