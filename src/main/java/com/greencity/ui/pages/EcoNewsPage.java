@@ -133,7 +133,7 @@ public class EcoNewsPage extends BasePage {
 
 
     @Step("Check if Eco News Page is opened")
-    public boolean EcoNewsPageIsOpened() {
+    public boolean ecoNewsPageIsOpened() {
         try {
             return randomNewsTitle.isDisplayed();
         } catch (Exception e) {
