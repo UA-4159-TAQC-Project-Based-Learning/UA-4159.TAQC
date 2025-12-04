@@ -2,6 +2,7 @@ package com.greencity.ui.ecoNews;
 
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsDetailsPage;
+import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -36,9 +37,11 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
                 .getContentEditor()
                 .typeText("Test content with 20 chars");
 
-        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+        EcoNewsPage ecoNewsPage = createNewsPage
                 .getCreateNewsButtonsComponent()
-                .clickPublish()
+                .clickPublish();
+
+        EcoNewsDetailsPage ecoNewsDetailsPage = ecoNewsPage
                 .getOneTableCardByTitle("Test")
                 .goToDetails();
 
@@ -74,13 +77,17 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
                 .selectTag("Events")
                 .selectTag("Education")
                 .getTitleInput()
-                .typeText("Test")
+                .typeText("Test");
+
+        createNewsPage
                 .getContentEditor()
                 .typeText("Test content with 20 chars");
 
-        EcoNewsDetailsPage ecoNewsDetailsPage = createNewsPage
+        EcoNewsPage ecoNewsPage = createNewsPage
                 .getCreateNewsButtonsComponent()
-                .clickPublish()
+                .clickPublish();
+
+        EcoNewsDetailsPage ecoNewsDetailsPage = ecoNewsPage
                 .getOneTableCardByTitle("Test")
                 .goToDetails();
 
@@ -142,7 +149,9 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
 
         createNewsPage
                 .getTitleInput()
-                .typeText("Test")
+                .typeText("Test");
+
+        createNewsPage
                 .getContentEditor()
                 .typeText("Test content with 20 chars");
 
