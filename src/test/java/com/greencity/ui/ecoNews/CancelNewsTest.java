@@ -8,6 +8,9 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
 import com.greencity.ui.utils.NavItem;
 import com.greencity.utils.EcoNewsTestData;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Issues;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -46,8 +49,9 @@ public class CancelNewsTest extends TestRunnerWithUser {
         }
     }
 
-    // U4T-30
     @Test
+    @Issue("U4T-30")
+    @Description("Verify that the 'Cancel' button is displayed and enabled on the Create News page.")
     public void cancelButtonIsVisibleAndEnabledOnCreateNewsPage() {
         CreateNewsButtonsComponent buttons = createNewsPage.getCreateNewsButtonsComponent();
 
@@ -55,11 +59,15 @@ public class CancelNewsTest extends TestRunnerWithUser {
         softAssert.assertTrue(buttons.getCancelButton().isEnabled(), "Cancel button should be enabled on Create News page.");
     }
 
-    // U4T-35 U4T-31
     @Test(
             dataProvider = "createNewsDataForCancelTests",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issues({
+            @Issue("U4T-35"),
+            @Issue("U4T-31")
+    })
+    @Description("Verify that clicking 'Cancel' on a filled Create News form opens a confirmation popup with the expected elements.")
     public void cancel_shouldShowConfirmationPopup(String title, String content) {
         CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(title, content)
@@ -81,11 +89,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-32
     @Test(
             dataProvider = "uniqueTitleAndContentToCancel",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-32")
+    @Description("Verify that confirming cancel discards the news, redirects to Eco News page, and clears the Create News form when reopened.")
     public void confirmCancel_shouldDiscardData_andRedirectToEcoNews(String uniqueTitle, String uniqueContent) {
         CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(uniqueTitle, uniqueContent)
@@ -129,11 +138,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-33
     @Test(
             dataProvider = "uniqueTitleAndContentToCancel",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-33")
+    @Description("Verify that cancelling in the confirmation popup keeps the user on Create News page and preserves the entered data.")
     public void cancelInPopup_shouldStayOnPage_andKeepEnteredData(String expectedTitle, String expectedContent) {
         CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
@@ -160,11 +170,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-36
     @Test(
             dataProvider = "uniqueTitleAndContentToCancel",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-36")
+    @Description("Verify that clicking outside the cancel popup closes it and keeps previously entered data.")
     public void clickOutsidePopUp_shouldClosePopup_andKeepData(String expectedTitle, String expectedContent) {
         CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
@@ -190,11 +201,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-39
     @Test(
             dataProvider = "uniqueTitleAndContentToCancel",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-39")
+    @Description("Verify that closing the cancel popup via the cross icon keeps the user on Create News and preserves the entered data.")
     public void closeViaCross_shouldKeepData(String expectedTitle, String expectedContent) {
         CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
@@ -221,11 +233,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-40
     @Test(
             dataProvider = "navItemsForCancelTest",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-40")
+    @Description("Verify that attempt to navigate via header with filled Create News form shows the cancel confirmation popup.")
     public void headerNav_withData_shouldShowConfirmationPopup(NavItem item) {
         createNewsPage
                 .enterTitleAndContent("Title entered", "Content entered")
@@ -251,11 +264,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
     }
 
-    // U4T-41
     @Test(
             dataProvider = "navItemsForCancelTest",
             dataProviderClass = EcoNewsTestData.class
     )
+    @Issue("U4T-41")
+    @Description("Verify that navigating via header from Create News with an empty form does not show a popup and redirects.")
     public void headerNav_emptyForm_shouldNavigateWithoutPopup(NavItem item) {
         String initialUrl = driver.getCurrentUrl();
         Assert.assertNotNull(initialUrl);
@@ -289,8 +303,9 @@ public class CancelNewsTest extends TestRunnerWithUser {
         }
     }
 
-    // U4T-34
     @Test
+    @Issue("U4T-34")
+    @Description("Verify that the cancel confirmation popup appears within one second after clicking Cancel.")
     public void cancelNews_popupShouldAppearWithinOneSecond() {
         createNewsPage.enterTitleAndContent("Title entered", "Content entered");
         CreateNewsButtonsComponent buttons = createNewsPage.getCreateNewsButtonsComponent();
