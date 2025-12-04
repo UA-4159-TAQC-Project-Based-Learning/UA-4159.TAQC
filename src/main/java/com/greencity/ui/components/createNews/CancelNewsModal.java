@@ -40,7 +40,7 @@ public class CancelNewsModal extends BaseComponent {
     }
 
     /**
-     * Overloaded constructor: waits for the auth modal to appear
+     * Overloaded constructor: waits for the Cancel modal to appear
      * and uses it as the component root.
      */
     public CancelNewsModal(WebDriver driver) {

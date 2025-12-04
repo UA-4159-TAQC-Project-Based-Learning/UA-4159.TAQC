@@ -8,21 +8,18 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
 import com.greencity.ui.utils.NavItem;
 import com.greencity.utils.EcoNewsTestData;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
-
 public class CancelNewsTest extends TestRunnerWithUser {
 
     private SoftAssert softAssert;
     private CreateNewsPage createNewsPage;
 
-    // Used for use test only - headerNav_emptyForm_shouldNavigateWithoutPopup()
+    // Used for one test only - headerNav_emptyForm_shouldNavigateWithoutPopup()
     public static final String CREATE_NEWS_URL = "/create-news";
 
     @BeforeMethod
@@ -64,7 +61,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void cancel_shouldShowConfirmationPopup(String title, String content) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(title, content)
                 .openCancelModal()
                 .waitUntilOpened();
@@ -90,7 +87,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void confirmCancel_shouldDiscardData_andRedirectToEcoNews(String uniqueTitle, String uniqueContent) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(uniqueTitle, uniqueContent)
                 .openCancelModal()
                 .waitUntilOpened();
@@ -103,7 +100,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
 
         // Verifications that user is redirected back to Eco News page
         softAssert.assertTrue(
-                ecoNewsPage.EcoNewsPageIsOpened(),
+                ecoNewsPage.ecoNewsPageIsOpened(),
                 "User should be redirected back to Eco News page after confirming cancel."
         );
         Assert.assertNotNull(currentUrl);
@@ -138,7 +135,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void cancelInPopup_shouldStayOnPage_andKeepEnteredData(String expectedTitle, String expectedContent) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
                 .openCancelModal()
                 .waitUntilOpened();
@@ -169,7 +166,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void clickOutsidePopUp_shouldClosePopup_andKeepData(String expectedTitle, String expectedContent) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
                 .openCancelModal()
                 .waitUntilOpened();
@@ -199,7 +196,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
             dataProviderClass = EcoNewsTestData.class
     )
     public void closeViaCross_shouldKeepData(String expectedTitle, String expectedContent) {
-        CancelNewsModal cancelNewsModal = (CancelNewsModal) createNewsPage
+        CancelNewsModal cancelNewsModal = createNewsPage
                 .enterTitleAndContent(expectedTitle, expectedContent)
                 .openCancelModal()
                 .waitUntilOpened();
@@ -295,22 +292,19 @@ public class CancelNewsTest extends TestRunnerWithUser {
     // U4T-34
     @Test
     public void cancelNews_popupShouldAppearWithinOneSecond() {
-        createNewsPage.getTitleInput().typeText("Title entered");
-        createNewsPage.getTextEditor().typeText("Content entered");
-
+        createNewsPage.enterTitleAndContent("Title entered", "Content entered");
         CreateNewsButtonsComponent buttons = createNewsPage.getCreateNewsButtonsComponent();
 
         long startTime = System.currentTimeMillis();
-        buttons.getCancelButton().click();
 
+        buttons.getCancelButton().click();
         CancelNewsModal modal = createNewsPage.getCancelNewsModal();
-        boolean shownOnTime = new WebDriverWait(driver, Duration.ofMillis(1000)).until(d -> modal.isVisible());
 
         long timeTaken = System.currentTimeMillis() - startTime;
 
         softAssert.assertTrue(
-                shownOnTime,
-                "Cancel popup did not become visible within 1 second."
+                modal.isVisible(),
+                "Cancel popup did not become visible."
         );
 
         softAssert.assertTrue(
