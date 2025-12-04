@@ -28,7 +28,7 @@ public class EcoNewsTableCardComponentTest extends BaseTestRunner {
         List<EcoNewsTableCardComponent> tableList = ecoNewsPage.getAllTableCards();
 
         Allure.step("Verify that at least one table card is present");
-        Assert.assertTrue(tableList.size() > 0, "No Eco News table cards were found on the page");
+        Assert.assertTrue(!tableList.isEmpty(), "No Eco News table cards were found on the page");
     }
 
     @Test(description = "Verify that a specific Eco News table card can be found by title")
