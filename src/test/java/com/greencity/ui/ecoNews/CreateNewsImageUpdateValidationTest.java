@@ -10,14 +10,14 @@ import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 
-public class CreateNewsImageUpdateValidationTest  extends TestRunnerWithUser {
+public class CreateNewsImageUpdateValidationTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;
-    String filePathCorrectImagePNG = new File("src/test/resources/images/imagePNG5MB.png").getAbsolutePath();
-    String filePathCorrectImageJPG = new File("src/test/resources/images/imageJPG5MB.jpg").getAbsolutePath();
-    String filePathWrongFormatImageGIF = new File("src/test/resources/images/imageGIF1MB.gif").getAbsolutePath();
-    String filePathBigSizeImageJPG = new File("src/test/resources/images/ImageJPG15MB.jpg").getAbsolutePath();
-    String validationMessage = "Upload only PNG or JPG. File size must be less than 10MB";
+    private final String filePathCorrectImagePNG = new File("src/test/resources/images/imagePNG5MB.png").getAbsolutePath();
+    private final String filePathCorrectImageJPG = new File("src/test/resources/images/imageJPG5MB.jpg").getAbsolutePath();
+    private final String filePathWrongFormatImageGIF = new File("src/test/resources/images/imageGIF1MB.gif").getAbsolutePath();
+    private final String filePathBigSizeImageJPG = new File("src/test/resources/images/imageJPG15MB.jpg").getAbsolutePath();
+    private final String validationMessage = "Upload only PNG or JPG. File size must be less than 10MB";
 
 
     @BeforeMethod
