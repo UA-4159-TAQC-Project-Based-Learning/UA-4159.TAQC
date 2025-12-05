@@ -66,7 +66,6 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
             description = "Error appears for invalid source URL"
     )
     public void errorIsDisplayedForInvalidSource(String invalidUrl) {
-        MandatoryFieldsNewsData newsData = testValueProvider.getValidMandatoryFieldsNewsData();
 
         createNewsPage
                 .getSourceInput()
