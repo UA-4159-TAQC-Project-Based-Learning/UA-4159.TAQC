@@ -111,6 +111,7 @@ public abstract class Base {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    @Step("Refresh the page")
     public void refreshPage() {
         driver.navigate().refresh();
     }
@@ -119,7 +120,16 @@ public abstract class Base {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
+    @Step("Wait until page is loaded")
     public void waitUntilPageLouder() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+    }
+
+    public static boolean hasClass(WebElement element, String className) {
+        if (element == null) {
+            return false;
+        }
+        String searchingClass = element.getAttribute("class");
+        return searchingClass != null && searchingClass.contains(className);
     }
 }
