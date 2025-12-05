@@ -34,6 +34,9 @@ public class AddImageComponent extends BaseComponent {
     @FindBy(css = ".image-block .warning")
     private WebElement validationMessage;
 
+    @FindBy(css = ".image-preview img")
+    private WebElement uploadedImagePreview;
+
     public AddImageComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
@@ -79,6 +82,12 @@ public class AddImageComponent extends BaseComponent {
     @Step("Check if upload errors are shown")
     public boolean hasUploadError() {
         return isWarningTextHighlighted() && isDropzoneHighlighted();
+    }
+
+    public boolean isImagePreviewDisplayed() {
+        return uploadedImagePreview.isDisplayed() &&
+                    uploadedImagePreview.getAttribute("src") != null &&
+                    !uploadedImagePreview.getAttribute("src").isEmpty();
     }
 
 }

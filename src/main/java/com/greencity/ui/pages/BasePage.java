@@ -4,6 +4,7 @@ import com.greencity.ui.Base;
 import com.greencity.ui.components.footer.FooterComponent;
 import com.greencity.ui.components.header.core.HeaderComponent;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,11 +16,15 @@ import java.time.Duration;
 import java.util.Objects;
 
 public abstract class BasePage extends Base {
+
+    // Needed to re-create the Header POM inside loginUserWithModal() in TestRunnerWithUser.
+    @Getter
+    private static final String HEADER_ROOT_LOCATOR_XPATH = "//app-header";
+
     @Getter
     protected HeaderComponent header;
     @Getter
     protected FooterComponent footer;
-
     @FindBy(xpath = "//app-header")
     private WebElement headerRoot;
     @FindBy(xpath = "//footer")

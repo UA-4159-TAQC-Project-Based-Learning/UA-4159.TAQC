@@ -49,5 +49,4 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         return new EcoNewsPage(driver);
     }
 
-
 }
