@@ -3,6 +3,8 @@ package com.greencity.ui.ecoNews;
 import com.greencity.ui.components.createNews.AddImageComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -22,14 +24,12 @@ public class CreateNewsImageUpdateValidationTest extends TestRunnerWithUser {
 
     @BeforeMethod
     public void openCreateNewsPage() {
-        String createNewsUrl = testValueProvider.getBaseUIUrl() + "/news/create-news";
-        driver.get(createNewsUrl);
-
-        createNewsPage = new CreateNewsPage(driver);
-        createNewsPage.waitForPageToLoad(10);
+        homePage.refreshPage();
+        createNewsPage = homePage.getHeader().clickEcoNewsNavItem().clickCreateNews();
     }
 
-
+    @Issue("U4T-14")
+    @Description("Verify uploading valid PNG/JPG images up to 10MB")
     @Test(description = "User can successfully upload image files up to 10MB", dataProvider = "validImages")
     public void testUploadImage(String imagePath) {
         SoftAssert softAssert = new SoftAssert();
@@ -47,10 +47,11 @@ public class CreateNewsImageUpdateValidationTest extends TestRunnerWithUser {
         softAssert.assertFalse(image.hasUploadError(), "Error on uploading image");
         softAssert.assertTrue(image.isImagePreviewDisplayed(), "Uploaded image preview not displayed");
         softAssert.assertAll();
-        image.clickCancel();
 
     }
 
+    @Issue("U4T-14")
+    @Description("Verify that uploading invalid GIF format shows warning")
     @Test(description = "Warning message shown if upload GIF files")
     public void testUploadImageGIF() {
         SoftAssert softAssert = new SoftAssert();
@@ -70,6 +71,8 @@ public class CreateNewsImageUpdateValidationTest extends TestRunnerWithUser {
 
     }
 
+    @Issue("U4T-14")
+    @Description("Verify that uploading images over 10MB shows warning")
     @Test(description = "Warning message shown if upload image over 10 MB")
     public void testUploadBigImage() {
         SoftAssert softAssert = new SoftAssert();
