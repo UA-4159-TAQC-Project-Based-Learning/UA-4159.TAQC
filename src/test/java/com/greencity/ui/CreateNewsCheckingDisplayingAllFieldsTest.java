@@ -3,11 +3,13 @@ package com.greencity.ui;
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 
+@Issue("U4T-11")
 public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;
@@ -144,7 +146,7 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
                 createNewsPage.getActualDate()
                         .getText()
                         .trim()
-                        .matches("^([A-Z][a-z]{2}|[A-Z][a-z]+) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+                        .matches("^(^[A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
 
         softAssert.assertTrue(isValidFormat,
                 "Date format should match 'MMMM d, yyyy'");
@@ -185,13 +187,13 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
     }
 
 
-    @Test (priority = 8, description = "'Cancel', 'Preview' and 'Submit' buttons should be displayed")
+    @Test (priority = 8, description = "'Cancel', 'Preview' and 'Publish' buttons should be displayed")
     public void testCancelPreviewSubmitButtonsDisplayed(){
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
                         .getRootElement()
                         .isDisplayed(),
-                "Buttons 'Cancel', 'Preview', 'Submit' block should be displayed");
+                "Buttons 'Cancel', 'Preview', 'Publish' block should be displayed");
 
         softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
                         .getCancelButton()
@@ -206,7 +208,7 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
         softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent()
                         .getPublishButton()
                         .isDisplayed(),
-                "Button 'Submit' should be displayed");
+                "Button 'Publish' should be displayed");
 
         softAssert.assertAll();
     }

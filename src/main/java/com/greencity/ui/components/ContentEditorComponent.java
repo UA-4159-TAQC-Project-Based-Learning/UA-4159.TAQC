@@ -75,13 +75,15 @@ public class ContentEditorComponent extends AbstractInputComponent {
         return this;
     }
 
+    @Step ("Click on main text in content editor")
     public ContentEditorComponent clickOnMainText() {
         textInputArea.click();
         return this;
     }
 
-    public String getValue() {
-        return textInputArea.getAttribute("value");
+    @Step ("Get placeholder text on main text in content editor")
+    public String getPlaceholderValue() {
+        return textInputArea.getAttribute("data-placeholder");
     }
 
     @Step("Typing text '{text}' into content editor")
@@ -91,10 +93,12 @@ public class ContentEditorComponent extends AbstractInputComponent {
         return this;
     }
 
+    @Step ("Get value on main text in content editor")
     public String getInputAreaText() {
         return textInputArea.getText().trim();
     }
 
+    @Step("Check if content editor shows 'not enough characters' warning")
     public boolean isEnoughCharacterMainText() {
         return hasClass(notEnoughCharacterMessage, "warning");
     }

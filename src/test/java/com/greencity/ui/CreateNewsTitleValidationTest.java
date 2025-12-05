@@ -2,6 +2,7 @@ package com.greencity.ui;
 
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import io.qameta.allure.Issue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +11,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
+@Issue("U4T-12")
 public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
 
     private CreateNewsPage createNewsPage;

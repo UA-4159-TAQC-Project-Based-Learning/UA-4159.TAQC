@@ -18,17 +18,20 @@ public class InputFormComponent extends AbstractInputComponent {
         super(driver, rootElement);
     }
 
+    @Step("Clear input field")
     public InputFormComponent clear() {
         fieldElement.click();
         fieldElement.clear();
         return this;
     }
 
+    @Step("Click on input field")
     public InputFormComponent clickOnField() {
         fieldElement.click();
         return this;
     }
 
+    @Step("Get value from input field")
     public String getValue() {
         return fieldElement.getAttribute("value");
     }
@@ -41,22 +44,27 @@ public class InputFormComponent extends AbstractInputComponent {
         return this;
     }
 
+    @Step("Get placeholder text from input field")
     public String getPlaceholderText() {
         return fieldElement.getAttribute("placeholder");
     }
 
+    @Step("Check if field is textarea")
     public boolean isTextArea() {
         return fieldElement.getTagName().equalsIgnoreCase("textarea");
     }
 
+    @Step("Check if field is input")
     public boolean isInput() {
         return fieldElement.getTagName().equalsIgnoreCase("input");
     }
 
+    @Step("Check if field is valid")
     public boolean isValidField() {
         return hasClass(fieldElement, "ng-valid");
     }
 
+    @Step("Check if field is invalid")
     public boolean isInvalidField() {
         return hasClass(fieldElement, "ng-invalid");
     }
