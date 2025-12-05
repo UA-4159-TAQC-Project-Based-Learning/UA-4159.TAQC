@@ -10,6 +10,8 @@ import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
 import com.greencity.ui.utils.NavItem;
 import com.greencity.utils.TestValueProvider;
+import io.qameta.allure.*;
+import jdk.jfr.Description;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -19,6 +21,13 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static com.greencity.ui.utils.NavItem.ECO_NEWS;
+
+@Epic("News page")
+@Story("Source Field Validation")
+@Feature("News page: Create News functionality {2}")
+@Issue("U4T-16")
+@Severity(SeverityLevel.NORMAL)
+@Link(name = "LINK goto site Green City", url = "https://www.greencity.cx.ua/#/greenCity")
 
 public class SourceFieldValidationTest extends TestRunnerWithUser {
 
@@ -52,6 +61,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
         };
     }
 
+    @Description("Validate that invalid Source URLs '{invalidUrl}' show error state and red border in Source input field")
     @Test(dataProvider = "invalidUrls",
             description = "Error appears for invalid source URL"
     )
@@ -94,6 +104,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
         };
     }
 
+    @Description("Verify that the Publish button is disabled when an invalid Source URL '{invalidUrl}' is entered")
     @Test(dataProvider = "invalidUrlsForSubmit",
             description = "Publish button is disabled when invalid Source URL"
     )
@@ -116,6 +127,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
         };
     }
 
+    @Description("Check that a news is successfully published when a valid Source URL '{validUrl}' is entered")
     @Test(dataProvider = "validSources",
             description = "Successful News publishing with valid Source URL")
     public void isSuccessfulPublishedNewsWithValidSource(String validUrl) {
@@ -138,6 +150,8 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 "News title should match the one entered");
         softAssert.assertAll();
     }
+
+    @Description("Check that a news successfully published when the Source field is empty (optional field)")
     @Test(description = "Check that news can be published with empty Source field")
     public void isSuccessfulNewsPublishingWithEmptySource() {
         MandatoryFieldsNewsData newsData = testValueProvider.getValidMandatoryFieldsNewsData();

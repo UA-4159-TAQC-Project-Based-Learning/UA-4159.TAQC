@@ -71,11 +71,13 @@ public class CreateNewsPage extends BasePage {
         this.createNewsButtonsComponent = new CreateNewsButtonsComponent(driver, submitButtonsRoot);
     }
 
+    @Step("Open 'Cancel News' dialog modal")
     public CancelNewsModal getCancelNewsModal() {
         wait.until(ExpectedConditions.visibilityOf(CancelNewsModalRoot));
         return new CancelNewsModal(driver, CancelNewsModalRoot);
     }
 
+    @Step("Fill mandatory fields for news creation: title, tags, and content")
     public CreateNewsPage fillMandatoryFields(String title, List<String> tags, String contentText) {
         titleInput.typeText(title);
         contentEditor.typeText(contentText);

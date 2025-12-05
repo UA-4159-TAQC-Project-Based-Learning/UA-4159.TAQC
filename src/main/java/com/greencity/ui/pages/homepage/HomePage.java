@@ -6,6 +6,7 @@ import com.greencity.ui.components.home.StatisticRowComponent;
 import com.greencity.ui.components.home.SubscribeSectionComponent;
 import com.greencity.ui.components.loginModalComponent.LoginModalComponent;
 import com.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,7 @@ public class HomePage extends BasePage {
         this.subscribeSection = new SubscribeSectionComponent(driver, subscribeSectionRoot);
     }
 
+    @Step("Get all statistic rows from the Home page")
     public List<StatisticRowComponent> getAllStatisticRows() {
         if (statisticRows == null) {
             statisticRows = statisticRowsRoot.stream().map(root -> new StatisticRowComponent(driver, root)).toList();
@@ -62,6 +64,7 @@ public class HomePage extends BasePage {
         return statisticRows;
     }
 
+    @Step("Get statistic row by index: {index}")
     public StatisticRowComponent getStatisticRow(int index) {
         return getAllStatisticRows().get(index);
     }

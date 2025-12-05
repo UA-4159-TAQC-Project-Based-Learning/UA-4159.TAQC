@@ -28,6 +28,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Click 'Preview' news button")
     public CreateNewsPreviewPage clickPreviewButton() {
         clickDynamicElement(previewButton);
         waitUntilPageLouder();

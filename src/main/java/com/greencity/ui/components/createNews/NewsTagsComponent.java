@@ -3,7 +3,6 @@ package com.greencity.ui.components.createNews;
 import com.greencity.ui.components.BaseComponent;
 import io.qameta.allure.Step;
 import lombok.Getter;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +15,6 @@ public class NewsTagsComponent extends BaseComponent {
 
     @Getter
     @FindBy(css = "a.global-tag")
-    //@FindBy(css = "button.tag-button")
     private List<WebElement> tagButtons;
 
     @Getter
@@ -36,8 +34,7 @@ public class NewsTagsComponent extends BaseComponent {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)) {
                 waitUntilElementClickable(tag);
-                clickDynamicElement(tag);
-                //tag.click();
+                tag.click();
                 return;
             }
         }
@@ -49,8 +46,7 @@ public class NewsTagsComponent extends BaseComponent {
             if (tag.getText().trim().equalsIgnoreCase(tagName)
                     && Objects.requireNonNull(tag.getAttribute("class")).contains("global-tag-clicked")) {
                 waitUntilElementClickable(tag);
-                clickDynamicElement(tag);
-                //tag.click();
+                tag.click();
                 return;
             }
         }
