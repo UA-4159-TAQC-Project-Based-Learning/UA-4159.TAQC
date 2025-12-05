@@ -1,5 +1,6 @@
 package com.greencity.ui.components;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +33,7 @@ public class InputFormComponent extends AbstractInputComponent {
         return fieldElement.getAttribute("value");
     }
 
+    @Step("Typing text '{text}' into input field")
     public InputFormComponent typeText(String text) {
         fieldElement.click();
         fieldElement.clear();
