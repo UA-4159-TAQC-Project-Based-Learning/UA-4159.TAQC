@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class CreateNewsPage extends BasePage {
 
     @Getter
@@ -68,6 +70,7 @@ public class CreateNewsPage extends BasePage {
         this.createNewsButtonsComponent = new CreateNewsButtonsComponent(driver, submitButtonsRoot);
     }
 
+    @Step("Open 'Cancel News' dialog modal")
     public CancelNewsModal getCancelNewsModal() {
         // wait.until(ExpectedConditions.visibilityOf(CancelNewsModalRoot));
         CancelNewsModal modal = new CancelNewsModal(driver, CancelNewsModalRoot);
@@ -91,6 +94,21 @@ public class CreateNewsPage extends BasePage {
         return new TextEditorComponent(driver);
     }
 
+    @Step("Fill mandatory fields for news creation: title, tags, and content")
+    public CreateNewsPage fillMandatoryFields(String title, List<String> tags, String contentText) {
+        titleInput.typeText(title);
+        contentEditor.typeText(contentText);
+
+        List<String> selectedTags = newsTagsComponent.getSelectedTags();
+        for (String tag : selectedTags) {
+            newsTagsComponent.unselectTag(tag);
+        }
+
+        for (String tag : tags) {
+            newsTagsComponent.selectTag(tag);
+        }
+        return this;
+    }
     @Step("Select tag: {tagName}")
     public CreateNewsPage selectTag(String tagName) {
         newsTagsComponent.selectTag(tagName);

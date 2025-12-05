@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NewsTagsComponent extends BaseComponent {
 
@@ -32,6 +33,7 @@ public class NewsTagsComponent extends BaseComponent {
     public void selectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)) {
+                waitUntilElementClickable(tag);
                 tag.click();
                 return;
             }
@@ -42,7 +44,8 @@ public class NewsTagsComponent extends BaseComponent {
     public void unselectTag(String tagName) {
         for (WebElement tag : tagButtons) {
             if (tag.getText().trim().equalsIgnoreCase(tagName)
-                    && tag.getAttribute("class").contains("global-tag-clicked")) {
+                    && Objects.requireNonNull(tag.getAttribute("class")).contains("global-tag-clicked")) {
+                waitUntilElementClickable(tag);
                 tag.click();
                 return;
             }
@@ -73,7 +76,8 @@ public class NewsTagsComponent extends BaseComponent {
     public List<String> getSelectedTags() {
         List<String> selected = new ArrayList<>();
         for (WebElement tag : tagButtons) {
-            if (tag.getAttribute("class").contains("global-tag-clicked")) {
+            String classAttr = tag.getAttribute("class");
+            if (classAttr != null && classAttr.contains("global-tag-clicked")) {
                 selected.add(tag.getText());
             }
         }

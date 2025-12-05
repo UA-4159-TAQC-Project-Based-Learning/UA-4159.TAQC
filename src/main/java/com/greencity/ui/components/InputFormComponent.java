@@ -57,9 +57,20 @@ public class InputFormComponent extends AbstractInputComponent {
         return hasClass(fieldElement, "ng-valid");
     }
 
+    public boolean hasWarningFieldInfo() {
+        return hasClass(fieldInfoElement, "warning");
+    }
+
     public boolean isInvalidField() {
         return hasClass(fieldElement, "ng-invalid");
     }
 
+    public boolean isWarningsForField() {
+        return hasClass(fieldElement, "field-warning");
+    }
 
+    public String getBorderColorWhenWarning() {
+        wait.until(driver -> isWarningsForField());
+        return fieldElement.getCssValue("border-color");
+    }
 }
