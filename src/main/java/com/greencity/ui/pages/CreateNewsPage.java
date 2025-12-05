@@ -10,7 +10,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CreateNewsPage extends BasePage {
 
@@ -70,8 +69,26 @@ public class CreateNewsPage extends BasePage {
     }
 
     public CancelNewsModal getCancelNewsModal() {
-        wait.until(ExpectedConditions.visibilityOf(CancelNewsModalRoot));
-        return new CancelNewsModal(driver, CancelNewsModalRoot);
+        // wait.until(ExpectedConditions.visibilityOf(CancelNewsModalRoot));
+        CancelNewsModal modal = new CancelNewsModal(driver, CancelNewsModalRoot);
+        modal.waitForModalVisible();
+        return modal;
+    }
+
+    public CreateNewsPage enterTitleAndContent(String title, String content) {
+        titleInput.typeText(title);
+        getTextEditor().typeText(content);
+        return this;
+    }
+
+    public CancelNewsModal openCancelModal() {
+        createNewsButtonsComponent.getCancelButton().click();
+        return getCancelNewsModal();
+    }
+
+    // Created a separate TextEditorComponent because the editor is not a regular input field
+    public TextEditorComponent getTextEditor() {
+        return new TextEditorComponent(driver);
     }
 
     @Step("Select tag: {tagName}")

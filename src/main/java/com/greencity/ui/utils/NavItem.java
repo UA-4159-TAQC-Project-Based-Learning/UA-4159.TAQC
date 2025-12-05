@@ -6,7 +6,8 @@ public enum NavItem {
     PLACES("#/greenCity/places"),
     ABOUT_US("#/greenCity/about"),
     MY_SPACE("#/greenCity/profile"),
-    UBS_COURIER("#/ubs");
+    UBS_COURIER("#/ubs"),
+    LOGO("#/greenCity");
 
     private final String href;
 
