@@ -76,7 +76,8 @@ public class NewsTagsComponent extends BaseComponent {
     public List<String> getSelectedTags() {
         List<String> selected = new ArrayList<>();
         for (WebElement tag : tagButtons) {
-            if (Objects.requireNonNull(tag.getAttribute("class")).contains("global-tag-clicked")) {
+            String classAttr = tag.getAttribute("class");
+            if (classAttr != null && classAttr.contains("global-tag-clicked")) {
                 selected.add(tag.getText());
             }
         }
