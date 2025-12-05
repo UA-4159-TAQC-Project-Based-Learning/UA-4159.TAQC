@@ -118,9 +118,9 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
                         getText().isEmpty(),
                 "Author should be not empty");
 
-        softAssert.assertEquals(testValueProvider.getLsUserName().trim(),
-                createNewsPage.getAuthorOfNews().
+        softAssert.assertEquals(createNewsPage.getAuthorOfNews().
                         getText().trim(),
+                testValueProvider.getLsUserName().trim(),
                 "Author should be equal to Username");
 
         softAssert.assertFalse(Boolean.parseBoolean(createNewsPage.getAuthorOfNews()
