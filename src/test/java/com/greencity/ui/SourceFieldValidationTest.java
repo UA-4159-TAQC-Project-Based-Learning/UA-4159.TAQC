@@ -108,7 +108,6 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
             description = "Publish button is disabled when invalid Source URL"
     )
     public void publishButtonDisabledForInvalidSource(String invalidUrl) {
-        MandatoryFieldsNewsData newsData = testValueProvider.getValidMandatoryFieldsNewsData();
 
         createNewsPage
                 .getSourceInput()
