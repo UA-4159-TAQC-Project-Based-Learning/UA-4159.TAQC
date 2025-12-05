@@ -73,7 +73,7 @@ public class CancelNewsModal extends BaseComponent {
 
     public CancelNewsModal waitUntilOpened() {
         waitUntilElementVisible(cancelNewsChangesModalTitle);
-        return new CancelNewsModal(driver, rootElement);
+        return this;
     }
 
     public void waitForModalClosed() {
