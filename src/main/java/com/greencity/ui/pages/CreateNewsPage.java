@@ -59,6 +59,12 @@ public class CreateNewsPage extends BasePage {
     @Getter
     @FindBy(css = "div.submit-buttons")
     private WebElement submitButtonsRoot;
+    @Getter
+    @FindBy(css = ".date p:nth-of-type(even) span:nth-of-type(even)")
+    private WebElement authorOfNews;
+    @Getter
+    @FindBy(css = ".date p:first-of-type span:nth-of-type(even)")
+    private WebElement actualDate;
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
