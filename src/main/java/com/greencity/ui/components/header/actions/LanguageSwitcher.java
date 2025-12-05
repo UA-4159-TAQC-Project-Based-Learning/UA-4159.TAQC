@@ -2,6 +2,7 @@ package com.greencity.ui.components.header.actions;
 
 import com.greencity.ui.elements.BaseElement;
 import com.greencity.ui.utils.Language;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class LanguageSwitcher extends BaseElement {
      *
      * @param language - from Language Enum
      */
+    @Step("Switch language to {language}")
     public void selectLanguage(Language language) {
         selectLanguage(language.label());
     }
@@ -32,6 +34,7 @@ public class LanguageSwitcher extends BaseElement {
      *              e.g. "En" for English,
      *              "Uk" for Ukrainian
      */
+    @Step("Switch language to '{label}'")
     public void selectLanguage(String label) {
         clickDynamicElement(languageToggle);
 

@@ -1,7 +1,15 @@
 package com.greencity.ui.testrunners;
 
+import com.greencity.ui.components.header.core.HeaderComponent;
+import com.greencity.ui.pages.BasePage;
 import com.greencity.ui.pages.profile.ProfilePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
+
+import java.time.Duration;
 
 public class TestRunnerWithUser extends BaseTestRunner {
 
@@ -27,11 +35,18 @@ public class TestRunnerWithUser extends BaseTestRunner {
                 .typeEmail(testValueProvider.getUserEmail())
                 .typePassword(testValueProvider.getUserPassword())
                 .submit();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        // Suggest using this instead of Thread.sleep() - some tests need to recreate the Header POM after UI refresh.
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(d -> {
+                    WebElement freshHeaderRoot = d.findElement(By.xpath(BasePage.getHEADER_ROOT_LOCATOR_XPATH()));
+                    HeaderComponent freshHeader = new HeaderComponent(d, freshHeaderRoot);
+                    return freshHeader.isLoggedIn();
+                });
     }
 
     protected void loginUserWithToken() {
