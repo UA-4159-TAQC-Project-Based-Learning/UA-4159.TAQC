@@ -62,10 +62,12 @@ public class LoginModalComponent extends BaseComponent {
         this(driver, new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(MODAL_ROOT_LOCATOR)));
     }
 
+    @Step("Check that login modal is open")
     public boolean isOpen() {
         return rootElement.isDisplayed();
     }
 
+    @Step("Close login modal")
     public void close() {
         clickDynamicElement(closeButton);
     }
@@ -100,22 +102,27 @@ public class LoginModalComponent extends BaseComponent {
         submit();
     }
 
+    @Step("Click 'Forgot password' link")
     public void clickForgotPassword() {
         clickDynamicElement(forgotPasswordLink);
     }
 
+    @Step("Click 'Sign in with Google' button")
     public void clickSignInWithGoogle() {
         clickDynamicElement(googleSignInButton);
     }
 
+    @Step("Click 'Sign up' link")
     public void clickSignUpLink() {
         clickDynamicElement(signUpLink);
     }
 
+    @Step("Check if general login error is displayed")
     public boolean hasGeneralError() {
         return generalErrorMessage.isDisplayed();
     }
 
+    @Step("Get general login error text")
     public String getGeneralErrorText() {
         if (!hasGeneralError()) {
             return "";

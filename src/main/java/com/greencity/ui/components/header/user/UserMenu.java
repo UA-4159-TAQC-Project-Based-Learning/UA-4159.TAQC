@@ -2,6 +2,7 @@ package com.greencity.ui.components.header.user;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.homepage.HomePage;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class UserMenu extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Get logged-in user name via the header")
     public String getUserFirstAndLastNameAsText() {
         return userFirstAndLastName.getText().trim();
     }
@@ -38,6 +40,7 @@ public class UserMenu extends BaseComponent {
         clickDynamicElement(trigger);
     }
 
+    @Step("Sign out via the header")
     public HomePage signOut() {
         openProfileDropdown();
         clickDynamicElement(signOut);
