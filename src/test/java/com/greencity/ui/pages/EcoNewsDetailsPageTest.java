@@ -17,33 +17,25 @@ public class EcoNewsDetailsPageTest extends BaseTestRunner {
 
         SoftAssert softAssert = new SoftAssert();
 
-        Allure.step("Open Eco News page");
-        homePage.getEcoNewsLink().click();
+        homePage.getHeader().clickEcoNewsNavItem();
 
-        Allure.step("Scroll to the middle of the page");
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
         ecoNewsPage.scrollToMiddlePage();
 
-        Allure.step("Find news card by title: New Eco-Event Announced for Weekend");
         EcoNewsTableCardComponent tableCard =
-                ecoNewsPage.getOneTableCardByTitle("New Eco-Event Announced for Weekend");
+                ecoNewsPage.getOneTableCardByTitle("Test One Tag 1764861506356");
 
-        Allure.step("Open the news details page");
         EcoNewsDetailsPage detailsPage = tableCard.goToDetails();
 
-        Allure.step("Validate title");
         softAssert.assertEquals(detailsPage.getTitle(),
-                "New Eco-Event Announced for Weekend");
+                "Test One Tag 1764861506356");
 
-        Allure.step("Validate author");
         softAssert.assertEquals(detailsPage.getAuthorName(),
-                "by Maryna Lobatiuk");
+                "by Liubomyr Halamaha");
 
-        Allure.step("Validate news text");
         softAssert.assertEquals(detailsPage.getNewsTextElement().getText(),
-                "A community garden opened this week, inviting residents to grow organic vegetables and learn about sustainable land use.");
+                "Test content with 20 chars");
 
-        Allure.step("Assert all collected checks");
         softAssert.assertAll();
     }
 }

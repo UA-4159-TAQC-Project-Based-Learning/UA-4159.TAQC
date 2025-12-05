@@ -2,6 +2,7 @@ package com.greencity.ui.pages;
 
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.components.eco_news.NewsTagsInfoComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -95,6 +96,7 @@ public class EcoNewsDetailsPage extends BasePage {
         return new EcoNewsPage(driver);
     }
 
+    @Step("Validate author")
     public String getAuthorName() {
         return authorInfoElement.getText();
     }
@@ -107,6 +109,7 @@ public class EcoNewsDetailsPage extends BasePage {
         }
     }
 
+    @Step("Validate title")
     public String getTitle() {
         return titleElement.getText();
     }
