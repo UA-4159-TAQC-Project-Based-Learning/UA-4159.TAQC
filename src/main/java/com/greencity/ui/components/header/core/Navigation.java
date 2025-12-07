@@ -1,6 +1,7 @@
 package com.greencity.ui.components.header.core;
 
 import com.greencity.ui.components.BaseComponent;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,4 +38,35 @@ public class Navigation extends BaseComponent {
         super(driver, rootElement);
     }
 
+    // ---------- CLICK METHODS ----------
+
+    @Step("Click on Eco News link")
+    public void clickEcoNews() {
+        ecoNewsLink.click();
+    }
+
+    @Step("Click on Events link")
+    public void clickEvents() {
+        eventsLink.click();
+    }
+
+    @Step("Click on Places link")
+    public void clickPlaces() {
+        placesLink.click();
+    }
+
+    @Step("Click on About Us link")
+    public void clickAboutUs() {
+        aboutUsLink.click();
+    }
+
+    @Step("Click on My Spaces link")
+    public void clickMySpaces() {
+        mySpacesLink.click();
+    }
+
+    @Step("Click on UBS Courier link")
+    public void clickUbsCourier() {
+        ubsCourierLink.click();
+    }
 }
