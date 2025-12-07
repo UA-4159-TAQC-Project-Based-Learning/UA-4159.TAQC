@@ -38,8 +38,6 @@ public class Navigation extends BaseComponent {
         super(driver, rootElement);
     }
 
-    // ---------- CLICK METHODS ----------
-
     @Step("Click on Eco News link")
     public void clickEcoNews() {
         ecoNewsLink.click();
