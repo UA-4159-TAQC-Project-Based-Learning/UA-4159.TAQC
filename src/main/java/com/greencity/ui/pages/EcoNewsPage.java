@@ -54,6 +54,15 @@ public class EcoNewsPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), ' Edit news ')]")
     private WebElement editNewsLink;
 
+    @Getter
+    @FindBy(css = "app-change-view-button span[aria-label='table view']")
+    private WebElement changeViewToCard;
+
+    @Getter
+    @FindBy(css = "app-change-view-button span[aria-label='list view']")
+    private WebElement changeViewToList;
+
+
     @FindBy(css = ".eco-news_list-view-wrp")
     private List<WebElement> ecoNewsListRoots;
 
@@ -84,6 +93,18 @@ public class EcoNewsPage extends BasePage {
         bookmarkButton.click();
         return this;
     }
+
+    @Step("Switch to News List view ")
+    public EcoNewsPage switchNewsPageToListView() {
+        WebElement changeViewToList = getChangeViewToList();
+
+        if (changeViewToList.isDisplayed() && changeViewToList.isEnabled())
+            changeViewToList.click();
+
+        return this;
+    }
+
+
 
     @Step("Get list of all list view news cards")
     public List<EcoNewsListCardComponent> getAllCards() {
