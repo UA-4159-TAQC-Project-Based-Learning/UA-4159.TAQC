@@ -28,7 +28,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
     @Issue("U4T-21")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Open Eco News, scroll, find a news card, and validate title, author, and text")
+    @Description("Create Eco News, verify preview is opened. Verifying title, author and date.")
     @Test(description = "Basic Preview Functionality")
     public void previewOpensSuccessfully() {
         EditEcoNewsPage editNewsPage = new EditEcoNewsPage(driver);
