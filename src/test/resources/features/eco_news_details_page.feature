@@ -8,7 +8,7 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
   Scenario: existing details page is loaded
     When user click on Eco News with title containing 'test title' in table
     Then Eco News details page is loaded
-    Then Eco News details title is populated
+    And Eco News details title is populated
     And Eco News details author is populated
     And Eco News details date is populated
     And Eco News details text is populated
