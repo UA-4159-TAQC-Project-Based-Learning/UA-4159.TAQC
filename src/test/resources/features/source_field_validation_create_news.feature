@@ -37,7 +37,6 @@ Feature: Source field validation on Create News page
       | https://.com               |
       | https://te st.com          |
       |  https://test.com          |
-      | https://te st.com          |
       | https://testnodot          |
       | https://-test.com          |
       | https://test-.com          |
