@@ -20,4 +20,9 @@
             <class name="com.greencity.cucumber.TestRunnerCucumber"></class>
         </classes>
     </test>
+    <test name="UITestsCucumber">
+        <classes>
+            <class name="com.greencity.cucumber.TestRunnerCucumber"></class>
+        </classes>
+    </test>
 </suite>

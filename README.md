@@ -103,3 +103,9 @@ To view test reports in Allure, run:
 ```
 allure serve target/allure-results
 ```
+
+### Run/Build Cucumber
+
+```maven
+mvn clean install -DskipTests
+```
