@@ -48,8 +48,6 @@ public class CreateNewsPreviewPage extends BasePage {
     }
 
     public boolean isPublishButtonPresent() {
-        return !driver.findElements(
-                By.cssSelector("form.submit-form button.primary-global-button")
-        ).isEmpty();
+        return publishButton.isDisplayed();
     }
 }
