@@ -4,6 +4,7 @@ import com.greencity.ui.pages.*;
 import com.greencity.ui.pages.ecoNewsPreviewPage.PreviewEcoNewsPage;
 import com.greencity.ui.testrunners.BaseTestRunner;
 import com.greencity.ui.testrunners.TestRunnerWithUser;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,7 +14,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-
+@Epic("Eco News")
+@Feature("Eco News Preview")
 public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
@@ -24,10 +26,13 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
         softAssert = new SoftAssert();
     }
 
-    @Test
+    @Issue("U4T-21")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Create Eco News, verify preview is opened. Verifying title, author and date.")
+    @Test(description = "Basic Preview Functionality")
     public void previewOpensSuccessfully() {
         EditEcoNewsPage editNewsPage = new EditEcoNewsPage(driver);
-        editNewsPage.getHeader().getNavigation().getEcoNewsLink().click();
+        editNewsPage.getHeader().getNavigation().clickEcoNews();
         editNewsPage.waitForPageToLoad(10000);
 
         EcoNewsPage newsPage = new EcoNewsPage(driver);
@@ -39,9 +44,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
         createNewsPage.getTitleInput().typeText(title);
-        WebElement qlEditor = createNewsPage.getQlEditor();
-        qlEditor.click();
-        qlEditor.sendKeys(content);
+        createNewsPage.enterTextIntoQLEditor(content);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
         createNewsPage.waitForPageToLoad(10000);
 
