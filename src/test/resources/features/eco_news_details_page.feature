@@ -29,7 +29,7 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
     When user clicks delete comment with text 'test'
     Then popup appears
     When user click button to delete comment
-    Then popup dissappears
+    Then popup disappears
     And comment 'test' is not displayed
 
 
