@@ -28,7 +28,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
     @BeforeMethod
     public void beforeMethod() {
         softAssert = new SoftAssert();
-        LocalTime localTime = LocalTime.now(); // Get current date for validation
+        LocalTime localTime = LocalTime.now(); // Get current time for validation
         testTitle = "test title " + localTime;
         testContent = "test content " + localTime;
     }
