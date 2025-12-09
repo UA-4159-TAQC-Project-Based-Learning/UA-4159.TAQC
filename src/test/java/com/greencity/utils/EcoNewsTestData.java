@@ -24,8 +24,16 @@ public class EcoNewsTestData {
         };
     }
 
-    @DataProvider(name = "navItemsForCancelTest")
-    public static Object[][] navItemsForCancelTest() {
+    @DataProvider(name = "navItemsForCancelTestWithRedirect")
+    public static Object[][] navItemsForCancelTestWithRedirect() {
+        return new Object[][]{
+                {NavItem.ECO_NEWS, "/#/greenCity/news"},
+                {NavItem.LOGO, "/#/greenCity"}
+        };
+    }
+
+    @DataProvider(name = "navItemsForCancelTestWithoutRedirect")
+    public static Object[][] navItemsForCancelTestWithoutRedirect() {
         return new Object[][]{
                 {NavItem.ECO_NEWS},
                 {NavItem.LOGO}

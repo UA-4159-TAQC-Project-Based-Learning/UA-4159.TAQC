@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @Epic("Eco News")
-@Feature("Eco news Preview")
+@Feature("Eco News Preview")
 public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
@@ -46,8 +46,8 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
-        createNewsPage.getTitleInput().typeText(testTitle);
-        createNewsPage.EnterTextIntoQLEditor(testContent);
+        createNewsPage.getTitleInput().typeText(title);
+        createNewsPage.enterTextIntoQLEditor(content);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
 
         CreateNewsPreviewPage previewPage = new CreateNewsPreviewPage(driver);
