@@ -16,6 +16,13 @@
 
             <class name="com.greencity.ui.CreateNewsTitleValidationTest"/>
             <class name="com.greencity.ui.FooterTest"/>
+            
+            <class name="com.greencity.cucumber.TestRunnerCucumber"/>
+        </classes>
+    </test>
+    <test name="UITestsCucumber">
+        <classes>
+            <class name="com.greencity.cucumber.TestRunnerCucumber"></class>
         </classes>
     </test>
 </suite>

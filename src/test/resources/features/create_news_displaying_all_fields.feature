@@ -4,7 +4,8 @@ Feature: Displaying All Fields on Create News Page
   So that I can understand what information is needed to publish news
 
   Background:
-    Given the user opens the "Create News" page
+    Given the user is logged in the system
+    And the user opens the 'Create News' page
     And the page is fully loaded
 
   Scenario: Title block should be displayed
