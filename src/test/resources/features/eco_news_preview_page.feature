@@ -11,7 +11,7 @@ Feature: Preview News Before Publishing
   Scenario: User previews news content
     When the user navigates to Eco News and clicks "Create news"
     And the user enters "Test Preview" into "Title" field
-    And the user click "News" tag
+    And the user clicks "News" tag
     And the user enters "This is a test preview content" into "Content" field
     And the user clicks the "Preview" button
     Then the preview mode should open

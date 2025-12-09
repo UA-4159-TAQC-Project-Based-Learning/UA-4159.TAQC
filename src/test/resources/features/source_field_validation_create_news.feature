@@ -14,11 +14,11 @@ Feature: Source field validation on Create News page
     And the Source field border color is "rgb(255, 0, 0)"
 
     Examples: invalidUrls
-      | invalidUrl           |
-      | invalid-url          |
-      | ht!tp:/bad           |
-      | 12345                |
-      | http:/missing-slash  |
+      | invalidUrl          |
+      | invalid-url         |
+      | ht!tp:/bad          |
+      | 12345               |
+      | http:/missing-slash |
 
   @news @source_validation @ui
   Scenario Outline: Publish button is disabled for invalid Source URLs
@@ -26,25 +26,24 @@ Feature: Source field validation on Create News page
     Then the Publish button is disabled
 
     Examples: invalidUrlsForSubmit
-      | invalidUrl                 |
-      | invalid-url                |
-      | ht!tp:/bad                 |
-      | 12345                      |
-      | http:/missing-slash        |
-      | http://                    |
-      | https://                   |
-      | http:/m.                   |
-      | https://.com               |
-      | https://te st.com          |
-      |  https://test.com          |
-      | https://te st.com          |
-      | https://testnodot          |
-      | https://-test.com          |
-      | https://test-.com          |
-      | https://test..com          |
-      | https:///test.com          |
-      | https://tes$t.com          |
-      | https://test.com/path space|
+      | invalidUrl                  |
+      | invalid-url                 |
+      | ht!tp:/bad                  |
+      | 12345                       |
+      | http:/missing-slash         |
+      | http://                     |
+      | https://                    |
+      | http:/m.                    |
+      | https://.com                |
+      | https://te st.com           |
+      | https://test.com            |
+      | https://testnodot           |
+      | https://-test.com           |
+      | https://test-.com           |
+      | https://test..com           |
+      | https:///test.com           |
+      | https://tes$t.com           |
+      | https://test.com/path space |
 
   @news @source_validation @ui
   Scenario Outline: News is published when Source is a valid URL
@@ -54,9 +53,9 @@ Feature: Source field validation on Create News page
     Then the news should be published and visible in the news list with the title I entered
 
     Examples: validSources
-      | validUrl             |
-      | http://test1.com     |
-      | https://test2.com    |
+      | validUrl          |
+      | http://test1.com  |
+      | https://test2.com |
 
   @news @source_validation @ui
   Scenario: News is published when Source field is empty
