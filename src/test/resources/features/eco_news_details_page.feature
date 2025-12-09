@@ -19,7 +19,7 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
   Scenario: Eco News details add comment
     When user click on Eco News with title containing 'test title' in table
     Then Eco News details page is loaded
-    When user scrols to comments on Eco News page
+    When user scrolls to comments on Eco News page
     And user click on comment field
     And user entered text 'test'
     And user click button Comment
