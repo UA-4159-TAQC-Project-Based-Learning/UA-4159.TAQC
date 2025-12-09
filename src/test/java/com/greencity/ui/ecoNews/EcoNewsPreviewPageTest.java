@@ -46,8 +46,8 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
-        createNewsPage.getTitleInput().typeText(title);
-        createNewsPage.enterTextIntoQLEditor(content);
+        createNewsPage.getTitleInput().typeText(testTitle);
+        createNewsPage.enterTextIntoQLEditor(testContent);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
 
         CreateNewsPreviewPage previewPage = new CreateNewsPreviewPage(driver);
@@ -86,7 +86,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
         createNewsPage.getTitleInput().typeText(testTitle);
-        createNewsPage.EnterTextIntoQLEditor(testContent);
+        createNewsPage.enterTextIntoQLEditor(testContent);
         createNewsPage.selectTag("News");
 
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
