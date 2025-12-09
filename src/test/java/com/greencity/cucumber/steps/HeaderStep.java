@@ -18,7 +18,7 @@ public class HeaderStep {
     }
 
     @Given("the user is logged in the system")
-    public void the_user_opens_the_create_news_page() {
+    public void the_user_is_logged_in_the_system() {
         new HomePage(hooks.getDriver())
                 .getHeader()
                 .clickSignIn()
