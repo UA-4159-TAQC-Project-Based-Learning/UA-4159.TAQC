@@ -115,6 +115,14 @@ public class CreateNewsPage extends BasePage {
         }
         return this;
     }
+
+    @Step("Entering text {content} into QL editor.")
+    public CreateNewsPage enterTextIntoQLEditor(String content) {
+        qlEditor.click();
+        qlEditor.sendKeys(content);
+        return this;
+    }
+
     @Step("Select tag: {tagName}")
     public CreateNewsPage selectTag(String tagName) {
         newsTagsComponent.selectTag(tagName);
