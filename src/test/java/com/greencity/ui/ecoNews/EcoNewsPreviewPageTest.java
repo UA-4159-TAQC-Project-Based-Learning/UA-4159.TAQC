@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @Epic("Eco News")
-@Feature("Eco news Preview")
+@Feature("Eco News Preview")
 public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
