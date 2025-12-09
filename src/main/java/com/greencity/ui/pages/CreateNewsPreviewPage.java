@@ -1,6 +1,7 @@
 package com.greencity.ui.pages;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,37 +13,41 @@ public class CreateNewsPreviewPage extends BasePage {
 
     @Getter
     @FindBy(css = ".back-button .button-link")
-    private WebElement BackLink;
+    private WebElement backLink;
 
     @Getter
     @FindBy(css = "form.submit-form button.primary-global-button")
-    private WebElement PublishButton;
+    private WebElement publishButton;
 
     @Getter
     @FindBy (css = ".news-content .news-title-container .news-title")
-    private WebElement NewsTitle;
+    private WebElement newsTitle;
 
     @Getter
     @FindBy (css = ".tags .tags-item")
-    private List<WebElement> Tags;
+    private List<WebElement> tags;
 
     @Getter
     @FindBy (css = ".news-content .news-info-date")
-    private WebElement Date;
+    private WebElement date;
 
     @Getter
     @FindBy (css = ".news-content .news-info-author")
-    private WebElement Author;
+    private WebElement author;
 
     @Getter
     @FindBy (css = ".news-content .news-image")
-    private WebElement Image;
+    private WebElement image;
 
     @Getter
     @FindBy (css = ".news-content .news-text-container .news-text")
-    private WebElement TextContent;
+    private WebElement textContent;
 
     public CreateNewsPreviewPage(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean isPublishButtonPresent() {
+        return publishButton.isDisplayed();
     }
 }
