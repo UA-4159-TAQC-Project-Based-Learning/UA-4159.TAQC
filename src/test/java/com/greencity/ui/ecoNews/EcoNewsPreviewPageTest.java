@@ -44,7 +44,7 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
         CreateNewsPage createNewsPage = new CreateNewsPage(driver);
         createNewsPage.getTitleInput().typeText(title);
-        createNewsPage.EnterTextIntoQLEditor(content);
+        createNewsPage.enterTextIntoQLEditor(content);
         createNewsPage.getCreateNewsButtonsComponent().getPreviewButton().click();
         createNewsPage.waitForPageToLoad(10000);
 
