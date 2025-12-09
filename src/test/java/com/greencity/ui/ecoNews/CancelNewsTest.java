@@ -234,7 +234,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
     }
 
     @Test(
-            dataProvider = "navItemsForCancelTest",
+            dataProvider = "navItemsForCancelTestWithoutRedirect",
             dataProviderClass = EcoNewsTestData.class
     )
     @Issue("U4T-40")
@@ -265,12 +265,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
     }
 
     @Test(
-            dataProvider = "navItemsForCancelTest",
+            dataProvider = "navItemsForCancelTestWithRedirect",
             dataProviderClass = EcoNewsTestData.class
     )
     @Issue("U4T-41")
     @Description("Verify that navigating via header from Create News with an empty form does not show a popup and redirects.")
-    public void headerNav_emptyForm_shouldNavigateWithoutPopup(NavItem item) {
+    public void headerNav_emptyForm_shouldNavigateWithoutPopup(NavItem item, String expectedPath) {
         String initialUrl = driver.getCurrentUrl();
         Assert.assertNotNull(initialUrl);
         softAssert.assertTrue(
@@ -286,21 +286,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 "User should not stay on Create News page after clicking header with empty form."
         );
 
-        switch (item) {
-            case ECO_NEWS -> {
-                softAssert.assertTrue(
-                        currentUrl.contains("/#/greenCity/news"),
-                        "Clicking ECO_NEWS with empty form should navigate to Eco News list page. Actual URL: " + currentUrl
-                );
-            }
-            case LOGO -> {
-                softAssert.assertEquals(
-                        currentUrl,
-                        testValueProvider.getBaseUIUrl(),
-                        "Clicking logo with empty form should navigate to Home page."
-                );
-            }
-        }
+        softAssert.assertTrue(currentUrl.contains(expectedPath));
     }
 
     @Test
