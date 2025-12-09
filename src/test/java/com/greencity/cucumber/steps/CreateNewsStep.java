@@ -66,6 +66,5 @@ public class CreateNewsStep {
 
 
 
-//    And the Title input field should be visible
 
 }
