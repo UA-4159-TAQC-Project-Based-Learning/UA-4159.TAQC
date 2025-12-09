@@ -45,7 +45,7 @@ public class CreateNewsStep {
                 .getFieldInfoElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Title block should be not visible");
+                "Title field info should be visible");
     }
 
     @Then("the Title input field should be visible")
