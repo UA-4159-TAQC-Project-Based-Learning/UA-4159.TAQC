@@ -117,7 +117,7 @@ public class CreateNewsPage extends BasePage {
     }
 
     @Step("Entering text {content} into QL editor.")
-    public CreateNewsPage EnterTextIntoQLEditor(String content) {
+    public CreateNewsPage enterTextIntoQLEditor(String content) {
         qlEditor.click();
         qlEditor.sendKeys(content);
         return this;
