@@ -22,8 +22,8 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
 
 
     private SoftAssert softAssert;
-    String testTitle = "test title 1234567890";
-    String testContent = "test content 1234567890";
+    private String testTitle = "test title 1234567890";
+    private String testContent = "test content 1234567890";
 
     @BeforeMethod
     public void beforeMethod() {
