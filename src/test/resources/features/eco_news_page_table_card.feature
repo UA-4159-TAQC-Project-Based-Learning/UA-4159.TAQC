@@ -11,7 +11,7 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
     And Eco News table card title is populated
     And Eco News table card author is populated
     And Eco News table card date is populated
-    And Eco News table card text is populatedf
+    And Eco News table card text is populated
     And comment counter is populated
     And likes counter is populated
 
