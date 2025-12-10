@@ -1,0 +1,30 @@
+Feature: Create News - Image Upload Validation
+  As a logged-in user
+  I want to upload an image when creating news
+  So that only valid PNG/JPG files up to 10MB are accepted
+
+  Background:
+    Given the user is logged in the system
+    And the user opens the 'Create News' page
+
+  Scenario: Successful upload of valid PNG image (size: 5MB)
+    When the user uploads a PNG image file of size "5MB"
+    Then the image should be uploaded successfully
+    And no validation errors should be displayed
+    And the image preview should be visible
+
+  Scenario: Successful upload of valid JPEG image (size: 5MB)
+    When the user uploads a JPEG image file of size "5MB"
+    Then the image should be uploaded successfully
+    And no validation errors should be displayed
+    And the image preview should be visible
+
+  Scenario: Warning when uploading GIF image (size: 1MB)
+    When the user uploads a GIF image file of size "1MB"
+    Then a validation error should be displayed with the message "Upload only PNG or JPEG. File size must be less than 10MB"
+    And the upload image field should be highlighted in red
+
+  Scenario: Warning when uploading JPEG image larger than 10MB
+    When the user uploads a JPEG image file of size "15MB"
+    Then a validation error should be displayed with the message "Upload only PNG or JPEG. File size must be less than 10MB"
+    And the upload image field should be highlighted in red
