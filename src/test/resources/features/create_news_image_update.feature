@@ -8,16 +8,16 @@ Feature: Create News - Image Upload Validation
     And the user opens the 'Create News' page
 
   Scenario: Successful upload of valid PNG image (size: 5MB)
-    When the user uploads a PNG image file of size "5MB"
+    When the user uploads a image file "<file_name>" of size "5MB"
     Then the image should be uploaded successfully
     And no validation errors should be displayed
     And the image preview should be visible
 
-  Scenario: Successful upload of valid JPEG image (size: 5MB)
-    When the user uploads a JPEG image file of size "5MB"
-    Then the image should be uploaded successfully
-    And no validation errors should be displayed
-    And the image preview should be visible
+    Examples:
+      | file_name       |
+      | imageJPG5MB.jpg |
+      | imagePNG5MB.png |
+
 
   Scenario: Warning when uploading GIF image (size: 1MB)
     When the user uploads a GIF image file of size "1MB"
