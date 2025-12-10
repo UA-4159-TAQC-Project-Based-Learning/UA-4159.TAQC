@@ -170,4 +170,6 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 "News title should match the one entered");
         softAssert.assertAll();
     }
+
+
 }

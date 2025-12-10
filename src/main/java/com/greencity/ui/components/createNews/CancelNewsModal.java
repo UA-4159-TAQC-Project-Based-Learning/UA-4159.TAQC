@@ -21,6 +21,10 @@ public class CancelNewsModal extends BaseComponent {
     private WebElement cancelNewsChangesModalTitle;
 
     @Getter
+    @FindBy(xpath = ".//div[contains(@class, 'warning-subtitle')]")
+    private WebElement cancelNewsChangesModalSubTitle;
+
+    @Getter
     @FindBy(xpath = ".//button[text() = ' Continue editing ']")
     private WebElement continueNewsEditingModalButton;
 
@@ -111,4 +115,112 @@ public class CancelNewsModal extends BaseComponent {
         clickDynamicElement(backdrop);
         waitForModalClosed();
     }
+
+    @Step("Get Cancel Confirmation Dialog title text")
+    public String getModalTitleText() {
+        waitUntilElementVisible(cancelNewsChangesModalTitle);
+        try {
+            return cancelNewsChangesModalTitle.getText().trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    @Step("Get Cancel Confirmation Dialog subtitle text")
+    public String getModalSubtitleText() {
+        waitUntilElementVisible(cancelNewsChangesModalTitle);
+        try {
+            return cancelNewsChangesModalSubTitle.getText().trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    @Step("Are all expected dialog buttons visible")
+    public boolean areButtonsVisible() {
+        waitForModalVisible();
+        boolean continueVisible = false;
+        boolean yesVisible = false;
+        boolean closeVisible = false;
+
+        try {
+            waitUntilElementVisible(continueNewsEditingModalButton);
+            continueVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(continueNewsEditingModalButtonAlternative);
+                continueVisible = true;
+            } catch (Exception ignored2) {
+            }
+        }
+
+        try {
+            waitUntilElementVisible(yesCancelChangesModalButton);
+            yesVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(yesCancelChangesModalButtonAlternative);
+                yesVisible = true;
+            } catch (Exception ignored2) {
+            }
+        }
+
+        try {
+            waitUntilElementVisible(crossIconForCloseChangesModal);
+            closeVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(crossIconForCloseChangesModalAlternative);
+                closeVisible = true;
+            } catch (Exception ignored2) {
+            }
+        }
+
+        return continueVisible && yesVisible && closeVisible;
+    }
+
+    @Step("Get missing dialog controls")
+    public java.util.List<String> getMissingControls() {
+        waitForModalVisible();
+        java.util.List<String> missing = new java.util.ArrayList<>();
+
+        boolean contVisible = false;
+        try {
+            waitUntilElementVisible(continueNewsEditingModalButton);
+            contVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(continueNewsEditingModalButtonAlternative);
+                contVisible = true;
+            } catch (Exception ignored2) {}
+        }
+        if (!contVisible) missing.add("Continue editing");
+
+        boolean yesVisible = false;
+        try {
+            waitUntilElementVisible(yesCancelChangesModalButton);
+            yesVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(yesCancelChangesModalButtonAlternative);
+                yesVisible = true;
+            } catch (Exception ignored2) {}
+        }
+        if (!yesVisible) missing.add("Yes, cancel");
+
+        boolean closeVisible = false;
+        try {
+            waitUntilElementVisible(crossIconForCloseChangesModal);
+            closeVisible = true;
+        } catch (Exception ignored) {
+            try {
+                waitUntilElementVisible(crossIconForCloseChangesModalAlternative);
+                closeVisible = true;
+            } catch (Exception ignored2) {}
+        }
+        if (!closeVisible) missing.add("Close icon");
+
+        return missing;
+    }
+
 }
