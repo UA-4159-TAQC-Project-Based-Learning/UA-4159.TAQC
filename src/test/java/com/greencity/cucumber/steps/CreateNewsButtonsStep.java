@@ -14,12 +14,10 @@ public class CreateNewsButtonsStep {
 
     public CreateNewsButtonsStep(Hooks hooks) {this.hooks = hooks;}
 
-    @Given("the user is logged in the system")
-    @And("the user opens the 'Create News' page")
-    @And("all required fields for the news draft are filled with valid data")
+
+    @Given("all required fields for the news draft are filled with valid data")
     public void all_required_fields_for_the_news_draft_are_filled_with_valid_data() {
         CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
-        createNewsPage.waitUntilPageLouder();
         MandatoryFieldsNewsData newsData = hooks.getTestValueProvider().getValidMandatoryFieldsNewsData();
 
         createNewsPage.fillMandatoryFields(

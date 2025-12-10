@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CancelNewsModal extends BaseComponent {
 
@@ -180,9 +182,9 @@ public class CancelNewsModal extends BaseComponent {
     }
 
     @Step("Get missing dialog controls")
-    public java.util.List<String> getMissingControls() {
+    public List<String> getMissingControls() {
         waitForModalVisible();
-        java.util.List<String> missing = new java.util.ArrayList<>();
+        List<String> missing = new ArrayList<>();
 
         boolean contVisible = false;
         try {
