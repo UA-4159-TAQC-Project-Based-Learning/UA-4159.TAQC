@@ -26,7 +26,7 @@ Feature: Create News - Tag Selection
     And the published news should not contain tags: 'Initiatives', 'Ads'
 
   Scenario: Selecting more than three tags is not allowed
-    When the user selects the tags: 'News','Events', 'Education', 'Initiatives', 'Ads'
+    When the user selects the tags: 'News', 'Events', 'Education', 'Initiatives', 'Ads'
     Then only 3 tags should remain selected: 'News', 'Events', 'Education'
     And the selected tags should not include: 'Initiatives', 'Ads'
 
