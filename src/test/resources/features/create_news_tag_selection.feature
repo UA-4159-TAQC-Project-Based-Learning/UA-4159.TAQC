@@ -5,7 +5,7 @@ Feature: Create News - Tag Selection
 
   Background:
     Given the user is logged in the system
-    And the user opens the 'Create News' page
+    And the user opens the "Create News" page
 
   Scenario Outline: Publish news with a valid number of selected tags
     When the user selects the tags: "<selected_tags>"
