@@ -1,5 +1,6 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.cucumber.java.After;
@@ -15,6 +16,9 @@ import org.testng.asserts.SoftAssert;
 import java.time.Duration;
 
 public class Hooks {
+
+    public HomePage homePage;
+    public CreateNewsPage createNewsPage;
 
     @Getter
     private final TestValueProvider testValueProvider = new TestValueProvider();
