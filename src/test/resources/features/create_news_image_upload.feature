@@ -5,7 +5,7 @@ Feature: Create News - Image Upload Validation
 
   Background:
     Given the user is logged in the system
-    And the user opens the "Create News" page
+    And the user opens the 'Create News' page
 
   Scenario Outline: Successful upload of valid image
     When the user uploads the image file "<file_name>"
