@@ -137,7 +137,7 @@ public class CreateNewsStep {
 
     @Then("the Author field should not be empty")
     public void the_author_field_should_not_be_empty() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+        hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
                         .getAuthorOfNews().getText().trim().isEmpty(),
                 "the Author field is empty");
     }
