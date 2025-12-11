@@ -9,6 +9,7 @@ Feature: Create News - Image Upload Validation
 
   Scenario Outline: Successful upload of valid image
     When the user uploads the image file "<file_name>"
+    And the user confirms image upload
     Then the image should be uploaded successfully
     And no validation errors should be displayed
     And the image preview should be visible
@@ -26,5 +27,5 @@ Feature: Create News - Image Upload Validation
 
     Examples:
       | file_name        | error_message |
-      | imageGIF1MB.gif  | Upload only PNG or JPEG. File size must be less than 10MB |
-      | imageJPG15MB.jpg | Upload only PNG or JPEG. File size must be less than 10MB |
+      | imageGIF1MB.gif  | Upload only PNG or JPG. File size must be less than 10MB |
+      | imageJPG15MB.jpg | Upload only PNG or JPG. File size must be less than 10MB |
