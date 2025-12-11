@@ -16,10 +16,10 @@ Feature: Displaying All Fields on Create News Page
 
   Scenario: Tags block should be displayed and tags can be selected
     Then the Tags block should be visible
-    When the user selects the "News" tag
-    Then the "News" tag should be selected
-    When the user unselects the "News" tag
-    Then the "News" tag should not be selected
+    When the user selects the 'News' tag
+    Then the 'News' tag should be selected
+    When the user unselects the 'News' tag
+    Then the 'News' tag should not be selected
 
   Scenario: Image Add block should be displayed
     Then the Add Image block should be visible
@@ -27,7 +27,7 @@ Feature: Displaying All Fields on Create News Page
 
   Scenario: Content Editor should be displayed
     Then the Content Editor should be visible
-    And the Content Editor field info should contain "63 206"
+    And the Content Editor field info should contain '63 206'
 
   Scenario: Author of news should be filled
     Then the Author field should not be empty
@@ -38,17 +38,17 @@ Feature: Displaying All Fields on Create News Page
     Then the Date field should be visible
     And the Date field should not be empty
     And the Date field should not be editable
-    And the Date field should match the format "MMMM d, yyyy"
+    And the Date field should match the format 'MMMM d, yyyy'
 
   Scenario: Source block should be displayed
     Then the Source block should be visible
     And the Source label should be visible
     And the Source field info should be visible
     And the Source input field should be visible
-    And the Source field info should contain "http(s)://"
+    And the Source field info should contain 'http(s)://'
 
-  Scenario: Cancel, Preview and Publish buttons should be displayed
+  Scenario: 'Cancel', 'Preview' and 'Publish' buttons should be displayed
     Then the buttons block should be visible
-    And the Cancel button should be visible
-    And the Preview button should be visible
-    And the Publish button should be visible
+    And the 'Cancel' button should be visible
+    And the 'Preview' button should be visible
+    And the 'Publish' button should be visible
