@@ -187,7 +187,7 @@ public class CreateNewsStep {
         boolean isValidFormat = new CreateNewsPage(hooks.getDriver())
                 .getActualDate().getText().trim()
                 .matches("^(^[A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
-        hooks.getSoftAssert().assertFalse(isValidFormat,
+        hooks.getSoftAssert().assertTrue(isValidFormat,
                 "Date format should match 'MMMM d, yyyy'");
     }
 
