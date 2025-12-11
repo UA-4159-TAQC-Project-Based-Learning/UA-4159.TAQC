@@ -34,4 +34,15 @@ public class HeaderStep {
                     return freshHeader.isLoggedIn();
                 });
     }
+
+    @Given("the user clicks on {string} in the header")
+    public void the_user_clicks_on_in_the_header(String menuItem) {
+        if ("Eco News".equalsIgnoreCase(menuItem)) {
+            new HomePage(hooks.getDriver())
+                    .getEcoNewsLink()
+                    .click();
+        } else {
+            throw new IllegalArgumentException(menuItem + " is not supported");
+        }
+    }
 }

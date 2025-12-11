@@ -49,4 +49,11 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         return new EcoNewsPage(driver);
     }
 
+    @Step("Click 'Cancel' news button")
+    public CancelNewsModal clickCancelButton() {
+        clickDynamicElement(cancelButton);
+        waitUntilPageLouder();
+        return new CancelNewsModal(driver);
+    }
+
 }

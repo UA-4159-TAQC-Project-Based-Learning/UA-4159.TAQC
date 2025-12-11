@@ -1,7 +1,7 @@
 Feature: GreenCity Eco News DetailsPage Verification for logged in user
 
   Background:
-    Given User is logged in into the system
+    Given the user is logged in the system
     And the user clicks on 'Eco News' in the header
     Then the Eco News page is loaded
 

@@ -84,12 +84,14 @@ public class CreateNewsPage extends BasePage {
         return modal;
     }
 
+    @Step("Enter title and Content")
     public CreateNewsPage enterTitleAndContent(String title, String content) {
         titleInput.typeText(title);
         getTextEditor().typeText(content);
         return this;
     }
 
+    @Step("Open cancel news dialog modal")
     public CancelNewsModal openCancelModal() {
         createNewsButtonsComponent.getCancelButton().click();
         return getCancelNewsModal();
