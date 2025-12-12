@@ -10,9 +10,9 @@ Feature: Displaying All Fields on Create News Page
 
   Scenario: Title block should be displayed
     Then the Title block should be visible
-    And the Title label should be visible
-    And the Title field info should be visible
-    And the Title input field should be visible
+    Then the Title label should be visible
+    Then the Title field info should be visible
+    Then the Title input field should be visible
 
   Scenario: Tags block should be displayed and tags can be selected
     Then the Tags block should be visible
@@ -26,7 +26,7 @@ Feature: Displaying All Fields on Create News Page
     And the Image dropzone should be visible
 
   Scenario: Content Editor should be displayed
-    Then the Content Editor should be visible
+    Then the Content Editor block should be visible
     And the Content Editor field info should contain '63 206'
 
 

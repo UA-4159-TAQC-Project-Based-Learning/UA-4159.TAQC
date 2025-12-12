@@ -4,6 +4,7 @@ import com.greencity.ui.pages.CreateNewsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
 
 public class CreateNewsStep {
     private Hooks hooks;
@@ -22,49 +23,111 @@ public class CreateNewsStep {
         new CreateNewsPage(hooks.getDriver()).waitUntilPageLouder();
     }
 
-    @Then("the Title block should be visible")
-    public void the_title_block_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getTitleInputRoot()
-                        .isDisplayed(),
-                "Title block is not visible");
-    }
-    @Then("the Title label should be visible")
-    public void the_title_label_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getTitleInput()
-                .getLabelElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Title label is not visible");
+    @Then("^the (.+) block should be visible$")
+    public void the_block_should_be_visible(String blockName) {
+
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+        WebElement root = resolveBlockRoot(page, blockName);
+        hooks.getSoftAssert().assertTrue(root != null && root.isDisplayed(),
+                blockName + " block is not visible");
     }
 
-    @Then("the Title field info should be visible")
-    public void the_title_field_info_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getTitleInput()
-                .getFieldInfoElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Title field info is not visible");
+    private WebElement resolveBlockRoot(CreateNewsPage page, String blockName) {
+        switch (blockName.toLowerCase()) {
+            case "title":
+                return page.getTitleInputRoot();
+            case "tags":
+                return page.getNewsTagsComponentRoot();
+            case "add image":
+                return page.getAddImageComponentRoot();
+            case "content editor":
+                return page.getContentEditorRoot();
+            case "buttons":
+                return page.getSubmitButtonsRoot();
+            case "source":
+                return page.getSourceInputRoot();
+            default:
+                hooks.getSoftAssert().fail("Unknown block: " + blockName);
+                return null;
+        }
     }
 
-    @Then("the Title input field should be visible")
-    public void the_title_input_field_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getTitleInput()
-                .getFieldElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Title input field is not visible");
+
+    @Then("^the (.+) label should be visible$")
+    public void the_label_should_be_visible(String blockName) {
+
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+        WebElement element = resolveRootBlockForLabel(page, blockName);
+        hooks.getSoftAssert().assertTrue(element != null &&
+                        element.isDisplayed(),
+                blockName + " label is not visible");
     }
 
-    @Then("the Tags block should be visible")
-    public void the_tags_block_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getNewsTagsComponentRoot().isDisplayed(),
-                "The tags block is not visible");
+    private WebElement resolveRootBlockForLabel(CreateNewsPage page, String blockName) {
+        switch (blockName.toLowerCase()) {
+            case "title":
+                return page.getTitleInput().getLabelElement();
+            case "source":
+                return page.getSourceInput().getLabelElement();
+            default:
+                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                return null;
+        }
     }
+
+    @Then("^the (.+) field info should be visible$")
+    public void the_field_info_should_be_visible(String blockName) {
+
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+        WebElement element = resolveRootBlockForFieldInfo(page, blockName);
+        hooks.getSoftAssert().assertTrue(element != null &&
+                        element.isDisplayed(),
+                blockName + " field info is not visible");
+    }
+
+    private WebElement resolveRootBlockForFieldInfo(CreateNewsPage page, String blockName) {
+        switch (blockName.toLowerCase()) {
+            case "title":
+                return page.getTitleInput().getFieldInfoElement();
+            case "source":
+                return page.getSourceInput().getFieldInfoElement();
+            default:
+                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                return null;
+        }
+    }
+
+    @Then("^the (.+) input field should be visible$")
+    public void the_input_field_should_be_visible(String blockName) {
+
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+        WebElement element = resolveRootBlockForInputField(page, blockName);
+        hooks.getSoftAssert().assertTrue(element != null &&
+                        element.isDisplayed(),
+                blockName + " input field is not visible");
+    }
+
+    private WebElement resolveRootBlockForInputField(CreateNewsPage page, String blockName) {
+        switch (blockName.toLowerCase()) {
+            case "title":
+                return page.getTitleInput().getFieldElement();
+            case "source":
+                return page.getSourceInput().getFieldElement();
+            default:
+                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                return null;
+        }
+    }
+
+//    @Then("the Title input field should be visible")
+//    public void the_title_input_field_should_be_visible() {
+//        boolean isVisible = new CreateNewsPage(hooks.getDriver())
+//                .getTitleInput()
+//                .getFieldElement()
+//                .isDisplayed();
+//        hooks.getSoftAssert().assertTrue(isVisible,
+//                "Title input field is not visible");
+//    }
 
     @When("the user selects the 'News' tag")
     public void the_user_selects_the_News_tag() {
@@ -96,13 +159,6 @@ public class CreateNewsStep {
                 "Tag 'News' stayed selected");
     }
 
-    @Then("the Add Image block should be visible")
-    public void the_add_image_block_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                .getAddImageComponentRoot().isDisplayed(),
-                "Add Image block is not visible");
-    }
-
     @Then("the Image dropzone should be visible")
     public void the_image_dropzone_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
@@ -110,14 +166,6 @@ public class CreateNewsStep {
                         .getImageContainer().isDisplayed(),
                 "Image dropzone is not visible");
     }
-
-    @Then("the Content Editor should be visible")
-    public void the_content_editor_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getContentEditorRoot().isDisplayed(),
-                "Content Editor block is not should visible");
-    }
-
 
     @Then("^the Content Editor field info should contain '([^']+)'$")
     public void the_content_editor_field_info_should_contain(String expectedText) {
@@ -185,43 +233,15 @@ public class CreateNewsStep {
                 "Date format should match 'MMMM d, yyyy'");
     }
 
-    @Then("the Source block should be visible")
-    public void the_source_block_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getSourceInputRoot()
-                        .isDisplayed(),
-                "Source block is not visible");
-    }
-
-    @Then("the Source label should be visible")
-    public void the_source_label_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getSourceInput()
-                .getLabelElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Source label is not visible");
-    }
-
-    @Then("the Source field info should be visible")
-    public void the_source_field_info_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getSourceInput()
-                .getFieldInfoElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Source field info is not visible");
-    }
-
-    @Then("the Source input field should be visible")
-    public void the_source_input_field_should_be_visible() {
-        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-                .getSourceInput()
-                .getFieldElement()
-                .isDisplayed();
-        hooks.getSoftAssert().assertTrue(isVisible,
-                "Source input field is not visible");
-    }
+//    @Then("the Source input field should be visible")
+//    public void the_source_input_field_should_be_visible() {
+//        boolean isVisible = new CreateNewsPage(hooks.getDriver())
+//                .getSourceInput()
+//                .getFieldElement()
+//                .isDisplayed();
+//        hooks.getSoftAssert().assertTrue(isVisible,
+//                "Source input field is not visible");
+//    }
 
     @Then("^the Source field info should contain '([^']+)'$")
     public void the_source_field_info_should_contain(String expectedText) {
@@ -233,14 +253,6 @@ public class CreateNewsStep {
                 actualText.contains(expectedText),
                 "Source field info does not contain '" + expectedText + "'. Actual: " + actualText
         );
-    }
-
-    @Then("the buttons block should be visible")
-    public void the_buttons_block_should_be_visible() {
-        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getSubmitButtonsRoot()
-                        .isDisplayed(),
-                "Source block does not visible");
     }
 
 
