@@ -29,6 +29,7 @@ Feature: Displaying All Fields on Create News Page
     Then the Content Editor should be visible
     And the Content Editor field info should contain '63 206'
 
+
   Scenario: Author of news should be filled
     Then the Author field should not be empty
     And the Author field should match the logged-in username

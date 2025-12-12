@@ -3,6 +3,7 @@ package com.greencity.cucumber.steps;
 import com.greencity.ui.pages.CreateNewsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class CreateNewsStep {
     private Hooks hooks;
@@ -26,7 +27,7 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getTitleInputRoot()
                         .isDisplayed(),
-                "Title block does not visible");
+                "Title block is not visible");
     }
     @Then("the Title label should be visible")
     public void the_title_label_should_be_visible() {
@@ -35,7 +36,7 @@ public class CreateNewsStep {
                 .getLabelElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Title block does not visible");
+                "Title label is not visible");
     }
 
     @Then("the Title field info should be visible")
@@ -45,7 +46,7 @@ public class CreateNewsStep {
                 .getFieldInfoElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Title field info does not visible");
+                "Title field info is not visible");
     }
 
     @Then("the Title input field should be visible")
@@ -55,17 +56,17 @@ public class CreateNewsStep {
                 .getFieldElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Title block does not visible");
+                "Title input field is not visible");
     }
 
     @Then("the Tags block should be visible")
     public void the_tags_block_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getNewsTagsComponentRoot().isDisplayed(),
-                "The tags block does not visible");
+                "The tags block is not visible");
     }
 
-    @Then("the user selects the 'News' tag")
+    @When("the user selects the 'News' tag")
     public void the_user_selects_the_News_tag() {
         new CreateNewsPage(hooks.getDriver())
                 .getNewsTagsComponent()
@@ -77,10 +78,10 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                 .getNewsTagsComponent()
                 .isTagSelected("News"),
-                "Tag 'News' does not selected");
+                "Tag 'News' is not selected");
     }
 
-    @Then("the user unselects the 'News' tag")
+    @When("the user unselects the 'News' tag")
     public void the_user_unselects_the_News_tag() {
         new CreateNewsPage(hooks.getDriver())
                 .getNewsTagsComponent()
@@ -99,7 +100,7 @@ public class CreateNewsStep {
     public void the_add_image_block_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                 .getAddImageComponentRoot().isDisplayed(),
-                "Add Image block does not visible");
+                "Add Image block is not visible");
     }
 
     @Then("the Image dropzone should be visible")
@@ -107,33 +108,26 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getAddImageComponent()
                         .getImageContainer().isDisplayed(),
-                "Image dropzone does not visible");
+                "Image dropzone is not visible");
     }
 
     @Then("the Content Editor should be visible")
     public void the_content_editor_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getContentEditorRoot().isDisplayed(),
-                "Content Editor block does not should visible");
+                "Content Editor block is not should visible");
     }
 
-//    @Then("the Content Editor field info should contain '{string}'")
-//    public void the_content_editor_field_info_should_contain(String expectedText) {
-//        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-//                .getContentEditor()
-//                .getFieldInfoElement()
-//                .getText().contains(expectedText),
-//                "Content Editor field info is not contain " + expectedText);
-//    }
 
-    @Then("the Content Editor field info should contain '63 206'")
-    public void the_content_editor_field_info_should_contain() {
+    @Then("^the Content Editor field info should contain '([^']+)'$")
+    public void the_content_editor_field_info_should_contain(String expectedText) {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
-                        .getContentEditor()
-                        .getFieldInfoElement()
-                        .getText().contains("63 206"),
-                "Content Editor field info does not contain '63 206'");
+                .getContentEditor()
+                .getFieldInfoElement()
+                .getText().contains(expectedText),
+                "Content Editor field info does not contain " + expectedText);
     }
+
 
     @Then("the Author field should not be empty")
     public void the_author_field_should_not_be_empty() {
@@ -147,7 +141,7 @@ public class CreateNewsStep {
         String username = new CreateNewsPage(hooks.getDriver())
                         .getAuthorOfNews().getText().trim();
         hooks.getSoftAssert().assertEquals(username, hooks.getTestValueProvider().getLsUserName(),
-                "Title block should does not visible");
+                "Author field does not match the logged-in username");
     }
 
     @Then("the Author field should not be editable")
@@ -163,7 +157,7 @@ public class CreateNewsStep {
     public void the_date_field_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getActualDate().isDisplayed(),
-                "the Date field does not visible");
+                "the Date field is not visible");
     }
 
     @Then("the Date field should not be empty")
@@ -196,7 +190,7 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getSourceInputRoot()
                         .isDisplayed(),
-                "Source block does not visible");
+                "Source block is not visible");
     }
 
     @Then("the Source label should be visible")
@@ -206,7 +200,7 @@ public class CreateNewsStep {
                 .getLabelElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Source block should does not visible");
+                "Source label is not visible");
     }
 
     @Then("the Source field info should be visible")
@@ -216,7 +210,7 @@ public class CreateNewsStep {
                 .getFieldInfoElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Source field info does not visible");
+                "Source field info is not visible");
     }
 
     @Then("the Source input field should be visible")
@@ -226,7 +220,7 @@ public class CreateNewsStep {
                 .getFieldElement()
                 .isDisplayed();
         hooks.getSoftAssert().assertTrue(isVisible,
-                "Source block does not visible");
+                "Source input field is not visible");
     }
 
     @Then("^the Source field info should contain '([^']+)'$")
