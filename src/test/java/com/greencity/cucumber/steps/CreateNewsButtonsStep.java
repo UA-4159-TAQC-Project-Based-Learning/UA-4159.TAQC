@@ -2,11 +2,15 @@ package com.greencity.cucumber.steps;
 
 import com.greencity.data.MandatoryFieldsNewsData;
 import com.greencity.ui.components.createNews.CancelNewsModal;
+import com.greencity.ui.components.createNews.CreateNewsButtonsComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateNewsButtonsStep {
     private Hooks hooks;
@@ -50,13 +54,33 @@ public class CreateNewsButtonsStep {
                 )
         );
     }
-    @Then("the dialog should contain a 'Continue editing' button, a 'Yes, cancel' button and a close icon")
-    public void the_dialog_should_contain_a_сontinue_editing_button_a_yes_cancel_button_and_a_close_icon() {
-        java.util.List<String> missing = cancelModal.getMissingControls();
-        hooks.getSoftAssert().assertTrue(
-                missing.isEmpty(),
-                "Dialog modal buttons are not all visible: " + missing
-        );
+    @Then("the cancel news dialog should contain all buttons")
+    public void the_cancel_news_dialog_should_contain_all_buttons() {
+        //CancelNewsModal cancelModal = new CancelNewsModal(hooks.getDriver());
+        List<String> missingButtons = new ArrayList<>();
+
+        if (!cancelModal.isContinueEditingVisible()) {
+            missingButtons.add("'Continue editing' button");
+        }
+        if (!cancelModal.isYesCancelVisible()) {
+            missingButtons.add("'Yes, cancel' button");
+        }
+        if (!cancelModal.isCloseIconVisible()) {
+            missingButtons.add("Close icon");
+        }
+
+        hooks.getSoftAssert().assertTrue(missingButtons.isEmpty(), "Some buttons are not visible in Cancel modal: " + missingButtons);
     }
+
+    @When("click the Continue editing button")
+    public void click_the_continue_editing_button() {
+        cancelModal.clickContinueEditingButton();
+    }
+
+    @Then("the confirmation dialog should be closed")
+    public void the_confirmation_dialog_should_be_closed() {
+        hooks.getSoftAssert().assertFalse(cancelModal.isVisible(), "Confirmation dialog should not be visible");
+    }
+
 
 }

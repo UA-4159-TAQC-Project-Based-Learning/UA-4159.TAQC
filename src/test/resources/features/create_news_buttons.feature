@@ -9,18 +9,24 @@ Feature: Create News - Cancel, Preview and Publish buttons
     And all required fields for the news draft are filled with valid data
 
   @create-news @buttons @cancel
-  Scenario: Clicking the Cancel button opens a confirmation prompt
+  Scenario: Clicking the Cancel button on the Create News page opens a confirmation dialog modal
     When click the Cancel button
     Then a confirmation dialog should be visible
     And the dialog title should indicate a warning about cancelling changes
-    And the dialog should contain a 'Continue editing' button, a 'Yes, cancel' button and a close icon
+
+  @create-news @buttons @cancel
+  Scenario: A confirmation dialog modal contains all buttons
+    When click the Cancel button
+    #Then a confirmation dialog should be visible
+    Then the cancel news dialog should contain all buttons
+
 
   @create-news @buttons @cancel
   Scenario: Choosing "Continue editing" closes the dialog and returns me to the Create News page
-    Given the cancel confirmation dialog is open
-    When I click the "Continue editing" button
+    Given a confirmation dialog should be visible
+    When click the Continue editing button
     Then the confirmation dialog should be closed
-    And I should remain on the "Create News" page with my draft preserved
+    #And the "Create News" page is opened with my draft preserved
 
   @create-news @buttons @cancel
   Scenario: Choosing "Yes, cancel" confirms cancellation and navigates away

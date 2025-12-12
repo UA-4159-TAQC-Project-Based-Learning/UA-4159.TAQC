@@ -5,6 +5,8 @@ import com.greencity.ui.pages.CreateNewsPreviewPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,15 +30,61 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         super(driver, rootElement);
     }
 
+    @Step("Check if 'Cancel' button is visible")
+    public boolean isCancelVisible() {
+        waitUntilElementVisible(cancelButton); // из Base
+        return cancelButton.isDisplayed();
+    }
+
+    @Step("Check if 'Cancel' button is enabled")
+    public boolean isCancelEnabled() {
+        waitUntilElementClickable(cancelButton); // из Base
+        return cancelButton.isEnabled();
+    }
+
+    @Step("Check if 'Preview' button is visible")
+    public boolean isPreviewVisible() {
+        waitUntilElementVisible(previewButton);
+        return previewButton.isDisplayed();
+    }
+    @Step("Check if 'Preview' button is enabled")
+    public boolean isPreviewEnabled() {
+        waitUntilElementClickable(previewButton);
+        return previewButton.isEnabled();
+    }
+
+    @Step("Check if 'Publish' button is visible")
+    public boolean isPublishVisible() {
+        waitUntilElementVisible(publishButton);
+        return publishButton.isDisplayed();
+    }
+
+    @Step("Check if 'Publish' button is enabled")
+    public boolean isPublishEnabled() {
+        waitUntilElementClickable(publishButton);
+        return publishButton.isEnabled();
+    }
+
+    @Step("Get text of 'Cancel' button")
+    public String getCancelButtonText() {
+        return cancelButton.getText().trim();
+    }
+
+    @Step("Get text of 'Preview' button")
+    public String getPreviewButtonText() {
+        return previewButton.getText().trim();
+    }
+
+    @Step("Get text of 'Publish' button")
+    public String getPublishButtonText() {
+        return publishButton.getText().trim();
+    }
+
     @Step("Click 'Preview' news button")
     public CreateNewsPreviewPage clickPreviewButton() {
         clickDynamicElement(previewButton);
         waitUntilPageLouder();
         return new CreateNewsPreviewPage(driver);
-    }
-
-    public boolean isPublishEnabled() {
-        return publishButton.isEnabled();
     }
 
     @Step("Click 'Publish' button")
