@@ -32,13 +32,13 @@ public class CreateNewsButtonsComponent extends BaseComponent {
 
     @Step("Check if 'Cancel' button is visible")
     public boolean isCancelVisible() {
-        waitUntilElementVisible(cancelButton); // из Base
+        waitUntilElementVisible(cancelButton); // from Base
         return cancelButton.isDisplayed();
     }
 
     @Step("Check if 'Cancel' button is enabled")
     public boolean isCancelEnabled() {
-        waitUntilElementClickable(cancelButton); // из Base
+        waitUntilElementClickable(cancelButton); // from Base
         return cancelButton.isEnabled();
     }
 
