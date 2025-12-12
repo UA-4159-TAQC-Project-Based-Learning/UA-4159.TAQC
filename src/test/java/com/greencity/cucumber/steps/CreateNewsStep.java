@@ -119,16 +119,6 @@ public class CreateNewsStep {
         }
     }
 
-//    @Then("the Title input field should be visible")
-//    public void the_title_input_field_should_be_visible() {
-//        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-//                .getTitleInput()
-//                .getFieldElement()
-//                .isDisplayed();
-//        hooks.getSoftAssert().assertTrue(isVisible,
-//                "Title input field is not visible");
-//    }
-
     @When("the user selects the 'News' tag")
     public void the_user_selects_the_News_tag() {
         new CreateNewsPage(hooks.getDriver())
@@ -232,16 +222,6 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(isValidFormat,
                 "Date format should match 'MMMM d, yyyy'");
     }
-
-//    @Then("the Source input field should be visible")
-//    public void the_source_input_field_should_be_visible() {
-//        boolean isVisible = new CreateNewsPage(hooks.getDriver())
-//                .getSourceInput()
-//                .getFieldElement()
-//                .isDisplayed();
-//        hooks.getSoftAssert().assertTrue(isVisible,
-//                "Source input field is not visible");
-//    }
 
     @Then("^the Source field info should contain '([^']+)'$")
     public void the_source_field_info_should_contain(String expectedText) {
