@@ -16,14 +16,13 @@ Feature: Create News - Cancel, Preview and Publish buttons
 
   @create-news @buttons @cancel
   Scenario: A confirmation dialog modal contains all buttons
-    When click the Cancel button
-    #Then a confirmation dialog should be visible
+    Given a confirmation dialog is visible
     Then the cancel news dialog should contain all buttons
 
 
   @create-news @buttons @cancel
   Scenario: Choosing "Continue editing" closes the dialog and returns me to the Create News page
-    Given a confirmation dialog should be visible
+    Given a confirmation dialog is visible
     When click the Continue editing button
     Then the confirmation dialog should be closed
     #And the "Create News" page is opened with my draft preserved

@@ -8,7 +8,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +35,17 @@ public class CreateNewsButtonsStep {
         );
     }
 
+    @Given("a confirmation dialog is visible")
+    public void a_confirmation_dialog_is_visible() {
+        CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
+        cancelModal = createNewsPage.openCancelModal();
+        hooks.getSoftAssert().assertTrue(cancelModal.isVisible(), "Confirmation dialog is not visible");
+    }
+
     @When("click the Cancel button")
     public void click_the_cancel_button() {
         CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
-        createNewsPage.waitUntilPageLouder();
+        //createNewsPage.waitUntilPageLouder();
         cancelModal = createNewsPage.openCancelModal();
     }
 
@@ -54,9 +65,9 @@ public class CreateNewsButtonsStep {
                 )
         );
     }
+
     @Then("the cancel news dialog should contain all buttons")
     public void the_cancel_news_dialog_should_contain_all_buttons() {
-        //CancelNewsModal cancelModal = new CancelNewsModal(hooks.getDriver());
         List<String> missingButtons = new ArrayList<>();
 
         if (!cancelModal.isContinueEditingVisible()) {
@@ -79,7 +90,11 @@ public class CreateNewsButtonsStep {
 
     @Then("the confirmation dialog should be closed")
     public void the_confirmation_dialog_should_be_closed() {
-        hooks.getSoftAssert().assertFalse(cancelModal.isVisible(), "Confirmation dialog should not be visible");
+        hooks.getWait().pollingEvery(Duration.ofMillis(200)).until(ExpectedConditions.invisibilityOfElementLocated(CancelNewsModal.getMODAL_ROOT_LOCATOR()));
+        boolean isModalInvisible = hooks.getDriver()
+                                .findElements(CancelNewsModal.getMODAL_ROOT_LOCATOR())
+                                .isEmpty();
+        hooks.getSoftAssert().assertTrue(isModalInvisible, "Confirmation dialog should not be visible");
     }
 
 

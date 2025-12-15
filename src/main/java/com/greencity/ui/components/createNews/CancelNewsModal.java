@@ -134,6 +134,7 @@ public class CancelNewsModal extends BaseComponent {
 
     @Step("Check if close icon is visible")
     public boolean isCloseIconVisible() {
+        waitUntilElementVisible(crossIconForCloseChangesModal);
         return crossIconForCloseChangesModal.isDisplayed();
     }
 

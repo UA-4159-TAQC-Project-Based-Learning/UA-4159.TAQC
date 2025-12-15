@@ -10,6 +10,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
@@ -21,6 +22,9 @@ public class Hooks {
 
     @Getter
     private WebDriver driver;
+
+    @Getter
+    private WebDriverWait wait;
 
     @Getter
     private SoftAssert softAssert;
@@ -36,6 +40,8 @@ public class Hooks {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(testValueProvider.getImplicitlyWait()));
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
 
@@ -51,9 +57,13 @@ public class Hooks {
 
     @After
     public void afterScenario() {
-        softAssert.assertAll();
-        if (driver != null) {
-            driver.quit();
+        try {
+            softAssert.assertAll();
+        } finally {
+            if (driver != null) {
+                driver.quit();
+                driver = null;
+            }
         }
     }
 }
