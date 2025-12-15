@@ -70,7 +70,7 @@ public class CreateNewsStep {
             case "source":
                 return page.getSourceInput().getLabelElement();
             default:
-                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                hooks.getSoftAssert().fail(blockName + " label is not visible");
                 return null;
         }
     }
@@ -92,7 +92,7 @@ public class CreateNewsStep {
             case "source":
                 return page.getSourceInput().getFieldInfoElement();
             default:
-                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                hooks.getSoftAssert().fail(blockName + " field info is not visible");
                 return null;
         }
     }
@@ -114,7 +114,7 @@ public class CreateNewsStep {
             case "source":
                 return page.getSourceInput().getFieldElement();
             default:
-                hooks.getSoftAssert().fail(blockName + " block element is not visible");
+                hooks.getSoftAssert().fail(blockName + " input field is not visible");
                 return null;
         }
     }
@@ -218,7 +218,7 @@ public class CreateNewsStep {
     public void the_date_field_should_match_the_format() {
         boolean isValidFormat = new CreateNewsPage(hooks.getDriver())
                 .getActualDate().getText().trim()
-                .matches("^(^[A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+                .matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
         hooks.getSoftAssert().assertTrue(isValidFormat,
                 "Date format should match 'MMMM d, yyyy'");
     }
@@ -231,7 +231,8 @@ public class CreateNewsStep {
                         .getText();
         hooks.getSoftAssert().assertTrue(
                 actualText.contains(expectedText),
-                "Source field info does not contain '" + expectedText + "'. Actual: " + actualText
+                "Source field info does not contain '" + expectedText
+                        + "'. Actual: " + actualText
         );
     }
 
@@ -242,7 +243,7 @@ public class CreateNewsStep {
                         .getCreateNewsButtonsComponent()
                         .getCancelButton()
                         .isDisplayed(),
-                "'Cancel' button does not visible");
+                "'Cancel' button is not visible");
     }
 
     @Then("the 'Preview' button should be visible")
@@ -251,7 +252,7 @@ public class CreateNewsStep {
                         .getCreateNewsButtonsComponent()
                         .getPreviewButton()
                         .isDisplayed(),
-                "'Preview' button does not visible");
+                "'Preview' button is not visible");
     }
 
     @Then("the 'Publish' button should be visible")
@@ -260,7 +261,7 @@ public class CreateNewsStep {
                         .getCreateNewsButtonsComponent()
                         .getPublishButton()
                         .isDisplayed(),
-                "'Publish' button does not visible");
+                "'Publish' button is not visible");
     }
 
 }
