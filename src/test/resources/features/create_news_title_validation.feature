@@ -4,7 +4,8 @@ Feature: Title Field Validation on Create News Page
   So that I cannot publish news with an invalid or incomplete title
 
   Background:
-    Given the user opens the "Create News" page
+    Given the user is logged in the system
+    And the user opens the 'Create News' page
     And the page is fully loaded
 
   Scenario: Title input invalid when empty and Publish disabled
@@ -12,7 +13,7 @@ Feature: Title Field Validation on Create News Page
     And the user enters an empty title
     Then the Title field should be marked as invalid
     And the Publish button should be disabled
-    And the Title counter should display "0/170"
+    And the Title counter should display '0/170'
 
   Scenario: Title input should not exceed 170 characters
     When the user enters a title longer than 170 characters

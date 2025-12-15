@@ -264,4 +264,68 @@ public class CreateNewsStep {
                 "'Publish' button is not visible");
     }
 
+    @When("the user clicks on the Title field")
+    public void the_user_clicks_on_the_title_field() {
+        new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .clickOnField();
+    }
+
+    @When("the user enters an empty title")
+    public void the_user_enters_an_empty_title() {
+        new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .typeText("");
+    }
+
+    @Then("the Title field should be marked as invalid")
+    public void the_title_field_should_be_marked_as_invalid() {
+        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .isInvalidField(),
+                "Title field is not marked as invalid");
+    }
+
+    @Then("the Publish button should be disabled")
+    public void the_publish_button_should_be_disabled() {
+        hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
+                        .getCreateNewsButtonsComponent()
+                        .isPublishEnabled(),
+                "Publish button is not disabled");
+    }
+
+    @Then("the Title counter should display '([^']+)'$")
+    public void the_title_counter_should_display_text(String text) {
+        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+                        .getTitleInput()
+                        .getFieldInfoText()
+                        .contains(text),
+                "Title counter does not display " + text);
+    }
+
+    @When("the user enters a title longer than 170 characters")
+    public void the_user_enters_a_title_longer_than_170_characters() {
+        String longTitle = "A".repeat(172);
+        new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .typeText(longTitle);
+    }
+
+    @Then("the Title field value should not exceed 170 characters")
+    public void the_title_field_value_should_not_exceed_170_characters() {
+        int actualLength = new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .getValue()
+                .length();
+        hooks.getSoftAssert().assertTrue(actualLength <=170);
+    }
+
+    @Then("the Title field should display a warning message")
+    public void the_title_field_should_display_a_warning_message() {
+        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+                .getTitleInput()
+                .hasWarningFieldInfo(),
+                "Title warning message is not displayed");
+    }
+
 }
