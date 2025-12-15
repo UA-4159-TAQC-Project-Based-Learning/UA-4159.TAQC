@@ -29,7 +29,7 @@ Feature: Create News - Cancel, Preview and Publish buttons
 
   @create-news @buttons @cancel
   Scenario: Choosing "Yes, cancel" confirms cancellation and navigates away
-    Given the cancel confirmation dialog is open
+    Given a confirmation dialog is visible
     When I click the "Yes, cancel" button
     Then the news creation should be cancelled
     And I should be navigated away from the Create News page to the Eco News page
