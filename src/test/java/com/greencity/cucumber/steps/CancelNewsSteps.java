@@ -102,7 +102,7 @@ public class CancelNewsSteps {
     public void confirmCancelInPopup() {
         cancelNewsModal.getYesCancelChangesModalButtonAlternative().click();
         ecoNewsPage = new EcoNewsPage(hooks.getDriver());
-        ecoNewsPage.waitUntilPageLouder();
+        ecoNewsPage.waitUntilPageLoaded();
     }
 
     @Then("the user should be redirected to Eco News page")
