@@ -150,7 +150,7 @@ public class CancelNewsSteps {
     public void contentEditorEmpty() {
         String actualContentValue = createNewsPage.getTextEditor().getText();
         hooks.getSoftAssert().assertTrue(
-                actualContentValue == null || actualContentValue.isBlank(),
+                actualContentValue == null || actualContentValue.trim().isEmpty(),
                 "Content editor should be empty after reopening Create News."
         );
     }
