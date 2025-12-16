@@ -48,7 +48,7 @@ public class CreateNewsButtonsStep {
         String expectedText = "All created content will be lost.";
         String actualText = cancelModal.getModalTitleText();
         hooks.getSoftAssert().assertEquals(actualText, expectedText,
-                String.format("Title in cancel dialog modal is '%s' that doesn't matched expected one: '%s'",
+                String.format("Title in cancel dialog modal is '%s' that doesn't match expected one: '%s'",
                         actualText, expectedText
                 )
         );
