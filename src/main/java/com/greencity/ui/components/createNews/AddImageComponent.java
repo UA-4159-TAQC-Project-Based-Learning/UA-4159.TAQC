@@ -128,7 +128,7 @@ public class AddImageComponent extends BaseComponent {
         }
         try {
             return elements.stream().anyMatch(WebElement::isDisplayed);
-        } catch (org.openqa.selenium.StaleElementReferenceException | org.openqa.selenium.NoSuchElementException e) {
+        } catch (StaleElementReferenceException | NoSuchElementException e) {
             return false;
         }
     }
