@@ -34,7 +34,7 @@ public class CropImageTest extends TestRunnerWithUser {
         driver.navigate().refresh();
 
         homePage = new HomePage(driver);
-        homePage.waitUntilPageLouder();
+        homePage.waitUntilPageLoaded();
 
         createNewsPage = ((EcoNewsPage) homePage
                 .getHeader()

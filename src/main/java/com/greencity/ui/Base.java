@@ -24,6 +24,14 @@ public abstract class Base {
         PageFactory.initElements(this.driver, this);
     }
 
+    public static boolean hasClass(WebElement element, String className) {
+        if (element == null) {
+            return false;
+        }
+        String searchingClass = element.getAttribute("class");
+        return searchingClass != null && searchingClass.contains(className);
+    }
+
     @Step("Scroll to the element")
     public void scrollToElement(WebElement element) {
         actions.moveToElement(element).perform();
@@ -122,14 +130,6 @@ public abstract class Base {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
     }
 
-    public static boolean hasClass(WebElement element, String className) {
-        if (element == null) {
-            return false;
-        }
-        String searchingClass = element.getAttribute("class");
-        return searchingClass != null && searchingClass.contains(className);
-    }
-
     // need it for tests where elements are dynamically changing
     public WebElement firstDisplayed(List<WebElement> elements) {
         if (elements == null || elements.isEmpty()) {
@@ -138,7 +138,7 @@ public abstract class Base {
         for (WebElement el : elements) {
             try {
                 if (el.isDisplayed()) return el;
-            } catch (org.openqa.selenium.StaleElementReferenceException ignored) {
+            } catch (StaleElementReferenceException ignored) {
             }
         }
         return elements.get(0);
