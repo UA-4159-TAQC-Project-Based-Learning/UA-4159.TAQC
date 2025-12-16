@@ -2,7 +2,6 @@ package com.greencity.cucumber.steps;
 
 import com.greencity.data.MandatoryFieldsNewsData;
 import com.greencity.ui.components.createNews.CancelNewsModal;
-import com.greencity.ui.components.createNews.CreateNewsButtonsComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import io.cucumber.java.en.And;
@@ -46,8 +45,8 @@ public class CreateNewsButtonsStep {
 
     @When("click the Cancel button")
     public void click_the_cancel_button() {
-        //CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
-        //createNewsPage.waitUntilPageLouder();
+        CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
+        createNewsPage.waitUntilPageLoaded();
         cancelModal = createNewsPage.openCancelModal();
     }
 
@@ -62,7 +61,7 @@ public class CreateNewsButtonsStep {
         String expectedText = "All created content will be lost.";
         String actualText = cancelModal.getModalTitleText();
         hooks.getSoftAssert().assertEquals(actualText, expectedText,
-                String.format("Title in cancel dialog modal is '%s' that doesn't matched expected one: '%s'",
+                String.format("Title in cancel dialog modal is '%s' that doesn't match expected one: '%s'",
                         actualText, expectedText
                 )
         );

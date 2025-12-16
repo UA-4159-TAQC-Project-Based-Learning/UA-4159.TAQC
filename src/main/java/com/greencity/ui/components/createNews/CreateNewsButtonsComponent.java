@@ -5,8 +5,6 @@ import com.greencity.ui.pages.CreateNewsPreviewPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,7 +87,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
     @Step("Click 'Preview' news button")
     public CreateNewsPreviewPage clickPreviewButton() {
         clickDynamicElement(previewButton);
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new CreateNewsPreviewPage(driver);
     }
 
@@ -99,14 +97,14 @@ public class CreateNewsButtonsComponent extends BaseComponent {
             throw new IllegalArgumentException("Publish button is disabled. Check if all required fields are filled out");
         }
         publishButton.click();
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new EcoNewsPage(driver);
     }
 
     @Step("Click 'Cancel' news button")
     public CancelNewsModal clickCancelButton() {
         clickDynamicElement(cancelButton);
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new CancelNewsModal(driver);
     }
 
