@@ -33,7 +33,7 @@ public class CreateNewsButtonsStep {
     @When("click the Cancel button")
     public void click_the_cancel_button() {
         CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
-        createNewsPage.waitUntilPageLouder();
+        createNewsPage.waitUntilPageLoaded();
         cancelModal = createNewsPage.openCancelModal();
     }
 

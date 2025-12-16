@@ -98,7 +98,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
     @Step("Click 'Cancel' news button")
     public CancelNewsModal clickCancelButton() {
         clickDynamicElement(cancelButton);
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new CancelNewsModal(driver);
     }
 

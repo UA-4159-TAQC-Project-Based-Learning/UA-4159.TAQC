@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateNewsPreviewStep {
     private final Hooks hooks;
-    private final SoftAssert softAssert;
 
     private EditEcoNewsPage editEcoNewsPage;
     private EcoNewsPage ecoNewsPage;
@@ -24,8 +23,6 @@ public class CreateNewsPreviewStep {
 
     public CreateNewsPreviewStep(Hooks hooks) {
         this.hooks = hooks;
-        this.softAssert = hooks.getSoftAssert();
-
         generateTestData();
     }
 
@@ -38,7 +35,7 @@ public class CreateNewsPreviewStep {
 
     @Then("the Eco News page is loaded")
     public void ecoNewsPageIsLoaded() {
-        softAssert.assertTrue(
+        hooks.getSoftAssert().assertTrue(
                 ecoNewsPage.ecoNewsPageIsOpened(),
                 "Eco News page is not loaded"
         );
@@ -81,7 +78,7 @@ public class CreateNewsPreviewStep {
 
     @Then("the preview mode should open")
     public void previewModeShouldOpen() {
-        softAssert.assertTrue(
+        hooks.getSoftAssert().assertTrue(
                 previewPage.getNewsTitle().isDisplayed(),
                 "Preview page is not opened"
         );
@@ -89,7 +86,7 @@ public class CreateNewsPreviewStep {
 
     @And("the preview should display the entered title")
     public void previewShouldDisplayTitle() {
-        softAssert.assertEquals(
+        hooks.getSoftAssert().assertEquals(
                 previewPage.getNewsTitle().getText(),
                 testTitle,
                 "News title is incorrect"
@@ -99,12 +96,12 @@ public class CreateNewsPreviewStep {
     @And("the preview should display the tag {string}")
     public void previewShouldDisplayTag(String tag) {
         // Tag is already validated visually by presence in preview
-        softAssert.assertTrue(true);
+        hooks.getSoftAssert().assertTrue(true);
     }
 
     @And("the preview should display the entered content text")
     public void previewShouldDisplayContent() {
-        softAssert.assertEquals(
+        hooks.getSoftAssert().assertEquals(
                 previewPage.getTextContent().getText(),
                 testContent,
                 "Content is incorrect"
@@ -117,7 +114,7 @@ public class CreateNewsPreviewStep {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
         String expectedDate = today.format(formatter);
 
-        softAssert.assertEquals(
+        hooks.getSoftAssert().assertEquals(
                 previewPage.getDate().getText(),
                 expectedDate,
                 "Date is incorrect"
@@ -126,7 +123,7 @@ public class CreateNewsPreviewStep {
 
     @And("the preview should display the author's name")
     public void previewShouldDisplayAuthorName() {
-        softAssert.assertTrue(
+        hooks.getSoftAssert().assertTrue(
                 previewPage.getAuthor().getText()
                         .contains(hooks.getTestValueProvider().getLsUserName()),
                 "Author name is incorrect"
@@ -135,7 +132,7 @@ public class CreateNewsPreviewStep {
 
     @And("a 'Back to editing' button should be available")
     public void backToEditingButtonAvailable() {
-        softAssert.assertTrue(
+        hooks.getSoftAssert().assertTrue(
                 previewPage.getBackLink().isDisplayed(),
                 "Back to editing button is not displayed"
         );
@@ -163,7 +160,7 @@ public class CreateNewsPreviewStep {
 
     @Then("the eco news list should be successfully opened")
     public void ecoNewsShouldBePublished() {
-        softAssert.assertTrue(
+        hooks.getSoftAssert().assertTrue(
                 ecoNewsPage.ecoNewsPageIsOpened(),
                 "Eco News page is not opened after publish"
         );
@@ -172,7 +169,7 @@ public class CreateNewsPreviewStep {
     @And("the published eco news should appear in Single View")
     public void publishedEcoNewsShouldAppear() {
         ecoNewsPage.switchNewsPageToListView();
-        softAssert.assertNotNull(
+        hooks.getSoftAssert().assertNotNull(
                 ecoNewsPage.findCardByTitle(testTitle),
                 "Published news is not found"
         );
@@ -183,7 +180,7 @@ public class CreateNewsPreviewStep {
         EcoNewsListCardComponent card =
                 ecoNewsPage.findCardByTitle(testTitle);
 
-        softAssert.assertNotNull(card, "News card is missing");
+        hooks.getSoftAssert().assertNotNull(card, "News card is missing");
     }
 
     private void generateTestData() {
