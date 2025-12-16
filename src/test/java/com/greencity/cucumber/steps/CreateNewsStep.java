@@ -57,14 +57,4 @@ public class CreateNewsStep {
         hooks.getSoftAssert().assertTrue(isVisible,
                 "Title block should be not visible");
     }
-
-
-
-
-
-
-
-
-
-
 }

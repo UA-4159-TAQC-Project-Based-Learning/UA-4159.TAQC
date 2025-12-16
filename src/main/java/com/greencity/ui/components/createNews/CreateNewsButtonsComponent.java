@@ -65,6 +65,12 @@ public class CreateNewsButtonsComponent extends BaseComponent {
         return publishButton.isEnabled();
     }
 
+    @Step("Check if 'Publish' button is disabled")
+    public boolean isPublishDisabled() {
+        waitUntilElementVisible(publishButton);
+        return !publishButton.isEnabled();
+    }
+
     @Step("Get text of 'Cancel' button")
     public String getCancelButtonText() {
         return cancelButton.getText().trim();
