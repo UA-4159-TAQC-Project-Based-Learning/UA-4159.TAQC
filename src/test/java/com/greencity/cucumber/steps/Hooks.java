@@ -46,7 +46,7 @@ public class Hooks {
         }
         softAssert = new SoftAssert();
         driver.get(testValueProvider.getBaseUIUrl());
-        new HomePage(driver).waitUntilPageLouder();
+        new HomePage(driver).waitUntilPageLoaded();
     }
 
     @After
