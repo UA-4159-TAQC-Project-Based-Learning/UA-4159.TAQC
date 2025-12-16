@@ -2,7 +2,6 @@ package com.greencity.cucumber.steps;
 
 import com.greencity.data.MandatoryFieldsNewsData;
 import com.greencity.ui.components.createNews.CancelNewsModal;
-import com.greencity.ui.components.createNews.CreateNewsButtonsComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
