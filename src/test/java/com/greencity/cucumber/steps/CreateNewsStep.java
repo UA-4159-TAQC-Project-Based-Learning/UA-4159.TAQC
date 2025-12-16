@@ -20,7 +20,7 @@ public class CreateNewsStep {
 
     @Given("the page is fully loaded")
     public void the_page_is_fully_loaded() {
-        new CreateNewsPage(hooks.getDriver()).waitUntilPageLouder();
+        new CreateNewsPage(hooks.getDriver()).waitUntilPageLoaded();
     }
 
     @Then("^the (.+) block should be visible$")
