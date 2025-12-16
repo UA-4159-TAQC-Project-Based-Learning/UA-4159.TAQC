@@ -12,10 +12,6 @@ public class EcoNewsDetailsStep {
         this.hooks = hooks;
     }
 
-    @Then("the Eco News page is loaded")
-    public void the_eco_news_page_is_loaded() {
-        new EcoNewsPage(hooks.getDriver()).waitUntilPageLouder();
-    }
 
     @When("the user clicks on Eco News with title containing {string} in the table")
     public void the_user_clicks_on_eco_news_with_title_containing_in_the_table(String text) {
@@ -27,7 +23,7 @@ public class EcoNewsDetailsStep {
 
     @Then("the Eco News details page is loaded")
     public void the_eco_news_details_page_is_loaded() {
-        new EcoNewsDetailsPage(hooks.getDriver()).waitUntilPageLouder();
+        new EcoNewsDetailsPage(hooks.getDriver()).waitUntilPageLoaded();
     }
 
     @Then("the Eco News details title is populated")
