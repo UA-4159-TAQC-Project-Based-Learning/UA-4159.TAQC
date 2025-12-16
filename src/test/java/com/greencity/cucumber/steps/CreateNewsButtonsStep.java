@@ -92,7 +92,7 @@ public class CreateNewsButtonsStep {
     @When("click the Yes cancel button")
     public void click_the_Yes_cancel_button() {
         EcoNewsPage ecoNewsPage = cancelModal.clickYesCancelButton();
-        ecoNewsPage.waitUntilPageLouder();
+        ecoNewsPage.waitUntilPageLoaded();
     }
 
     @Then("the confirmation dialog should be closed")

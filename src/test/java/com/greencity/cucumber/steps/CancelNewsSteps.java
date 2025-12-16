@@ -30,7 +30,7 @@ public class CancelNewsSteps {
         ecoNewsPage = (EcoNewsPage) new HomePage(hooks.getDriver())
                 .getHeader()
                 .openNavItem(NavItem.ECO_NEWS);
-        ecoNewsPage.waitUntilPageLouder();
+        ecoNewsPage.waitUntilPageLoaded();
     }
 
     @Given("the user opens the Create News page")
@@ -40,7 +40,7 @@ public class CancelNewsSteps {
 
     @Given("the Create News page is fully loaded")
     public void createNewsPageLoaded() {
-        createNewsPage.waitUntilPageLouder();
+        createNewsPage.waitUntilPageLoaded();
     }
 
     @Then("the Cancel button should be visible")
