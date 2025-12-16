@@ -55,7 +55,6 @@ public class CreateNewsButtonsStep {
     }
     @Then("the cancel news dialog should contain all buttons")
     public void the_cancel_news_dialog_should_contain_all_buttons() {
-        //CancelNewsModal cancelModal = new CancelNewsModal(hooks.getDriver());
         List<String> missingButtons = new ArrayList<>();
 
         if (!cancelModal.isContinueEditingVisible()) {
