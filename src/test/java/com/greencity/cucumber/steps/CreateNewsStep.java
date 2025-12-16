@@ -16,7 +16,6 @@ public class CreateNewsStep {
     public void the_user_opens_the_create_news_page() {
         hooks.homePage = new HomePage(hooks.getDriver());
         hooks.homePage.refreshPage();
-        
         hooks.createNewsPage = hooks.homePage
                 .getHeader()
                 .clickEcoNewsNavItem()
