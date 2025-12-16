@@ -134,7 +134,7 @@ public class CancelNewsSteps {
     @When("the user opens Create News page from Eco News")
     public void openCreateNewsFromEcoNews() {
         createNewsPage = ecoNewsPage.clickCreateNews();
-        createNewsPage.waitUntilPageLouder();
+        createNewsPage.waitUntilPageLoaded();
     }
 
     @Then("the Create News title field should be empty")
