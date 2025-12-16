@@ -119,34 +119,27 @@ public class CreateNewsStep {
         }
     }
 
-    @When("the user selects the 'News' tag")
-    public void the_user_selects_the_News_tag() {
-        new CreateNewsPage(hooks.getDriver())
-                .getNewsTagsComponent()
-                .selectTag("News");
-    }
-
-    @Then("the 'News' tag should be selected")
+    @Then("^the News tag should be selected$")
     public void the_News_tag_should_be_selected() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                 .getNewsTagsComponent()
                 .isTagSelected("News"),
-                "Tag 'News' is not selected");
+                "Tag News is not selected");
     }
 
-    @When("the user unselects the 'News' tag")
+    @When("the user unselects the News tag")
     public void the_user_unselects_the_News_tag() {
         new CreateNewsPage(hooks.getDriver())
                 .getNewsTagsComponent()
                 .unselectTag("News");
     }
 
-    @Then("the 'News' tag should not be selected")
+    @Then("the News tag should not be selected")
     public void the_News_tag_should_not_be_selected() {
         hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
                         .getNewsTagsComponent()
                         .isTagSelected("News"),
-                "Tag 'News' stayed selected");
+                "Tag News stayed selected");
     }
 
     @Then("the Image dropzone should be visible")
@@ -237,31 +230,31 @@ public class CreateNewsStep {
     }
 
 
-    @Then("the 'Cancel' button should be visible")
+    @Then("the Cancel button should be visible")
     public void the_cancel_button_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getCreateNewsButtonsComponent()
                         .getCancelButton()
                         .isDisplayed(),
-                "'Cancel' button is not visible");
+                "Cancel button is not visible");
     }
 
-    @Then("the 'Preview' button should be visible")
+    @Then("the Preview button should be visible")
     public void the_preview_button_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getCreateNewsButtonsComponent()
                         .getPreviewButton()
                         .isDisplayed(),
-                "'Preview' button is not visible");
+                "Preview button is not visible");
     }
 
-    @Then("the 'Publish' button should be visible")
+    @Then("the Publish button should be visible")
     public void the_publish_button_should_be_visible() {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getCreateNewsButtonsComponent()
                         .getPublishButton()
                         .isDisplayed(),
-                "'Publish' button is not visible");
+                "Publish button is not visible");
     }
 
     @When("the user clicks on the Title field")
@@ -275,6 +268,7 @@ public class CreateNewsStep {
     public void the_user_enters_an_empty_title() {
         new CreateNewsPage(hooks.getDriver())
                 .getTitleInput()
+                .clickOnField()
                 .typeText("");
     }
 
@@ -317,7 +311,9 @@ public class CreateNewsStep {
                 .getTitleInput()
                 .getValue()
                 .length();
-        hooks.getSoftAssert().assertTrue(actualLength <=170);
+        hooks.getSoftAssert().assertTrue(actualLength <=170,
+                "in requirements field value <= 170 characters, " +
+                        "characters but on the site implemented  is <=171");
     }
 
     @Then("the Title field should display a warning message")
@@ -326,6 +322,65 @@ public class CreateNewsStep {
                 .getTitleInput()
                 .hasWarningFieldInfo(),
                 "Title warning message is not displayed");
+    }
+
+    @Given("^the user enters a valid title '([^']+)'$")
+    public void the_user_enters_a_valid_title(String validTitle) {
+        hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
+                        .getTitleInput()
+                        .clickOnField()
+                        .typeText(validTitle)
+                        .isInvalidField(),
+                "Entered title is invalid");
+    }
+
+    @Then("the Title field should not display a warning message")
+    public void the_title_field_should_not_display_a_warning_message() {
+        hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
+                        .getTitleInput()
+                        .isInvalidField(),
+                "the Title field is displayed a warning message");
+    }
+
+    @Then("the Main text field should remain empty")
+    public void the_main_text_field_should_remain_empty() {
+        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+                        .getContentEditor()
+                        .getInputAreaText()
+                        .trim().isEmpty(),
+                "the Main text field is not empty");
+    }
+
+    @Then("the Publish button should remain disabled")
+    public void the_publish_button_should_remain_disabled() {
+        hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
+                        .getCreateNewsButtonsComponent()
+                        .isPublishEnabled(),
+                "the Publish button is enable");
+    }
+
+    @Given("the user enters valid main text of at least 20 characters")
+    public void the_user_enters_valid_main_text_of_at_least_20_characters() {
+        String validMainText = "B".repeat(21);
+        new CreateNewsPage(hooks.getDriver())
+                        .getContentEditor()
+                        .clickOnMainText()
+                        .typeText(validMainText);
+    }
+
+    @Given("the user selects the News tag")
+    public void the_user_selects_the_news_tag() {
+        new CreateNewsPage(hooks.getDriver())
+                        .getNewsTagsComponent()
+                        .selectTag("News");
+    }
+
+    @Then("the Publish button should be enabled")
+    public void the_publish_button_should_be_enabled() {
+        hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
+                        .getCreateNewsButtonsComponent()
+                        .isPublishEnabled(),
+                "the Publish button is not enabled");
     }
 
 }

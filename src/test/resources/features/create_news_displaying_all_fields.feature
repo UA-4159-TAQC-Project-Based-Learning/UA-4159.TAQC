@@ -16,10 +16,10 @@ Feature: Displaying All Fields on Create News Page
 
   Scenario: Tags block should be displayed and tags can be selected
     Then the Tags block should be visible
-    When the user selects the 'News' tag
-    Then the 'News' tag should be selected
-    When the user unselects the 'News' tag
-    Then the 'News' tag should not be selected
+    When the user selects the News tag
+    Then the News tag should be selected
+    When the user unselects the News tag
+    Then the News tag should not be selected
 
   Scenario: Image Add block should be displayed
     Then the Add Image block should be visible
@@ -48,8 +48,8 @@ Feature: Displaying All Fields on Create News Page
     And the Source input field should be visible
     And the Source field info should contain 'http(s)://'
 
-  Scenario: 'Cancel', 'Preview' and 'Publish' buttons should be displayed
+  Scenario: Cancel, Preview and Publish buttons should be displayed
     Then the buttons block should be visible
-    And the 'Cancel' button should be visible
-    And the 'Preview' button should be visible
-    And the 'Publish' button should be visible
+    And the Cancel button should be visible
+    And the Preview button should be visible
+    And the Publish button should be visible
