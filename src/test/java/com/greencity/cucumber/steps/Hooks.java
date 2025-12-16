@@ -1,5 +1,6 @@
 package com.greencity.cucumber.steps;
 
+import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.cucumber.java.After;
@@ -18,7 +19,10 @@ public class Hooks {
 
     @Getter
     private final TestValueProvider testValueProvider = new TestValueProvider();
-
+    @Getter
+    public HomePage homePage;
+    @Getter
+    public CreateNewsPage createNewsPage;
     @Getter
     private WebDriver driver;
 

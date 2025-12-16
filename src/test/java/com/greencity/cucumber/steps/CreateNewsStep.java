@@ -1,6 +1,7 @@
 package com.greencity.cucumber.steps;
 
 import com.greencity.ui.pages.CreateNewsPage;
+import com.greencity.ui.pages.homepage.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,7 +16,12 @@ public class CreateNewsStep {
 
     @Given("the user opens the 'Create News' page")
     public void the_user_opens_the_create_news_page() {
-        hooks.getDriver().get(hooks.getTestValueProvider().getBaseUIUrl() + "/news/create-news");
+        hooks.homePage = new HomePage(hooks.getDriver());
+        hooks.homePage.refreshPage();
+        hooks.createNewsPage = hooks.homePage
+                .getHeader()
+                .clickEcoNewsNavItem()
+                .clickCreateNews();
     }
 
     @Given("the page is fully loaded")
