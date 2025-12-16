@@ -5,8 +5,6 @@ import com.greencity.ui.pages.CreateNewsPreviewPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
