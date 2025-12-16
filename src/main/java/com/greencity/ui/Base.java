@@ -138,7 +138,7 @@ public abstract class Base {
         for (WebElement el : elements) {
             try {
                 if (el.isDisplayed()) return el;
-            } catch (org.openqa.selenium.StaleElementReferenceException ignored) {
+            } catch (StaleElementReferenceException ignored) {
             }
         }
         return elements.get(0);
