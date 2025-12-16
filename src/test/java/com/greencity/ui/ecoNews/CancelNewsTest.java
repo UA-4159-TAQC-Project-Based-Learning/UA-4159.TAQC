@@ -34,7 +34,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
         driver.navigate().refresh();
 
         homePage = new HomePage(driver);
-        homePage.waitUntilPageLouder();
+        homePage.waitUntilPageLoaded();
         // pre-condition for all test cases -> user is on Create News page with empty form
         createNewsPage = ((EcoNewsPage) homePage
                 .getHeader()
@@ -104,7 +104,7 @@ public class CancelNewsTest extends TestRunnerWithUser {
         cancelNewsModal.getYesCancelChangesModalButtonAlternative().click();
 
         EcoNewsPage ecoNewsPage = new EcoNewsPage(driver);
-        ecoNewsPage.waitUntilPageLouder();
+        ecoNewsPage.waitUntilPageLoaded();
         String currentUrl = driver.getCurrentUrl();
 
         // Verifications that user is redirected back to Eco News page
