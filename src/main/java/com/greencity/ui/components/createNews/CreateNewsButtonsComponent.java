@@ -31,7 +31,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
     @Step("Click 'Preview' news button")
     public CreateNewsPreviewPage clickPreviewButton() {
         clickDynamicElement(previewButton);
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new CreateNewsPreviewPage(driver);
     }
 
@@ -45,7 +45,7 @@ public class CreateNewsButtonsComponent extends BaseComponent {
             throw new IllegalArgumentException("Publish button is disabled. Check if all required fields are filled out");
         }
         publishButton.click();
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new EcoNewsPage(driver);
     }
 
