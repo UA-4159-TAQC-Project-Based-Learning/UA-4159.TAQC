@@ -21,7 +21,9 @@ public class CreateNewsButtonsStep {
     private CancelNewsModal cancelModal;
     private CreateNewsPage createNewsPage;
 
-    public CreateNewsButtonsStep(Hooks hooks) {this.hooks = hooks;}
+    public CreateNewsButtonsStep(Hooks hooks) {
+        this.hooks = hooks;
+    }
 
 
     @Given("all required fields for the news draft are filled with valid data")
