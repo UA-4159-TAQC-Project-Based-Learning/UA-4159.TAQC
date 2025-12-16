@@ -18,7 +18,7 @@ public class EcoNewsDetailsStep {
         hooks.getSoftAssert().assertTrue(new EcoNewsDetailsPage(hooks.getDriver())
                         .getTitle()
                         .contains(text),
-                "Title should be not empty");
+                "Title should contain '" + text + "'");
     }
 
     @Then("the Eco News details page is loaded")
