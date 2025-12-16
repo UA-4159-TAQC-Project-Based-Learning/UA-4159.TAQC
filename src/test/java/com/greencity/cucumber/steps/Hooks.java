@@ -17,12 +17,12 @@ import java.time.Duration;
 
 public class Hooks {
 
-    public HomePage homePage;
-    public CreateNewsPage createNewsPage;
-
     @Getter
     private final TestValueProvider testValueProvider = new TestValueProvider();
-
+    @Getter
+    public HomePage homePage;
+    @Getter
+    public CreateNewsPage createNewsPage;
     @Getter
     private WebDriver driver;
 
