@@ -21,6 +21,10 @@ public class CancelNewsModal extends BaseComponent {
     private WebElement cancelNewsChangesModalTitle;
 
     @Getter
+    @FindBy(xpath = ".//div[contains(@class, 'warning-subtitle')]")
+    private WebElement cancelNewsChangesModalSubTitle;
+
+    @Getter
     @FindBy(xpath = ".//button[text() = ' Continue editing ']")
     private WebElement continueNewsEditingModalButton;
 
@@ -47,7 +51,6 @@ public class CancelNewsModal extends BaseComponent {
     public CancelNewsModal(WebDriver driver) {
         this(driver, new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(MODAL_ROOT_LOCATOR)));
     }
-
 
     @Step("Wait until the Cancel Confirmation Dialog is visible")
     public void waitForModalVisible() {
@@ -84,8 +87,13 @@ public class CancelNewsModal extends BaseComponent {
         waitUntilElementInvisible(rootElement);
     }
 
+    @Step("Check if Cancel modal is visible")
     public boolean isVisible() {
-        return rootElement.isDisplayed();
+        try {
+            return rootElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Alternative locators for the Cancel News modal buttons.
@@ -110,5 +118,45 @@ public class CancelNewsModal extends BaseComponent {
 
         clickDynamicElement(backdrop);
         waitForModalClosed();
+    }
+
+    @Step("Check if 'Continue editing' button is visible")
+    public boolean isContinueEditingVisible() {
+        return continueNewsEditingModalButton.isDisplayed();
+    }
+
+    @Step("Check if 'Yes, cancel' button is visible")
+    public boolean isYesCancelVisible() {
+        return yesCancelChangesModalButton.isDisplayed();
+    }
+
+    @Step("Check if close icon is visible")
+    public boolean isCloseIconVisible() {
+        return crossIconForCloseChangesModal.isDisplayed();
+    }
+
+    @Step("Get Cancel modal title text")
+    public String getModalTitleText() {
+        return cancelNewsChangesModalTitle.getText().trim();
+    }
+
+    @Step("Get Cancel modal subtitle text")
+    public String getModalSubtitleText() {
+        return cancelNewsChangesModalSubTitle.getText().trim();
+    }
+
+    @Step("Check if 'Continue editing' button is enabled")
+    public boolean isContinueEditingEnabled() {
+        return continueNewsEditingModalButton.isEnabled();
+    }
+
+    @Step("Check if 'Yes, cancel' button is enabled")
+    public boolean isYesCancelEnabled() {
+        return yesCancelChangesModalButton.isEnabled();
+    }
+
+    @Step("Check if close icon is enabled")
+    public boolean isCloseIconEnabled() {
+        return crossIconForCloseChangesModal.isEnabled();
     }
 }

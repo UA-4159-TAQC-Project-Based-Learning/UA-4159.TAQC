@@ -35,7 +35,7 @@ public class AddImageComponent extends BaseComponent {
     @FindBy(css = ".cropper-buttons .primary-global-button")
     private WebElement submitButton;
 
-    @Getter
+
     @FindBy(css = ".image-block .warning")
     private WebElement validationMessage;
 

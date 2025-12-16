@@ -118,7 +118,7 @@ public abstract class Base {
     }
 
     @Step("Wait until page is loaded")
-    public void waitUntilPageLouder() {
+    public void waitUntilPageLoaded() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
     }
 
