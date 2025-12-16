@@ -38,7 +38,7 @@ public class EcoNewsSectionComponent extends BaseComponent {
     public EcoNewsPage clickReadAllNews() {
         waitUntilElementClickable(readAllNewsLink);
         clickDynamicElement(readAllNewsLink);
-        waitUntilPageLouder();
+        waitUntilPageLoaded();
         return new EcoNewsPage(driver);
     }
 }

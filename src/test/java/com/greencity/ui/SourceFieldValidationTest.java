@@ -113,7 +113,7 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 .getSourceInput()
                 .typeText(invalidUrl);
 
-        softAssert.assertFalse(createNewsPage.getCreateNewsButtonsComponent().isPublishEnabled(),
+        softAssert.assertTrue(createNewsPage.getCreateNewsButtonsComponent().isPublishDisabled(),
                 "Source input should be invalid for incorrect URL format");
         softAssert.assertAll();
     }
@@ -170,6 +170,4 @@ public class SourceFieldValidationTest extends TestRunnerWithUser {
                 "News title should match the one entered");
         softAssert.assertAll();
     }
-
-
 }

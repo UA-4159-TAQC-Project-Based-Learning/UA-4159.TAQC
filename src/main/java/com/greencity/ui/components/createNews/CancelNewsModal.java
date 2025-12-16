@@ -2,19 +2,20 @@ package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.CreateNewsPage;
+import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.pages.EditEcoNewsPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CancelNewsModal extends BaseComponent {
 
@@ -31,7 +32,7 @@ public class CancelNewsModal extends BaseComponent {
     private WebElement continueNewsEditingModalButton;
 
     @Getter
-    @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
+    @FindBy(xpath = ".//button[contains(@class, 'primary-global-button')]")
     private WebElement yesCancelChangesModalButton;
 
     @Getter
@@ -54,7 +55,6 @@ public class CancelNewsModal extends BaseComponent {
         this(driver, new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(MODAL_ROOT_LOCATOR)));
     }
 
-
     @Step("Wait until the Cancel Confirmation Dialog is visible")
     public void waitForModalVisible() {
        wait.until(ExpectedConditions.visibilityOf(rootElement));
@@ -68,10 +68,10 @@ public class CancelNewsModal extends BaseComponent {
     }
 
     @Step("Click 'Yes, cancel' button")
-    public EditEcoNewsPage clickYesCancelButton() {
+    public EcoNewsPage clickYesCancelButton() {
         waitForModalVisible();
-        yesCancelChangesModalButton.click();
-        return new EditEcoNewsPage(driver);
+        getYesCancelChangesModalButton().click();
+        return new EcoNewsPage(driver);
     }
 
     @Step("Click cross icon to close Cancel Confirmation Dialog")
@@ -90,8 +90,13 @@ public class CancelNewsModal extends BaseComponent {
         waitUntilElementInvisible(rootElement);
     }
 
+    @Step("Check if Cancel modal is visible")
     public boolean isVisible() {
-        return rootElement.isDisplayed();
+        try {
+            return rootElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Alternative locators for the Cancel News modal buttons.
@@ -118,111 +123,44 @@ public class CancelNewsModal extends BaseComponent {
         waitForModalClosed();
     }
 
-    @Step("Get Cancel Confirmation Dialog title text")
+    @Step("Check if 'Continue editing' button is visible")
+    public boolean isContinueEditingVisible() {
+        return continueNewsEditingModalButton.isDisplayed();
+    }
+
+    @Step("Check if 'Yes, cancel' button is visible")
+    public boolean isYesCancelVisible() {
+        return yesCancelChangesModalButton.isDisplayed();
+    }
+
+    @Step("Check if close icon is visible")
+    public boolean isCloseIconVisible() {
+        waitUntilElementVisible(crossIconForCloseChangesModal);
+        return crossIconForCloseChangesModal.isDisplayed();
+    }
+
+    @Step("Get Cancel modal title text")
     public String getModalTitleText() {
-        waitUntilElementVisible(cancelNewsChangesModalTitle);
-        try {
-            return cancelNewsChangesModalTitle.getText().trim();
-        } catch (Exception e) {
-            return "";
-        }
+        return cancelNewsChangesModalTitle.getText().trim();
     }
 
-    @Step("Get Cancel Confirmation Dialog subtitle text")
+    @Step("Get Cancel modal subtitle text")
     public String getModalSubtitleText() {
-        waitUntilElementVisible(cancelNewsChangesModalTitle);
-        try {
-            return cancelNewsChangesModalSubTitle.getText().trim();
-        } catch (Exception e) {
-            return "";
-        }
+        return cancelNewsChangesModalSubTitle.getText().trim();
     }
 
-    @Step("Are all expected dialog buttons visible")
-    public boolean areButtonsVisible() {
-        waitForModalVisible();
-        boolean continueVisible = false;
-        boolean yesVisible = false;
-        boolean closeVisible = false;
-
-        try {
-            waitUntilElementVisible(continueNewsEditingModalButton);
-            continueVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(continueNewsEditingModalButtonAlternative);
-                continueVisible = true;
-            } catch (Exception ignored2) {
-            }
-        }
-
-        try {
-            waitUntilElementVisible(yesCancelChangesModalButton);
-            yesVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(yesCancelChangesModalButtonAlternative);
-                yesVisible = true;
-            } catch (Exception ignored2) {
-            }
-        }
-
-        try {
-            waitUntilElementVisible(crossIconForCloseChangesModal);
-            closeVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(crossIconForCloseChangesModalAlternative);
-                closeVisible = true;
-            } catch (Exception ignored2) {
-            }
-        }
-
-        return continueVisible && yesVisible && closeVisible;
+    @Step("Check if 'Continue editing' button is enabled")
+    public boolean isContinueEditingEnabled() {
+        return continueNewsEditingModalButton.isEnabled();
     }
 
-    @Step("Get missing dialog controls")
-    public List<String> getMissingControls() {
-        waitForModalVisible();
-        List<String> missing = new ArrayList<>();
-
-        boolean contVisible = false;
-        try {
-            waitUntilElementVisible(continueNewsEditingModalButton);
-            contVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(continueNewsEditingModalButtonAlternative);
-                contVisible = true;
-            } catch (Exception ignored2) {}
-        }
-        if (!contVisible) missing.add("Continue editing");
-
-        boolean yesVisible = false;
-        try {
-            waitUntilElementVisible(yesCancelChangesModalButton);
-            yesVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(yesCancelChangesModalButtonAlternative);
-                yesVisible = true;
-            } catch (Exception ignored2) {}
-        }
-        if (!yesVisible) missing.add("Yes, cancel");
-
-        boolean closeVisible = false;
-        try {
-            waitUntilElementVisible(crossIconForCloseChangesModal);
-            closeVisible = true;
-        } catch (Exception ignored) {
-            try {
-                waitUntilElementVisible(crossIconForCloseChangesModalAlternative);
-                closeVisible = true;
-            } catch (Exception ignored2) {}
-        }
-        if (!closeVisible) missing.add("Close icon");
-
-        return missing;
+    @Step("Check if 'Yes, cancel' button is enabled")
+    public boolean isYesCancelEnabled() {
+        return yesCancelChangesModalButton.isEnabled();
     }
 
+    @Step("Check if close icon is enabled")
+    public boolean isCloseIconEnabled() {
+        return crossIconForCloseChangesModal.isEnabled();
+    }
 }
