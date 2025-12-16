@@ -2,12 +2,15 @@ package com.greencity.ui.components.createNews;
 
 import com.greencity.ui.components.BaseComponent;
 import com.greencity.ui.pages.CreateNewsPage;
+import com.greencity.ui.pages.EcoNewsPage;
 import com.greencity.ui.pages.EditEcoNewsPage;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,7 +32,7 @@ public class CancelNewsModal extends BaseComponent {
     private WebElement continueNewsEditingModalButton;
 
     @Getter
-    @FindBy(xpath = ".//button[contains(@class, 'secondary-global-button')]")
+    @FindBy(xpath = ".//button[contains(@class, 'primary-global-button')]")
     private WebElement yesCancelChangesModalButton;
 
     @Getter
@@ -65,10 +68,10 @@ public class CancelNewsModal extends BaseComponent {
     }
 
     @Step("Click 'Yes, cancel' button")
-    public EditEcoNewsPage clickYesCancelButton() {
+    public EcoNewsPage clickYesCancelButton() {
         waitForModalVisible();
-        yesCancelChangesModalButton.click();
-        return new EditEcoNewsPage(driver);
+        getYesCancelChangesModalButton().click();
+        return new EcoNewsPage(driver);
     }
 
     @Step("Click cross icon to close Cancel Confirmation Dialog")
@@ -132,6 +135,7 @@ public class CancelNewsModal extends BaseComponent {
 
     @Step("Check if close icon is visible")
     public boolean isCloseIconVisible() {
+        waitUntilElementVisible(crossIconForCloseChangesModal);
         return crossIconForCloseChangesModal.isDisplayed();
     }
 

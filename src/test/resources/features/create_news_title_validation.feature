@@ -12,7 +12,7 @@ Feature: Title Field Validation on Create News Page
     When the user clicks on the Title field
     And the user enters an empty title
     Then the Title field should be marked as invalid
-    And the Publish button should be disabled
+    And the Publish button should be disabled in News creation page
     And the Title counter should display '0/170'
 
   Scenario: Title input should not exceed 170 characters

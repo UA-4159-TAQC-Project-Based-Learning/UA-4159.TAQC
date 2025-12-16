@@ -10,7 +10,7 @@ Feature: Create News - Cancel flow
     And the Create News page is fully loaded
 
   Scenario: Cancel button is visible and enabled on Create News page
-    Then the Cancel button should be visible
+    Then the Cancel button should be visible in newsPage
     And the Cancel button should be enabled
 
   Scenario Outline: Cancel with filled form shows confirmation popup
