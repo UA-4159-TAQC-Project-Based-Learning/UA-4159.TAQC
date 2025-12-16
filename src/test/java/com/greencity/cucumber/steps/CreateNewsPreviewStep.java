@@ -3,7 +3,6 @@ package com.greencity.cucumber.steps;
 import com.greencity.ui.pages.*;
 import com.greencity.ui.components.EcoNewsListCardComponent;
 import com.greencity.ui.pages.CreateNewsPreviewPage;
-import com.greencity.ui.pages.homepage.HomePage;
 import com.greencity.utils.TestValueProvider;
 import io.cucumber.java.en.*;
 import org.testng.asserts.SoftAssert;
