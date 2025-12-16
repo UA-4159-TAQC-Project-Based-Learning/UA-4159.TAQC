@@ -11,7 +11,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class CreateNewsPreviewStep {
-    protected static TestValueProvider testValueProvider;
     private final Hooks hooks;
     private final SoftAssert softAssert;
 
