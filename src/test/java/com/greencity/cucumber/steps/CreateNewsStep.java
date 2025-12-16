@@ -288,7 +288,7 @@ public class CreateNewsStep {
                 "Publish button is not disabled");
     }
 
-    @Then("the Title counter should display '([^']+)'$")
+    @Then("^the Title counter should display '([^']+)'$")
     public void the_title_counter_should_display_text(String text) {
         hooks.getSoftAssert().assertTrue(new CreateNewsPage(hooks.getDriver())
                         .getTitleInput()
