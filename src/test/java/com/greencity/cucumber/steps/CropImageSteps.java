@@ -27,24 +27,6 @@ public class CropImageSteps {
         this.hooks = hooks;
     }
 
-    @Given("the user opens Eco News via header")
-    public void openEcoNewsViaHeader() {
-        ecoNewsPage = (EcoNewsPage) new HomePage(hooks.getDriver())
-                .getHeader()
-                .openNavItem(NavItem.ECO_NEWS);
-        ecoNewsPage.waitUntilPageLoaded();
-    }
-
-    @Given("the user opens the Create News page")
-    public void openCreateNewsPage() {
-        createNewsPage = ecoNewsPage.clickCreateNews();
-    }
-
-    @Given("the Create News page is fully loaded")
-    public void createNewsPageLoaded() {
-        createNewsPage.waitUntilPageLoaded();
-    }
-
     @When("the user uploads image for cropping {string}")
     public void uploadImageForCropping(String fileName) {
         String imagePath = Paths.get("src/test/resources/images", fileName)

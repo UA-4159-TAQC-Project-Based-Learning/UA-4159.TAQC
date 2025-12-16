@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewsButtonsStep {
-    private Hooks hooks;
+    private final Hooks hooks;
     private CancelNewsModal cancelModal;
     private CreateNewsPage createNewsPage;
 

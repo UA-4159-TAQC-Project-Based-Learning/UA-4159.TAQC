@@ -43,7 +43,7 @@ public class CancelNewsSteps {
         createNewsPage.waitUntilPageLoaded();
     }
 
-    @Then("the Cancel button should be visible")
+    @Then("the Cancel button should be visible in newsPage")
     public void cancelButtonVisible() {
         CreateNewsButtonsComponent buttons = createNewsPage.getCreateNewsButtonsComponent();
         hooks.getSoftAssert().assertTrue(

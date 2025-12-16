@@ -286,7 +286,7 @@ public class CreateNewsStep {
                 "Title field is not marked as invalid");
     }
 
-    @Then("the Publish button should be disabled")
+    @Then("the Publish button should be disabled in News creation page")
     public void the_publish_button_should_be_disabled() {
         hooks.getSoftAssert().assertFalse(new CreateNewsPage(hooks.getDriver())
                         .getCreateNewsButtonsComponent()
