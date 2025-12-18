@@ -11,10 +11,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class LanguageSwitcher extends BaseElement {
 
-    @Getter
-    @FindBy(css = "[aria-label='language switcher']")
-    private WebElement languageToggle;
-
     public LanguageSwitcher(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
     }
@@ -36,7 +32,7 @@ public class LanguageSwitcher extends BaseElement {
      */
     @Step("Switch language to '{label}'")
     public void selectLanguage(String label) {
-        clickDynamicElement(languageToggle);
+        clickDynamicElement(this.rootElement);
 
         WebElement option = rootElement.findElement(
                 By.xpath(".//span[normalize-space()='" + label + "']"));

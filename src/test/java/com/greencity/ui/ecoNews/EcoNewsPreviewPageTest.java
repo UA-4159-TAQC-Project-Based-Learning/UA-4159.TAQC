@@ -14,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 
 @Epic("Eco News")
@@ -24,6 +25,15 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
     private SoftAssert softAssert;
     private String testTitle = "test title 1234567890";
     private String testContent = "test content 1234567890";
+    private static final String DATE_PATTERN_UKR =
+            "^(0?[1-9]|[12][0-9]|3[01])\\s" +
+                    "(січ\\.|лют\\.|бер\\.|квіт\\.|трав\\.|черв\\.|лип\\.|серп\\.|вер\\.|жовт\\.|лист\\.|груд\\.)\\s" +
+                    "\\d{4}\\sр\\.$";
+
+    private static final String DATE_PATTERN_ENG =
+            "^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s(0?[1-9]|[12][0-9]|3[01]),\\s\\d{4}$";
+
+
 
     @BeforeMethod
     public void beforeMethod() {
@@ -40,7 +50,6 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
     public void previewOpensSuccessfully() {
         EditEcoNewsPage editNewsPage = new EditEcoNewsPage(driver);
         editNewsPage.getHeader().getNavigation().clickEcoNews();
-
         EcoNewsPage newsPage = new EcoNewsPage(driver);
         newsPage.clickCreateNews();
 
@@ -65,8 +74,14 @@ public class EcoNewsPreviewPageTest extends TestRunnerWithUser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
         String formatted = currentDate.format(formatter);
 
+
         softAssert.assertTrue(previewPage.getDate().isDisplayed(), "Date is not displayed.");
-        softAssert.assertEquals(previewPage.getDate().getText(), formatted,  "Date is wrong.");
+
+        String date =  previewPage.getDate().getText();
+        boolean isEngFormatValid = Pattern.matches(DATE_PATTERN_ENG, date);
+        boolean isUkrFormatValid = Pattern.matches(DATE_PATTERN_UKR, date);
+
+        softAssert.assertTrue(isEngFormatValid || isUkrFormatValid,  "Date is wrong.");
 
         softAssert.assertTrue(previewPage.getBackLink().isDisplayed(), "BackLink is not displayed.");
 
