@@ -6,6 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CreateNewsStep {
     private Hooks hooks;
@@ -419,4 +423,25 @@ public class CreateNewsStep {
                 "no error message should be displayed");
     }
 
+    @Given("the user selects three news tags")
+    public void the_user_selects_three_news_tags() {
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+
+        page.getNewsTagsComponent().selectTag("News");
+        page.getNewsTagsComponent().selectTag("Events");
+        page.getNewsTagsComponent().selectTag("Education");
+    }
+
+    @Then("the user should see the news successfully published notification")
+    public void the_user_should_see_the_news_successfully_published_notification() {
+        CreateNewsPage page = new CreateNewsPage(hooks.getDriver());
+
+        new WebDriverWait(hooks.getDriver(), Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(page.getNewsPublishedMessage()));
+
+        hooks.getSoftAssert().assertTrue(
+                page.getNewsPublishedMessage()
+                        .isDisplayed(),
+                "News published notification is not displayed");
+    }
 }
