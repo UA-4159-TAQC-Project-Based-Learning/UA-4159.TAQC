@@ -103,4 +103,9 @@ public class ContentEditorComponent extends AbstractInputComponent {
         return hasClass(notEnoughCharacterMessage, "warning");
     }
 
+    @Step ("Check is field has warning message")
+    public boolean hasTextInputAreaWarning() {
+        return hasClass(textInputArea, "warning");
+    }
+
 }
