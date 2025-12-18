@@ -370,6 +370,53 @@ public class CreateNewsStep {
                 "the Publish button is not enabled");
     }
 
+    @When("the user enters {string} in the Content field")
+    public void the_user_enters_text_in_the_content_field(String text) {
+        createNewsPage.getContentEditor()
+                .clickOnMainText()
+                .typeText(text);
+    }
 
+    @Then ("an error message should appear in red with text {string}")
+    public void an_error_message_should_appear_in_red_with_text(String expectedMessage) {
+        String actualMessage = createNewsPage
+                .getContentEditor()
+                .getFieldInfoElement()
+                .getText()
+                .trim();
+
+        hooks.getSoftAssert().assertEquals(actualMessage, expectedMessage,
+                "an error message does not have expected message: " + expectedMessage);
+    }
+
+    @When("the user enters {string} characters in the Content field")
+    public void the_user_enters_over_maximum_characters_in_the_content_field(String charactersNumber) {
+        int overMaximumCharacters = Integer.parseInt(charactersNumber);
+        String longContentText = "R".repeat(overMaximumCharacters);
+        createNewsPage.getContentEditor()
+                .clickOnMainText()
+                .typeText(longContentText);
+    }
+
+    @Then ("the Content field value should be truncated to {string} characters")
+    public void the_content_field_value_should_be_truncated_to_maximum_characters(String charactersNumber) {
+        int expectedCharacterNumber = Integer.parseInt(charactersNumber);
+        int actualCharacterNumber = createNewsPage
+                .getContentEditor()
+                .getInputAreaText()
+                .trim()
+                .length();
+
+        hooks.getSoftAssert().assertTrue(actualCharacterNumber <= expectedCharacterNumber,
+                "the Content field value has different number of characters");
+    }
+
+    @Then ("no error message should be displayed")
+    public void no_error_message_should_be_displayed() {
+        hooks.getSoftAssert().assertFalse(createNewsPage
+                        .getContentEditor()
+                        .hasTextInputAreaWarning(),
+                "no error message should be displayed");
+    }
 
 }
