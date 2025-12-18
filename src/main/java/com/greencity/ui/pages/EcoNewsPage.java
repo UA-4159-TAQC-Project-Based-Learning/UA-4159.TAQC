@@ -154,6 +154,16 @@ public class EcoNewsPage extends BasePage {
         return null;
     }
 
+    @Step("Get table card by containing title: '{title}'")
+    public EcoNewsTableCardComponent getOneTableCardByPartialTitle(String title) {
+        List<EcoNewsTableCardComponent> listOfTableCards = this.getAllTableCards();
+        for (EcoNewsTableCardComponent item : listOfTableCards) {
+            if (item.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                return item;
+            }
+        }
+        return null;
+    }
 
     @Step("Check if Eco News Page is opened")
     public boolean ecoNewsPageIsOpened() {

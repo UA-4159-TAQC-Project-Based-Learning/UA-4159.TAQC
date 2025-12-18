@@ -6,7 +6,7 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
     Then the Eco News page is loaded
 
   Scenario: Existing Eco News details page is loaded
-    When the user clicks on Eco News with title containing 'test title' in the table
+    When the user clicks on Eco News with title containing 'test' in the table
     Then the Eco News details page is loaded
     And the Eco News details title is populated
     And the Eco News details author is populated
@@ -22,17 +22,17 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
 
     When the user scrolls to the comments section
     And the user clicks on the comment input field
-    And the user enters text "test"
-    And the user clicks the "Comment" button
+    And the user enters text 'test'
+    And the user clicks the 'Comment' button
 
-    Then a comment with text "test" appears
+    Then a comment with text 'test' appears
     And the comment's user name is populated
     And the comment's date is populated
 
-    When the user clicks delete on comment with text "test"
+    When the user clicks delete on comment with text 'test'
     Then a delete confirmation popup appears
 
     When the user confirms deletion in the popup
     Then the popup disappears
-    And the comment with text "test" is not displayed
+    And the comment with text 'test' is not displayed
 
