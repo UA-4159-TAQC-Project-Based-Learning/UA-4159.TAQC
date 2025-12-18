@@ -3,9 +3,6 @@ package com.greencity.cucumber.steps;
 import com.greencity.ui.components.createNews.AddImageComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsPage;
-import com.greencity.ui.pages.homepage.HomePage;
-import com.greencity.ui.utils.NavItem;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Dimension;
@@ -29,6 +26,8 @@ public class CropImageSteps {
 
     @When("the user uploads image for cropping {string}")
     public void uploadImageForCropping(String fileName) {
+        createNewsPage = new CreateNewsPage(hooks.getDriver());
+
         String imagePath = Paths.get("src/test/resources/images", fileName)
                 .toAbsolutePath()
                 .toString();
