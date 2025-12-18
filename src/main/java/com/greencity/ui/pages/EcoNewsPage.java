@@ -5,6 +5,7 @@ import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.components.newsFilter.NewsFilterComponent;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -69,6 +70,11 @@ public class EcoNewsPage extends BasePage {
     @Getter
     @FindBy(css = "div.title-list.word-wrap")
     private WebElement randomNewsTitle;
+
+    @Getter
+    By successSnackBarLocator = By.cssSelector(".cdk-overlay-container .mat-mdc-snack-bar-container simple-snack-bar .mat-mdc-snack-bar-label");
+
+    private final By ecoNewsCardRootsStable = By.cssSelector("div.list-gallery");
 
     public EcoNewsPage(WebDriver driver) {
         super(driver);
@@ -156,5 +162,30 @@ public class EcoNewsPage extends BasePage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Step("Wait to get success message")
+    public WebElement waitForSuccessMessage() {
+        return new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(successSnackBarLocator));
+    }
+
+    @Step("Get all news cards (stable)")
+    public List<EcoNewsListCardComponent> getAllCardsStable() {
+        List<WebElement> roots = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                        ecoNewsCardRootsStable, 0));
+
+        return roots.stream()
+                .map(root -> new EcoNewsListCardComponent(driver, root))
+                .collect(Collectors.toList());
+    }
+
+    @Step("Find news card by title (stable): '{title}'")
+    public EcoNewsListCardComponent findCardByTitleStable(String title) {
+        return getAllCardsStable().stream()
+                .filter(card -> card.getTitleTextOtherOption().equalsIgnoreCase(title))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -36,14 +36,14 @@ Feature: Create News - Cancel, Preview and Publish buttons
 
   @create-news @buttons @cancel
   Scenario: Clicking the close icon closes the confirmation dialog without cancelling
-    Given a confirmation dialog should be visible
+    Given a confirmation dialog is visible
     When click the dialog close icon
     Then the confirmation dialog should be closed
     And the Create News page is opened with my draft preserved
 
   @create-news @buttons @cancel
   Scenario: Clicking outside the pop-up closes the confirmation dialog (backdrop)
-    Given a confirmation dialog should be visible
+    Given a confirmation dialog is visible
     When click outside the pop-up on the backdrop
     Then the confirmation dialog should be closed
     And the Create News page is opened with my draft preserved
@@ -56,5 +56,6 @@ Feature: Create News - Cancel, Preview and Publish buttons
   @create-news @buttons @publish
   Scenario: Publish button submits the news for publication
     When click the Publish button
-    Then the news should be submitted for publication
-    And the system should show confirmation or navigate according to the post-publish flow
+    Then success message is displayed containing text 'Your news has been successfully published'
+    And the user is navigated away from the Create News page to the Eco News page
+    And published news with title is in the news list

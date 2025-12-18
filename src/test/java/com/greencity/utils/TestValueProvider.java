@@ -133,5 +133,4 @@ public class TestValueProvider {
         return new MandatoryFieldsNewsData(title, tags, contentText);
 
     }
-
 }
