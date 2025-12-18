@@ -36,7 +36,7 @@ public class CreateNewsPreviewStep {
         generateTestData();
     }
 
-    @And("the user clicks on 'Eco News' in the header")
+    @And("the user clicks on Eco News in the header")
     public void theUserClicksEcoNewsInHeader() {
         editEcoNewsPage = new EditEcoNewsPage(hooks.getDriver());
         editEcoNewsPage.getHeader().getNavigation().clickEcoNews();
