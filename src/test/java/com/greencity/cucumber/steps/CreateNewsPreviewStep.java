@@ -35,6 +35,7 @@ public class CreateNewsPreviewStep {
 
     @Then("the Eco News page is loaded")
     public void ecoNewsPageIsLoaded() {
+        new EcoNewsPage(hooks.getDriver()).waitUntilPageLoaded();
         hooks.getSoftAssert().assertTrue(
                 ecoNewsPage.ecoNewsPageIsOpened(),
                 "Eco News page is not loaded"
