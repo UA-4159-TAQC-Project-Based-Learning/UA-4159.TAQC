@@ -17,6 +17,10 @@ public class EcoNewsListCardComponent extends BaseComponent {
     private WebElement title;
 
     @Getter
+    @FindBy(xpath = ".//div[contains(@class, 'title-list')]")
+    private WebElement titleOtherOption;
+
+    @Getter
     @FindBy(css = ".eco-news_list-content-text")
     private WebElement description;
 
@@ -45,6 +49,10 @@ public class EcoNewsListCardComponent extends BaseComponent {
 
     public String getTitleText() {
         return title.getText().trim();
+    }
+
+    public String getTitleTextOtherOption() {
+        return titleOtherOption.getText().trim();
     }
 
     public String getDescriptionText() {

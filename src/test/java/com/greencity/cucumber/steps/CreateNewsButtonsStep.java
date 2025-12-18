@@ -1,8 +1,10 @@
 package com.greencity.cucumber.steps;
 
 import com.greencity.data.MandatoryFieldsNewsData;
+import com.greencity.ui.components.EcoNewsListCardComponent;
 import com.greencity.ui.components.createNews.CancelNewsModal;
 import com.greencity.ui.pages.CreateNewsPage;
+import com.greencity.ui.pages.CreateNewsPreviewPage;
 import com.greencity.ui.pages.EcoNewsPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,7 +27,6 @@ public class CreateNewsButtonsStep {
         this.hooks = hooks;
     }
 
-
     @Given("all required fields for the news draft are filled with valid data")
     public void all_required_fields_for_the_news_draft_are_filled_with_valid_data() {
         createNewsPage = new CreateNewsPage(hooks.getDriver());
@@ -40,16 +41,62 @@ public class CreateNewsButtonsStep {
 
     @Given("a confirmation dialog is visible")
     public void a_confirmation_dialog_is_visible() {
-        //CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
         cancelModal = createNewsPage.openCancelModal();
         hooks.getSoftAssert().assertTrue(cancelModal.isVisible(), "Confirmation dialog is not visible");
     }
 
     @When("click the Cancel button")
     public void click_the_cancel_button() {
-        CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
+        createNewsPage = new CreateNewsPage(hooks.getDriver());
         createNewsPage.waitUntilPageLoaded();
         cancelModal = createNewsPage.openCancelModal();
+    }
+
+    @When("click the Preview button")
+    public void click_the_preview_button() {
+        createNewsPage = new CreateNewsPage(hooks.getDriver());
+        createNewsPage.waitUntilPageLoaded();
+        CreateNewsPreviewPage createNewsPreviewPage = createNewsPage.getCreateNewsButtonsComponent().clickPreviewButton();
+    }
+    @When("click the Publish button")
+    public void click_the_publish_button() {
+        createNewsPage = new CreateNewsPage(hooks.getDriver());
+        createNewsPage.waitUntilPageLoaded();
+        EcoNewsPage ecoNewsPage = createNewsPage.getCreateNewsButtonsComponent().clickPublish();
+    }
+
+    @Then("success message is displayed containing text 'Your news has been successfully published'")
+    public void success_message_is_displayed_containing_text_Your_news_has_been_successfully_published() {
+        EcoNewsPage ecoNewsPage = new EcoNewsPage(hooks.getDriver());
+        String expectedText = hooks.getTestValueProvider().getProperty("news.success.message");
+        WebElement actualMessage = ecoNewsPage.waitForSuccessMessage();
+
+        hooks.getSoftAssert().assertTrue(actualMessage.isDisplayed(),
+                "Success message is not displayed");
+
+        String actualText = actualMessage.getText().trim();
+        hooks.getSoftAssert().assertEquals(actualText, expectedText, "Success message text is incorrect");
+    }
+
+    @Then("published news with title is in the news list")
+    public void published_news_with_title_is_in_the_news_list() {
+        EcoNewsPage ecoNewsPage = new EcoNewsPage(hooks.getDriver());
+        String expectedTitle = hooks.getTestValueProvider().getProperty("news.title.valid");
+
+        ecoNewsPage.refreshPage();
+        ecoNewsPage.waitUntilPageLoaded();
+
+        EcoNewsListCardComponent searchResult = ecoNewsPage.findCardByTitleStable(expectedTitle);
+
+        hooks.getSoftAssert().assertNotNull(searchResult, "Published news with title '" + expectedTitle + "' is not found in the news list");
+        hooks.getSoftAssert().assertEquals(searchResult.getTitleTextOtherOption(), expectedTitle, "Title of the found news card does not match expected");
+    }
+
+    @Then("a preview of the news entry should be displayed to the user")
+    public void a_preview_of_the_news_entry_should_be_displayed_to_the_user() {
+        String actualUrl = hooks.getDriver().getCurrentUrl();
+        String expectedUrl = hooks.getTestValueProvider().getBaseUIUrl() + "/news/preview";
+        hooks.getSoftAssert().assertEquals(actualUrl, expectedUrl, "Expected preview Eco news page is not opened");
     }
 
     @Then("a confirmation dialog should be visible")
@@ -97,18 +144,33 @@ public class CreateNewsButtonsStep {
         ecoNewsPage.waitUntilPageLoaded();
     }
 
+    @When("click the dialog close icon")
+    public void click_the_dialog_close_icon() {
+        createNewsPage = cancelModal.clickCloseIcon();
+        createNewsPage.waitUntilPageLoaded();
+    }
+
+    @When("click outside the pop-up on the backdrop")
+    public void click_outside_the_pop_up_on_the_backdrop() {
+        hooks.getDriver().manage().timeouts().implicitlyWait(Duration.ZERO);
+        cancelModal.closeByClickingOutsidePopUp();
+        hooks.getDriver().manage().timeouts()
+                .implicitlyWait(Duration.ofSeconds(hooks.getTestValueProvider().getImplicitlyWait()));
+    }
+
+
     @Then("the confirmation dialog should be closed")
     public void the_confirmation_dialog_should_be_closed() {
-        hooks.getWait().pollingEvery(Duration.ofMillis(200)).until(ExpectedConditions.invisibilityOfElementLocated(CancelNewsModal.getMODAL_ROOT_LOCATOR()));
-        boolean isModalInvisible = hooks.getDriver()
-                                .findElements(CancelNewsModal.getMODAL_ROOT_LOCATOR())
-                                .isEmpty();
+        hooks.getDriver().manage().timeouts().implicitlyWait(Duration.ZERO);
+        boolean isModalInvisible = hooks.getWait().until(ExpectedConditions.invisibilityOfElementLocated(CancelNewsModal.getMODAL_ROOT_LOCATOR()));
         hooks.getSoftAssert().assertTrue(isModalInvisible, "Confirmation dialog should not be visible");
+
+        hooks.getDriver().manage().timeouts()
+                .implicitlyWait(Duration.ofSeconds(hooks.getTestValueProvider().getImplicitlyWait()));
     }
 
     @Then("the Create News page is opened with my draft preserved")
     public void the_create_news_page_is_opened_with_my_draft_preserved() {
-        //CreateNewsPage createNewsPage = new CreateNewsPage(hooks.getDriver());
         MandatoryFieldsNewsData expectedData = hooks.getTestValueProvider().getValidMandatoryFieldsNewsData();
 
         hooks.getSoftAssert().assertTrue(createNewsPage.getPageTitle().isDisplayed(), "Create News page is not opened");
@@ -136,7 +198,7 @@ public class CreateNewsButtonsStep {
     }
 
     @Then("the user is navigated away from the Create News page to the Eco News page")
-    public  void the_user_is_navigated_away_from_the_Create_News_page_to_the_Eco_News_page() {
+    public void the_user_is_navigated_away_from_the_Create_News_page_to_the_Eco_News_page() {
         String actualUrl = hooks.getDriver().getCurrentUrl();
         String expectedUrl = hooks.getTestValueProvider().getBaseUIUrl() + "/news";
         hooks.getSoftAssert().assertEquals(actualUrl, expectedUrl, "Expected Eco news page is not opened");
