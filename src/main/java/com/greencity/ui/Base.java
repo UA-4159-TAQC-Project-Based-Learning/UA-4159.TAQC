@@ -1,6 +1,7 @@
 package com.greencity.ui;
 
 import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +16,9 @@ public abstract class Base {
     protected WebDriverWait wait;
     protected JavascriptExecutor threadJs;
     protected Actions actions;
+
+    @Getter
+    final long DEFAULT_IMPLICIT = 5; // seconds
 
     public Base(WebDriver driver) {
         this.driver = driver;
@@ -142,5 +146,9 @@ public abstract class Base {
             }
         }
         return elements.get(0);
+    }
+
+    public void setImplicitWaitSeconds(long seconds) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
 }
