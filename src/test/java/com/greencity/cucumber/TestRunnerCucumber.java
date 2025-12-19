@@ -7,13 +7,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @CucumberOptions(
-        features = {
-                "src/test/resources/features/create_news_image_upload.feature",
-                "src/test/resources/features/create_news_tag_selection.feature"
-        },
-        glue = {"com.greencity.cucumber.steps"},
-        plugin = {"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+        features = "src/test/resources/features",
+        glue = {"com.greencity.cucumber.steps"}
 )
+
 public class TestRunnerCucumber extends AbstractTestNGCucumberTests {
 
     private TestNGCucumberRunner testNGCucumberRunner;
