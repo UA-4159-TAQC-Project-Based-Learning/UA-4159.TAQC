@@ -15,7 +15,7 @@ Feature: Content Field Validation on Create News Page
     And the Publish button should remain disabled
 
   Scenario: Content input truncated when exceeding 63,206 characters
-    When the user enters '63207' characters in the Content field
+    When the user enters '63210' characters in the Content field
     Then the Content field value should be truncated to '63206' characters
     And no error message should be displayed
 
