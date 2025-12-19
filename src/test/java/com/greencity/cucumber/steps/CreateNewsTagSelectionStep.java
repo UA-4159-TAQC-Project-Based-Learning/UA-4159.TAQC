@@ -61,14 +61,16 @@ public class CreateNewsTagSelectionStep {
     @Then("the published news should contain the tags: {string}")
     public void the_published_news_should_contain_the_tags(String tags) {
         for (String tag : parseTags(tags)) {
-            hooks.getSoftAssert().assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag(tag), "Expected tag '" + tag + "' was not found on published news");
+            hooks.getSoftAssert().assertTrue(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag(tag),
+                    "Expected tag '" + tag + "' was not found on published news");
         }
     }
 
     @Then("the published news should not contain tags: {string}")
     public void the_published_news_should_not_contain_tags(String tags) {
         for (String tag : parseTags(tags)) {
-            hooks.getSoftAssert().assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag(tag), "Unexpected tag '" + tag + "' was found on published news");
+            hooks.getSoftAssert().assertFalse(ecoNewsDetailsPage.getNewsTagsInfoComponent().hasTag(tag),
+                    "Unexpected tag '" + tag + "' was found on published news");
         }
     }
 
