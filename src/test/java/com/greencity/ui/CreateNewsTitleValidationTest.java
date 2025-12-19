@@ -45,8 +45,8 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
                 "Expected title input has ng-invalid class tag when field is empty");
 
         boolean publishEnabled = createNewsPage.getCreateNewsButtonsComponent()
-                .isPublishEnabled();
-        softAssert.assertFalse(publishEnabled,
+                .isPublishDisabled();
+        softAssert.assertTrue(publishEnabled,
                 "Expected Publish button to be disabled when title is empty");
 
         boolean fieldInfoMessage = createNewsPage.getTitleInput()
@@ -106,8 +106,8 @@ public class CreateNewsTitleValidationTest extends TestRunnerWithUser {
         softAssert.assertTrue(mainText, "Main text should be empty when only title is entered");
 
         boolean actualPublishEnabled = createNewsPage.getCreateNewsButtonsComponent()
-                .isPublishEnabled();
-        softAssert.assertFalse(actualPublishEnabled,
+                .isPublishDisabled();
+        softAssert.assertTrue(actualPublishEnabled,
                 "Publish button should not be enabled before entering main text and selecting news tag");
 
 
