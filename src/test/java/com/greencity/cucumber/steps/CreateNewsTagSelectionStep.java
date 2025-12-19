@@ -93,9 +93,9 @@ public class CreateNewsTagSelectionStep {
 
     @Then("the Publish button should be disabled")
     public void the_Publish_button_should_be_disabled() {
-        boolean publishEnabled = createNewsPage.getCreateNewsButtonsComponent().isPublishEnabled();
+        boolean publishDisabled = createNewsPage.getCreateNewsButtonsComponent().isPublishDisabled();
 
-        hooks.getSoftAssert().assertFalse(publishEnabled, "Expected Publish button to be disabled when tags are not selected");
+        hooks.getSoftAssert().assertTrue(publishDisabled, "Expected Publish button to be disabled when tags are not selected");
     }
 
 }
