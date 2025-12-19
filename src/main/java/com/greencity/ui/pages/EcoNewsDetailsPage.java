@@ -118,6 +118,10 @@ public class EcoNewsDetailsPage extends BasePage {
         return dateInfoElement.getText();
     }
 
+    public String getText() {
+        return newsTextElement.getText();
+    }
+
     public EditEcoNewsPage clickEditNewsButton() {
         this.editNewsButton.click();
         return new EditEcoNewsPage(driver);

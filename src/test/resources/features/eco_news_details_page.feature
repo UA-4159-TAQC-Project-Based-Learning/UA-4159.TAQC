@@ -2,8 +2,8 @@ Feature: GreenCity Eco News DetailsPage Verification for logged in user
 
   Background:
     Given the user is logged in the system
-    Given the user clicks on 'Eco News' in the header
-    Then the Eco News page is loaded
+    Given the user clicks on 'Eco News' in the header menu
+    Then the Eco News page is loaded successfully
 
   Scenario: Existing Eco News details page is loaded
     When the user clicks on Eco News with title containing 'test' in the table
