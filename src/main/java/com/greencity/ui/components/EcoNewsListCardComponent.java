@@ -88,5 +88,10 @@ public class EcoNewsListCardComponent extends BaseComponent {
         return new EcoNewsDetailsPage(driver);
     }
 
+    public EcoNewsDetailsPage clickOnCardStable() {
+        titleOtherOption.click();
+        return new EcoNewsDetailsPage(driver);
+    }
+
 
 }

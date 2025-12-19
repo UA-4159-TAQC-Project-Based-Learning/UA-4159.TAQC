@@ -131,4 +131,10 @@ public class CreateNewsPage extends BasePage {
         return this;
     }
 
+    @Step("Clear Source field")
+    public CreateNewsPage clearSourceField() {
+        sourceInput.clear();
+        return this;
+    }
+
 }
