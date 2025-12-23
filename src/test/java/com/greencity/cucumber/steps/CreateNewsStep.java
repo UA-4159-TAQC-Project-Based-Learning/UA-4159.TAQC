@@ -5,12 +5,14 @@ import com.greencity.ui.pages.homepage.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Epic;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Epic("Create News")
 public class CreateNewsStep {
     private Hooks hooks;
     private CreateNewsPage createNewsPage;
@@ -208,12 +210,15 @@ public class CreateNewsStep {
 
     @Then("the Date field should match the format 'MMMM d, yyyy'")
     public void the_date_field_should_match_the_format() {
-        boolean isValidFormat = createNewsPage.getActualDate()
-                .getText().trim()
-                .matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+        String actualDate = createNewsPage.getActualDate().getText().trim();
+
+        boolean isValidFormat = actualDate.matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$")
+                || actualDate.matches("^[а-яіїєґ]{4}\\.\\s\\d{1,2},\\s\\d{4}\\sр\\.$");
+
         hooks.getSoftAssert().assertTrue(isValidFormat,
-                "Date format should match 'MMMM d, yyyy'");
+                "Date format should match 'MMMM d, yyyy' or Ukrainian format");
     }
+
 
     @Then("^the Source field info should contain '([^']+)'$")
     public void the_source_field_info_should_contain(String expectedText) {
