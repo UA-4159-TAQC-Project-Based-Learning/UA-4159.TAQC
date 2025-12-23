@@ -26,8 +26,8 @@ public class TestValueProvider {
         return properties != null ? properties.getProperty("base.ui.url") : System.getenv("BASE_UI_URL");
     }
 
-    public String getBaseAPIUrl() {
-        return properties != null ? properties.getProperty("base.api.url") : System.getenv("BASE_API_URL");
+    public String getBaseAPIUserUrl() {
+        return properties != null ? properties.getProperty("base.api.user.url") : System.getenv("BASE_API_URL");
     }
 
     public int getImplicitlyWait() {
@@ -50,6 +50,9 @@ public class TestValueProvider {
 
     public String getUserName() {
         return properties != null ? properties.getProperty("user.name") : System.getenv("USER_NAME");
+    }
+    public Integer getUserId() {
+        return properties != null ? Integer.parseInt(properties.getProperty("user.id")) : Integer.parseInt(System.getenv("USER_ID"));
     }
 
     public String getUserPassword() {
