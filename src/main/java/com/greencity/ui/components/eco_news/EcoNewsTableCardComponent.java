@@ -35,6 +35,14 @@ public class EcoNewsTableCardComponent extends BaseComponent {
     private WebElement userDataInfoElement;
 
     @Getter
+    @FindBy(xpath = "//div[@class='user-data-added-news']/p/img[contains(@src, 'calendar')]/following-sibling::span")
+    private WebElement createdDateElement;
+
+    @Getter
+    @FindBy(xpath = "//div[@class='user-data-added-news']/p/img[contains(@src, 'profile')]/following-sibling::span")
+    private WebElement authorElement;
+
+    @Getter
     @FindBy(xpath = ".//p[@class='user-data-like']/img[@alt='comments']/following-sibling::span[@class='numerosity']")
     private WebElement commentsCounterElement;
 
@@ -55,6 +63,18 @@ public class EcoNewsTableCardComponent extends BaseComponent {
     public EcoNewsTableCardComponent addToFavorite() {
         favoriteBtn.click();
         return this;
+    }
+
+    public String getDateCreated() {
+        return createdDateElement.getText();
+    }
+
+    public String getAuthor() {
+        return authorElement.getText();
+    }
+
+    public String getText() {
+        return textElement.getText();
     }
 
     public String getTitle() {
