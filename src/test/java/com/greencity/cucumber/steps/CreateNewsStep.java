@@ -5,12 +5,14 @@ import com.greencity.ui.pages.homepage.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Epic;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Epic("Create News")
 public class CreateNewsStep {
     private Hooks hooks;
     private CreateNewsPage createNewsPage;
@@ -208,12 +210,15 @@ public class CreateNewsStep {
 
     @Then("the Date field should match the format 'MMMM d, yyyy'")
     public void the_date_field_should_match_the_format() {
-        boolean isValidFormat = createNewsPage.getActualDate()
-                .getText().trim()
-                .matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+        String actualDate = createNewsPage.getActualDate().getText().trim();
+
+        boolean isValidFormat = actualDate.matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$")
+                || actualDate.matches("^[а-яіїєґ]{4}\\.\\s\\d{1,2},\\s\\d{4}\\sр\\.$");
+
         hooks.getSoftAssert().assertTrue(isValidFormat,
-                "Date format should match 'MMMM d, yyyy'");
+                "Date format should match 'MMMM d, yyyy' or Ukrainian format");
     }
+
 
     @Then("^the Source field info should contain '([^']+)'$")
     public void the_source_field_info_should_contain(String expectedText) {
@@ -396,15 +401,26 @@ public class CreateNewsStep {
     @When("the user enters {string} characters in the Content field")
     public void the_user_enters_over_maximum_characters_in_the_content_field(String charactersNumber) {
         int overMaximumCharacters = Integer.parseInt(charactersNumber);
-        String longContentText = "R".repeat(overMaximumCharacters);
-        createNewsPage.getContentEditor()
-                .clickOnMainText()
-                .typeText(longContentText);
+
+        String chunk = "R".repeat(1000);
+        int fullChunks = overMaximumCharacters/1000;
+        int remainderChunks = overMaximumCharacters%1000;
+
+        createNewsPage.getContentEditor().clickOnMainText();
+        for (int i = 0; i < fullChunks; i++) {
+            createNewsPage.getContentEditor().typeText(chunk);
+        }
+
+        if (remainderChunks > 0) {
+            createNewsPage.getContentEditor().typeText("R".repeat(remainderChunks));
+        }
+
     }
 
     @Then ("the Content field value should be truncated to {string} characters")
     public void the_content_field_value_should_be_truncated_to_maximum_characters(String charactersNumber) {
         int expectedCharacterNumber = Integer.parseInt(charactersNumber);
+
         int actualCharacterNumber = createNewsPage
                 .getContentEditor()
                 .getInputAreaText()
@@ -412,7 +428,8 @@ public class CreateNewsStep {
                 .length();
 
         hooks.getSoftAssert().assertTrue(actualCharacterNumber <= expectedCharacterNumber,
-                "the Content field value has different number of characters");
+                "the Content field value has different number of characters- " +
+                "expected: " + expectedCharacterNumber + ", but actual: " + actualCharacterNumber);
     }
 
     @Then ("no error message should be displayed")
