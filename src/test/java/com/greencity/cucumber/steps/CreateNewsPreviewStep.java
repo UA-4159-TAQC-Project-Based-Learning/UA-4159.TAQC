@@ -9,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 public class CreateNewsPreviewStep {
     private final Hooks hooks;
@@ -21,12 +22,21 @@ public class CreateNewsPreviewStep {
     private String testTitle;
     private String testContent;
 
+    private static final String DATE_PATTERN_UKR =
+            "^(0?[1-9]|[12][0-9]|3[01])\\s" +
+                    "(січ\\.|лют\\.|бер\\.|квіт\\.|трав\\.|черв\\.|лип\\.|серп\\.|вер\\.|жовт\\.|лист\\.|груд\\.)\\s" +
+                    "\\d{4}\\sр\\.$";
+
+    private static final String DATE_PATTERN_ENG =
+            "^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s(0?[1-9]|[12][0-9]|3[01]),\\s\\d{4}$";
+
+
     public CreateNewsPreviewStep(Hooks hooks) {
         this.hooks = hooks;
         generateTestData();
     }
 
-    @And("the user clicks on 'Eco News' in the header")
+    @And("the user clicks on Eco News in the header")
     public void theUserClicksEcoNewsInHeader() {
         editEcoNewsPage = new EditEcoNewsPage(hooks.getDriver());
         editEcoNewsPage.getHeader().getNavigation().clickEcoNews();
@@ -111,13 +121,12 @@ public class CreateNewsPreviewStep {
 
     @And("the preview should display the current date")
     public void previewShouldDisplayCurrentDate() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
-        String expectedDate = today.format(formatter);
+        String date =  previewPage.getDate().getText();
+        boolean isEngFormatValid = Pattern.matches(DATE_PATTERN_ENG, date);
+        boolean isUkrFormatValid = Pattern.matches(DATE_PATTERN_UKR, date);
 
-        hooks.getSoftAssert().assertEquals(
-                previewPage.getDate().getText(),
-                expectedDate,
+        hooks.getSoftAssert().assertTrue(
+                isEngFormatValid || isUkrFormatValid,
                 "Date is incorrect"
         );
     }

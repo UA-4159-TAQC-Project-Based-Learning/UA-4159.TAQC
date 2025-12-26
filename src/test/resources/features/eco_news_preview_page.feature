@@ -5,7 +5,7 @@ Feature: Preview News Before Publishing
 
   Background:
     Given the user is logged in the system
-    And the user clicks on 'Eco News' in the header
+    And the user clicks on Eco News in the header
     Then the Eco News page is loaded
 
   Scenario: User previews news content
