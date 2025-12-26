@@ -8,6 +8,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.List;
+import java.util.Map;
+
 public class LanguageClientTest extends ApiTestRunnerWithUser {
     private LanguageClient languageClient;
 
@@ -26,9 +29,17 @@ public class LanguageClientTest extends ApiTestRunnerWithUser {
         softAssert.assertEquals(response.getStatusCode(), 200,
                 "Status code is not 200");
 
-        String body = response.getBody().asString();
-        softAssert.assertTrue(body.contains("en"),
-                "Response does not contain 'en'");
+        List<Map<String, Object>> languages = response.jsonPath().getList("$");
+        softAssert.assertFalse(languages.isEmpty(),
+                "Languages list is empty");
+
+        List<String> codes = response.jsonPath().getList("name");
+        softAssert.assertTrue(codes.contains("Ukrainian"),
+                "Response does not contain code 'Ukrainian'");
+        softAssert.assertTrue(codes.contains("English"),
+                "Response does not contain code 'English'");
+
+
 
         softAssert.assertAll();
     }
@@ -42,26 +53,41 @@ public class LanguageClientTest extends ApiTestRunnerWithUser {
         softAssert.assertEquals(response.getStatusCode(), 200,
                 "Status code is not 200");
 
-        String body = response.getBody().asString();
-        softAssert.assertTrue(body.contains("uk"),
-                "Response does not contain 'uk'");
+        List<String> codes = response.jsonPath().getList("$");
+        softAssert.assertTrue(codes.contains("uk"),
+                "Response does not contain code 'uk'");
+        softAssert.assertTrue(codes.contains("en"),
+                "Response does not contain code 'en'");
+
 
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify that a specific language can be retrieved by code")
-    public void testFindLanguageByCode() {
+    @Test(description = "Verify that specific languages can be retrieved by code")
+    public void testGetLanguagesByCode() {
         SoftAssert softAssert = new SoftAssert();
 
-        Response response = languageClient.getLanguageByCode(LanguageCode.EN);
+        Map<LanguageClient.LanguageCode, String> expectedLanguages = Map.of(
+                LanguageClient.LanguageCode.EN, "English",
+                LanguageClient.LanguageCode.UK, "Ukrainian"
+        );
 
-        softAssert.assertEquals(response.getStatusCode(), 200,
-                "Status code is not 200");
+        for (Map.Entry<LanguageClient.LanguageCode, String> entry : expectedLanguages.entrySet()) {
+            Response response = languageClient.getLanguageByCode(entry.getKey());
 
-        String body = response.getBody().asString();
-        softAssert.assertTrue(body.contains("\"code\":\"en\""),
-                "Response does not contain the correct code 'en'");
+            softAssert.assertEquals(response.getStatusCode(), 200,
+                    "Status code is not 200 for code " + entry.getKey().getCode());
+
+            String code = response.jsonPath().getString("code");
+            String name = response.jsonPath().getString("name");
+
+            softAssert.assertEquals(code, entry.getKey().getCode(),
+                    "Code mismatch for " + entry.getKey().getCode());
+            softAssert.assertEquals(name, entry.getValue(),
+                    "Name mismatch for " + entry.getKey().getCode());
+        }
 
         softAssert.assertAll();
     }
+
 }
