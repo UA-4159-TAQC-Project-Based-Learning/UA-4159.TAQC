@@ -16,4 +16,9 @@ public class UserClient extends BaseClient {
                 .get("/user/" + id + "/profileStatistics/");
     }
 
+    public Response findUserByEmail(String email){
+        return preparedRequest()
+                .get("/user/findByEmail?email=" + email);
+    }
+
 }
