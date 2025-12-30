@@ -21,7 +21,7 @@ public class UserTestsAuthorized extends ApiTestRunnerWithUser {
                 Integer.valueOf(0), "Amount of habits acquired is not correct");
         softAssert.assertEquals(profileStatisticsResponse.getAmountHabitsInProgress(), Integer.valueOf(0), "Amount of habits in progress is not correct");
         softAssert.assertEquals(profileStatisticsResponse.getAmountOrganizedAndAttendedEvents(), Integer.valueOf(0), "Amount of organized and attended events is not correct");
-        softAssert.assertEquals(profileStatisticsResponse.getAmountPublishedNews(), Integer.valueOf(49), "Amount of published news is not correct");
+        softAssert.assertEquals(profileStatisticsResponse.getAmountPublishedNews(), Integer.valueOf(119), "Amount of published news is not correct");
         softAssert.assertAll();
     }
 }
