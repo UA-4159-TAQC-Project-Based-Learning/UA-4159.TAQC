@@ -16,4 +16,14 @@ public class UserClient extends BaseClient {
                 .get("/user/" + id + "/profileStatistics/");
     }
 
+    public Response updateUserLanguage(int languageId) {
+        return preparedRequest()
+                .put("/user/language/" + languageId);
+    }
+
+    public Response getUserLanguage() {
+        return preparedRequest()
+                .get("/user/lang");
+    }
+
 }
