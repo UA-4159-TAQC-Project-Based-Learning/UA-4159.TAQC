@@ -12,7 +12,7 @@ public class EcoNewsCommentApiTest extends ApiTestRunnerWithUser {
     public void shouldCreateEcoNewsComment() {
         EcoNewsCommentClient commentClient = new EcoNewsCommentClient(
                 testValueProvider.getBaseAPIUserUrl(),
-                testValueProvider.getLsUserAccessToken()
+                signInResponse.accessToken
         );
 
         Integer ecoNewsId = 556;
@@ -22,6 +22,8 @@ public class EcoNewsCommentApiTest extends ApiTestRunnerWithUser {
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 201, "Status code is not 201");
+
+
         softAssert.assertAll();
     }
 }
