@@ -155,11 +155,11 @@ public class CreateNewsTagSelectionTest extends TestRunnerWithUser {
                 .getContentEditor()
                 .typeText("Test content with 20 chars");
 
-        boolean publishEnabled = createNewsPage
+        boolean publishDisabled = createNewsPage
                 .getCreateNewsButtonsComponent()
-                .isPublishEnabled();
+                .isPublishDisabled();
 
-        softAssert.assertFalse(publishEnabled,
+        softAssert.assertTrue(publishDisabled,
                 "Expected Publish button to be disabled when tags are not selected");
 
         softAssert.assertAll();
