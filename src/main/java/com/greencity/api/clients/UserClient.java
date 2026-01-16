@@ -22,7 +22,7 @@ public class UserClient extends BaseClient {
                 .body(request)
                 .put("/user/profile");
     }
-  
+
     public Response updateUserLanguage(int languageId) {
         return preparedRequest()
                 .put("/user/language/" + languageId);
@@ -31,6 +31,12 @@ public class UserClient extends BaseClient {
     public Response getUserLanguage() {
         return preparedRequest()
                 .get("/user/lang");
+    }
+
+    public Response findUserByEmail(String email){
+        return preparedRequest()
+                .queryParam("email", email)
+                .get("/user/findByEmail");
     }
 
 }
