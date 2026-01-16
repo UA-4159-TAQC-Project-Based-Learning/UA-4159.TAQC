@@ -16,13 +16,7 @@ public class FileClient extends BaseClient {
     }
 
     private RequestSpecification preparedMultipartRequest() {
-        RequestSpecification request = RestAssured.given()
-                .baseUri(baseAPIUrl);
-
-        if (token != null) {
-            request.header("Authorization", "Bearer " + token);
-        }
-        return request;
+        return preparedRequest();
     }
 
     public Response uploadMultiple(List<File> files) {
