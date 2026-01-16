@@ -94,7 +94,6 @@ public class EcoNewsDetailsPage extends BasePage {
     @FindBy(css = "app-warning-pop-up")
     private WebElement popupRootElement;
 
-
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
 
