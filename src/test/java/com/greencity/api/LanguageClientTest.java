@@ -1,4 +1,4 @@
-package com.greencity.api.tests;
+package com.greencity.api;
 
 import com.greencity.api.clients.LanguageClient;
 import com.greencity.api.clients.LanguageClient.LanguageCode;
