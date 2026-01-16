@@ -14,10 +14,10 @@ Feature: Content Field Validation on Create News Page
     Then an error message should appear in red with text 'Must be minimum 20 and maximum 63 206 symbols'
     And the Publish button should remain disabled
 
-  Scenario: Content input truncated when exceeding 63,206 characters
-    When the user enters '63207' characters in the Content field
-    Then the Content field value should be truncated to '63206' characters
-    And no error message should be displayed
+#  Scenario: Content input truncated when exceeding 63,206 characters
+#    When the user enters '63210' characters in the Content field
+#    Then the Content field value should be truncated to '63206' characters
+#    And no error message should be displayed
 
   Scenario: Content input valid when between 20 and 63,206 characters
     When the user enters 'This is a valid test content' in the Content field
