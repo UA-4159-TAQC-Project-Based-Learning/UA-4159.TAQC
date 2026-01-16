@@ -28,7 +28,8 @@ public class EcoNewsTableCardStep {
     public void eco_news_table_card_is_populated_on_the_create_news_page() {
         EcoNewsPage ecoNewsPage = new EcoNewsPage(hooks.getDriver());
         List<EcoNewsTableCardComponent> allTableCards = ecoNewsPage.getAllTableCards();
-        hooks.getSoftAssert().assertTrue(allTableCards.size() > 0);
+        hooks.getSoftAssert().assertTrue(allTableCards.size() > 0,
+                "Eco News table card list is empty on the Create News Page");
     }
 
     @Then("Eco News table card title is populated for all items")
