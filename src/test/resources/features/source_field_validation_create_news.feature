@@ -4,14 +4,14 @@ Feature: Source field validation on Create News page
   So that invalid URLs show validation and publishing is blocked, while valid or empty sources allow publishing
 
   Background:
-    Given I am logged in as a valid user
-    And I am on the Create News page
+    Given the user is logged in the system
+    And the user opens the 'Create News' page
 
   @news @source_validation @ui
   Scenario Outline: Invalid Source shows validation warning and red border
-    When I enter "<invalidUrl>" into the Source field
+    When enter "<invalidUrl>" into the Source field
     Then the Source field shows a validation warning
-    And the Source field border color is "rgb(255, 0, 0)"
+    And the Source field border color is red
 
     Examples: invalidUrls
       | invalidUrl          |
@@ -22,7 +22,7 @@ Feature: Source field validation on Create News page
 
   @news @source_validation @ui
   Scenario Outline: Publish button is disabled for invalid Source URLs
-    When I enter "<invalidUrl>" into the Source field
+    When enter "<invalidUrl>" into the Source field
     Then the Publish button is disabled
 
     Examples: invalidUrlsForSubmit
@@ -47,10 +47,13 @@ Feature: Source field validation on Create News page
 
   @news @source_validation @ui
   Scenario Outline: News is published when Source is a valid URL
-    Given I have filled mandatory news fields with a unique title and valid content
-    When I enter "<validUrl>" into the Source field
-    And I click Publish
-    Then the news should be published and visible in the news list with the title I entered
+    Given all required fields for the news draft are filled with valid data
+    When enter "<validUrl>" into the Source field
+    And click the Publish button
+    Then success message is displayed containing text 'Your news has been successfully published'
+    And the user is navigated away from the Create News page to the Eco News page
+    And published news with title is in the news list
+    And published news contains entered source url "<validUrl>"
 
     Examples: validSources
       | validUrl          |
@@ -59,7 +62,9 @@ Feature: Source field validation on Create News page
 
   @news @source_validation @ui
   Scenario: News is published when Source field is empty
-    Given I have filled mandatory news fields with a unique title and valid content
-    And I clear the Source field
-    When I click Publish
-    Then the news should be published and visible in the news list with the title I entered
+    Given all required fields for the news draft are filled with valid data
+    When clear the Source field
+    And click the Publish button
+    Then success message is displayed containing text 'Your news has been successfully published'
+    And the user is navigated away from the Create News page to the Eco News page
+    And published news with title is in the news list

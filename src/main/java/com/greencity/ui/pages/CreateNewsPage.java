@@ -138,6 +138,12 @@ public class CreateNewsPage extends BasePage {
         return this;
     }
 
+    @Step("Clear Source field")
+    public CreateNewsPage clearSourceField() {
+        sourceInput.clear();
+        return this;
+    }
+
     public boolean publishMessageDisplayed() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOf(newsPublishedMessage));
