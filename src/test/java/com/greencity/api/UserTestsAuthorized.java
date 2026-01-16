@@ -27,7 +27,7 @@ public class UserTestsAuthorized extends ApiTestRunnerWithUser {
     }
 
     @DataProvider(name = "languages")
-    public  Object[][] languages() {
+    public Object[][] languages() {
         return new Object[][] {
                 {2, "en"},
                 {1, "uk"}
