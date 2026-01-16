@@ -35,7 +35,8 @@ public class UserClient extends BaseClient {
 
     public Response findUserByEmail(String email){
         return preparedRequest()
-                .get("/user/findByEmail?email=" + email);
+                .queryParam("email", email)
+                .get("/user/findByEmail");
     }
 
 }
