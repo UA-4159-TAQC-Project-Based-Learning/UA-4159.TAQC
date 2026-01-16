@@ -30,17 +30,8 @@ public class EcoNewsCommentClient extends BaseClient {
         String path = "/eco-news/" + ecoNewsId + "/comments";
         AddCommentRequest addCommentRequest = new AddCommentRequest(commentText, 0L);
 
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonBody = mapper.writeValueAsString(addCommentRequest);
-            return preparedRequest()
-
-                    .multiPart("request", jsonBody, "application/json")
-                    .post(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       return null;
-
+        return preparedRequest()
+                .multiPart("request", addCommentRequest, "application/json")
+                .post(path);
     }
 }

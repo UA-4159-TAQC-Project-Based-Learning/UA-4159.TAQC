@@ -11,7 +11,7 @@ public class EcoNewsCommentApiTest extends ApiTestRunnerWithUser {
     @Test
     public void shouldCreateEcoNewsComment() {
         EcoNewsCommentClient commentClient = new EcoNewsCommentClient(
-                testValueProvider.getBaseAPIUserUrl(),
+                testValueProvider.getBaseUIUrl(),
                 signInResponse.accessToken
         );
 
