@@ -1,5 +1,6 @@
 package com.greencity.ui.pages;
 
+import com.greencity.ui.components.eco_news.EcoNewsDetailsCommentItemComponent;
 import com.greencity.ui.components.eco_news.EcoNewsTableCardComponent;
 import com.greencity.ui.components.eco_news.NewsTagsInfoComponent;
 import io.qameta.allure.Step;
@@ -81,6 +82,18 @@ public class EcoNewsDetailsPage extends BasePage {
     @FindBy(css = "app-add-comment .primary-global-button")
     private WebElement commentButtonElement;
 
+    @Getter
+    @FindBy(css = "app-comments-container app-comments-list div.wrapper-comment")
+    private List<WebElement> commentItemsRootElements;
+
+    @Getter
+    @FindBy(css = "app-warning-pop-up .primary-global-button")
+    private WebElement popupYesButtonElement;
+
+    @Getter
+    @FindBy(css = "app-warning-pop-up")
+    private WebElement popupRootElement;
+
     public EcoNewsDetailsPage(WebDriver driver) {
         super(driver);
 
@@ -89,6 +102,29 @@ public class EcoNewsDetailsPage extends BasePage {
 
     public NewsTagsInfoComponent getNewsTagsInfoComponent() {
         return new NewsTagsInfoComponent(driver, tagsRoot);
+    }
+
+    public List<EcoNewsDetailsCommentItemComponent> getCommentItems() {
+        List<EcoNewsDetailsCommentItemComponent> result = new ArrayList<>();
+        for (WebElement commentItem : commentItemsRootElements) {
+            EcoNewsDetailsCommentItemComponent commentItemComponent = new EcoNewsDetailsCommentItemComponent(driver, commentItem);
+            result.add(commentItemComponent);
+        }
+        return result;
+    }
+
+    public EcoNewsDetailsCommentItemComponent findOneCommentItemByText(String text) {
+        List<EcoNewsDetailsCommentItemComponent> commentItems = getCommentItems();
+        for (EcoNewsDetailsCommentItemComponent commentItem : commentItems) {
+            if (commentItem.getCommentText().equalsIgnoreCase(text)) {
+                return commentItem;
+            }
+        }
+        return null;
+    }
+
+    public void clickPopupYesButton() {
+        popupYesButtonElement.click();
     }
 
     public EcoNewsPage clickBackButton() {
@@ -116,6 +152,10 @@ public class EcoNewsDetailsPage extends BasePage {
 
     public String getDateInfo() {
         return dateInfoElement.getText();
+    }
+
+    public String getText() {
+        return newsTextElement.getText();
     }
 
     public EditEcoNewsPage clickEditNewsButton() {
@@ -148,5 +188,14 @@ public class EcoNewsDetailsPage extends BasePage {
     public EcoNewsDetailsPage clickCommentButtonElement() {
         this.commentButtonElement.click();
         return this;
+    }
+
+    public EcoNewsDetailsPage enterCommentText(String commentText) {
+        this.commentInputElement.sendKeys(commentText);
+        return this;
+    }
+
+    public boolean waitForPopupDisappears() {
+        return isElementInvisible(popupRootElement);
     }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsTagsInfoComponent extends BaseComponent {
@@ -17,6 +17,13 @@ public class NewsTagsInfoComponent extends BaseComponent {
 
     public NewsTagsInfoComponent(WebDriver driver, WebElement rootElement) {
         super(driver, rootElement);
+    }
+
+    public List<String> getAllTags() {
+       List<String> result =  new ArrayList<>();
+
+       allTagsElements.forEach(element -> result.add(element.getText()));
+       return result;
     }
 
     @Step("Check if tag '{tagName}' is present")

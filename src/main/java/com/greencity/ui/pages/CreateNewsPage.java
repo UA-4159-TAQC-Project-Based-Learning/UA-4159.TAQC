@@ -10,7 +10,10 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CreateNewsPage extends BasePage {
@@ -65,6 +68,10 @@ public class CreateNewsPage extends BasePage {
     @Getter
     @FindBy(css = ".date p:first-of-type span:nth-of-type(even)")
     private WebElement actualDate;
+    @Getter
+    @FindBy(xpath = "//div[contains(@class,'mdc-snackbar__label') and contains(@class,'mat-mdc-snack-bar-label')]")
+    private WebElement newsPublishedMessage;
+
 
     public CreateNewsPage(WebDriver driver) {
         super(driver);
@@ -137,4 +144,9 @@ public class CreateNewsPage extends BasePage {
         return this;
     }
 
+    public boolean publishMessageDisplayed() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(newsPublishedMessage));
+        return newsPublishedMessage.isDisplayed();
+    }
 }

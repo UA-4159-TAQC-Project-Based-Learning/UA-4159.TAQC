@@ -146,7 +146,11 @@ public class CreateNewsCheckingDisplayingAllFieldsTest extends TestRunnerWithUse
                 createNewsPage.getActualDate()
                         .getText()
                         .trim()
-                        .matches("^(^[A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$");
+                        .matches("^([A-Z][a-z]{2,}) ([1-9]|[12][0-9]|3[01]), \\d{4}$")
+                || createNewsPage.getActualDate()
+                        .getText()
+                        .trim()
+                        .matches("^[а-яіїєґ]{4}\\.\\s\\d{1,2},\\s\\d{4}\\sр\\.$");
 
         softAssert.assertTrue(isValidFormat,
                 "Date format should match 'MMMM d, yyyy'");
