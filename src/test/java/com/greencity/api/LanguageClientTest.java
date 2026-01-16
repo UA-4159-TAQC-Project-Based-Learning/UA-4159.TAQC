@@ -15,6 +15,7 @@ public class LanguageClientTest extends ApiTestRunnerWithUser {
     private LanguageClient languageClient;
 
     @BeforeClass
+    @Override
     public void setUp() {
         languageClient = new LanguageClient(
                 testValueProvider.getBaseAPIUserUrl(), signInResponse.accessToken);
