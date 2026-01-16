@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="GreenCitySuite" parallel="classes" thread-count="4">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+    <test name="UITests">
+        <classes>
+            <class name="com.greencity.ui.ecoNews.CancelNewsTest"/>
+            <class name="com.greencity.ui.ecoNews.CropImageTest"/>
+        </classes>
+    </test>
+    <test name="UITestsCucumber">
+        <classes>
+            <class name="com.greencity.cucumber.TestRunnerCucumberMaryna"></class>
+        </classes>
+    </test>
+</suite>

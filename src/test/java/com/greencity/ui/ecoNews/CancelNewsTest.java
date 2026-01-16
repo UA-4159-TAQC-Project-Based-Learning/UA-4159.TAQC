@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class CancelNewsTest extends TestRunnerWithUser {
-
     private SoftAssert softAssert;
     private CreateNewsPage createNewsPage;
 
@@ -119,10 +118,12 @@ public class CancelNewsTest extends TestRunnerWithUser {
         );
 
         // Verification that news item is not created after cancel
+        homePage.setImplicitWaitSeconds(0);
         softAssert.assertNull(
                 ecoNewsPage.findCardByTitle(uniqueTitle),
                 "Cancelled news should NOT appear in Eco News list."
         );
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
         // If user reopens Create News, form should be empty
         createNewsPage = ecoNewsPage.clickCreateNews();
@@ -151,7 +152,10 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .waitUntilOpened();
 
         cancelNewsModal.getContinueNewsEditingModalButtonAlternative().click();
+
+        homePage.setImplicitWaitSeconds(0);
         cancelNewsModal.waitForModalClosed();
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
         softAssert.assertTrue(
                 createNewsPage.getPageTitle().isDisplayed(),
@@ -182,7 +186,9 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .openCancelModal()
                 .waitUntilOpened();
 
+        homePage.setImplicitWaitSeconds(0);
         cancelNewsModal.closeByClickingOutsidePopUp();
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
         softAssert.assertTrue(
                 createNewsPage.getPageTitle().isDisplayed(),
@@ -214,7 +220,9 @@ public class CancelNewsTest extends TestRunnerWithUser {
                 .waitUntilOpened();
 
         cancelNewsModal.getCrossIconForCloseChangesModalAlternative().click();
+        homePage.setImplicitWaitSeconds(0);
         cancelNewsModal.waitForModalClosed();
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
         softAssert.assertTrue(
                 createNewsPage.getPageTitle().isDisplayed(),

@@ -3,9 +3,6 @@ package com.greencity.cucumber.steps;
 import com.greencity.ui.components.createNews.AddImageComponent;
 import com.greencity.ui.pages.CreateNewsPage;
 import com.greencity.ui.pages.EcoNewsPage;
-import com.greencity.ui.pages.homepage.HomePage;
-import com.greencity.ui.utils.NavItem;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Dimension;
@@ -29,6 +26,8 @@ public class CropImageSteps {
 
     @When("the user uploads image for cropping {string}")
     public void uploadImageForCropping(String fileName) {
+        createNewsPage = new CreateNewsPage(hooks.getDriver());
+
         String imagePath = Paths.get("src/test/resources/images", fileName)
                 .toAbsolutePath()
                 .toString();
@@ -93,18 +92,22 @@ public class CropImageSteps {
 
     @Then("image preview should be displayed")
     public void imagePreviewShouldBeDisplayed() {
+        createNewsPage.setImplicitWaitSeconds(0);
         hooks.getSoftAssert().assertTrue(
                 addImage.isImagePreviewDisplayed(),
                 "Image preview should be displayed after submitting crop selection."
         );
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @Then("cropper should be active")
     public void cropperShouldBeActive() {
+        createNewsPage.setImplicitWaitSeconds(0);
         hooks.getSoftAssert().assertTrue(
                 addImage.isCropperActive(),
                 "Precondition: cropper should be active after uploading an image."
         );
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @When("the user cancels image cropping")
@@ -122,17 +125,21 @@ public class CropImageSteps {
 
     @Then("cropper should not be active")
     public void cropperShouldNotBeActive() {
+        createNewsPage.setImplicitWaitSeconds(0);
         hooks.getSoftAssert().assertFalse(
                 addImage.isCropperActive(),
                 "After Cancel, cropper frame/overlay should not be displayed."
         );
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @Then("image preview should not be displayed")
     public void imagePreviewShouldNotBeDisplayed() {
+        createNewsPage.setImplicitWaitSeconds(0);
         hooks.getSoftAssert().assertFalse(
                 addImage.isImagePreviewDisplayedAlt(),
                 "After Cancel, uploaded image preview should not be displayed."
         );
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 }

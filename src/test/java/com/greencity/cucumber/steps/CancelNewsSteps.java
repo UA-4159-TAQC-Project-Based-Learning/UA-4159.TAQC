@@ -125,10 +125,12 @@ public class CancelNewsSteps {
 
     @Then("the news card with title {string} should not exist in Eco News list")
     public void cardShouldNotExist(String title) {
+        createNewsPage.setImplicitWaitSeconds(0);
         hooks.getSoftAssert().assertNull(
                 ecoNewsPage.findCardByTitle(title),
                 "Cancelled news should NOT appear in Eco News list."
         );
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @When("the user opens Create News page from Eco News")
@@ -158,7 +160,9 @@ public class CancelNewsSteps {
     @When("the user clicks Continue editing in the popup")
     public void clickContinueEditing() {
         cancelNewsModal.getContinueNewsEditingModalButtonAlternative().click();
+        createNewsPage.setImplicitWaitSeconds(0);
         cancelNewsModal.waitForModalClosed();
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @Then("the user should stay on Create News page")
@@ -189,13 +193,17 @@ public class CancelNewsSteps {
 
     @When("the user clicks outside cancel popup")
     public void clickOutsidePopup() {
+        createNewsPage.setImplicitWaitSeconds(0);
         cancelNewsModal.closeByClickingOutsidePopUp();
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @When("the user closes cancel popup via cross icon")
     public void closeViaCrossIcon() {
         cancelNewsModal.getCrossIconForCloseChangesModalAlternative().click();
+        createNewsPage.setImplicitWaitSeconds(0);
         cancelNewsModal.waitForModalClosed();
+        createNewsPage.setImplicitWaitSeconds(createNewsPage.getDEFAULT_IMPLICIT());
     }
 
     @When("the user clicks header nav item {string} without navigation")

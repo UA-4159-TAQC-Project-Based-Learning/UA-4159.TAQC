@@ -98,11 +98,15 @@ public class CropImageTest extends TestRunnerWithUser {
         softAssert.assertTrue(addImage.isDropzoneDisplayed(),
                 "After Cancel, dropzone should be displayed again.");
 
+        homePage.setImplicitWaitSeconds(0);
         softAssert.assertFalse(addImage.isCropperActive(),
                 "After Cancel, cropper frame/overlay should not be displayed.");
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
+        homePage.setImplicitWaitSeconds(0);
         softAssert.assertFalse(addImage.isImagePreviewDisplayedAlt(),
                 "After Cancel, uploaded image preview should not be displayed.");
+        homePage.setImplicitWaitSeconds(homePage.getDEFAULT_IMPLICIT());
 
     }
 }
