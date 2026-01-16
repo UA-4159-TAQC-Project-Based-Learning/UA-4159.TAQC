@@ -35,11 +35,11 @@ public class EcoNewsTableCardComponent extends BaseComponent {
     private WebElement userDataInfoElement;
 
     @Getter
-    @FindBy(xpath = "//div[@class='user-data-added-news']/p/img[contains(@src, 'calendar')]/following-sibling::span")
+    @FindBy(xpath = ".//div[@class='user-data-added-news']/p/img[contains(@src, 'calendar')]/following-sibling::span")
     private WebElement createdDateElement;
 
     @Getter
-    @FindBy(xpath = "//div[@class='user-data-added-news']/p/img[contains(@src, 'profile')]/following-sibling::span")
+    @FindBy(xpath = ".//div[@class='user-data-added-news']/p/img[contains(@src, 'profile')]/following-sibling::span")
     private WebElement authorElement;
 
     @Getter
