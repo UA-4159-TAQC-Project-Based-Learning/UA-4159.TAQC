@@ -62,8 +62,8 @@ public class UserTestsAuthorized extends ApiTestRunnerWithUser {
 
         UserFindByEmailResponse userFindByEmailResponse = response.as(UserFindByEmailResponse.class);
 
-        softAssert.assertEquals(userFindByEmailResponse.name,"Testuser2025", "Email is not correct");
-        softAssert.assertEquals(userFindByEmailResponse.email,testValueProvider.getUserEmail(), "UserName is not correct");
+        softAssert.assertEquals(userFindByEmailResponse.name,testValueProvider.getUserName(), "UserName is not correct");
+        softAssert.assertEquals(userFindByEmailResponse.email,testValueProvider.getUserEmail(), "Email is not correct");
         softAssert.assertEquals(userFindByEmailResponse.role,"ROLE_USER", "Role is not correct");
         softAssert.assertEquals(userFindByEmailResponse.userStatus,"VERIFIED", "UserStatus is not correct");
         softAssert.assertEquals(userFindByEmailResponse.ownSecurity.user.id, (int)testValueProvider.getUserId(), "UserId is not correct");

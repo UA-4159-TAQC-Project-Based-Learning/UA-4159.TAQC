@@ -1,6 +1,7 @@
 package com.greencity.api.clients;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -12,15 +13,12 @@ public class FileClient extends BaseClient {
     private static final String BASE_PATH = "/files";
 
     public FileClient(String baseUrl) {
-        super(baseUrl);
+        super(baseUrl, ContentType.MULTIPART);
     }
 
-    private RequestSpecification preparedMultipartRequest() {
-        return preparedRequest();
-    }
 
     public Response uploadMultiple(List<File> files) {
-        var req = preparedMultipartRequest();
+        var req = preparedRequest();
         for (File f : files) {
             req.multiPart("files", f);
         }
@@ -28,7 +26,7 @@ public class FileClient extends BaseClient {
     }
 
     public Response uploadSingle(File file) {
-        return preparedMultipartRequest()
+        return preparedRequest()
                 .multiPart("file", file)
                 .post(BASE_PATH + "/single");
     }

@@ -6,6 +6,7 @@ import com.greencity.api.models.user.EmailPreference;
 import com.greencity.api.models.user.ProfileRequest;
 import com.greencity.api.testRunner.ApiTestRunnerWithUser;
 import io.restassured.response.Response;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -60,6 +61,21 @@ public class UserProfileTest extends ApiTestRunnerWithUser {
         softAssert.assertEquals(contentType, "application/json", "Content type is invalid" );
         softAssert.assertEquals(cacheControl, "no-cache, no-store, max-age=0, must-revalidate", "cacheControl is invalid");
         softAssert.assertAll();
+    }
+
+    @AfterMethod
+    public  void tearDown() {
+        UserClient userClient = new UserClient(testValueProvider.getBaseAPIUserUrl(), signInResponse.accessToken);
+        ProfileRequest request = new ProfileRequest(
+                testValueProvider.getUserName(),
+                List.of(),
+                "PRIVATE",
+                "PRIVATE",
+                "PRIVATE",
+                null,
+                List.of()
+        );
+        userClient.putProfile(request);
     }
 
 }
