@@ -47,8 +47,8 @@ public class EcoNewsTableCardStep {
         EcoNewsPage ecoNewsPage = new EcoNewsPage(hooks.getDriver());
         List<EcoNewsTableCardComponent> allTableCards = ecoNewsPage.getAllTableCards();
         for (EcoNewsTableCardComponent tableCard : allTableCards) {
-            String title = tableCard.getAuthor();
-            hooks.getSoftAssert().assertNotNull(title);
+            String author = tableCard.getAuthor();
+            hooks.getSoftAssert().assertNotNull(author);
         }
     }
 
